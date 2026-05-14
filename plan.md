@@ -201,10 +201,22 @@ Resumable sub-units. Each one captures its own pre-state so a cold restart can r
 - [x] **2.10 Bundle-architecture finding DEFERRED to Phase 5** — agent flagged that `import.meta.glob({eager: true})` bundles full Zod runtime (~28 KB) + all markdown component bodies into every consumer of `loader.ts`. **Currently only `/dev/kitchen-sink` (internal, robots-blocked) imports the loader**, so production users are unaffected. When Phase 5 builds public `/projects` listing, the loader must be refactored: build-time JSON generation via Vite plugin or pre-build script, lazy component loaders for prose bodies. Logged as a hard precondition for any public route that consumes the loader.
 - [x] **2.11 Commit + memory update**.
 
-### Phase 3 — Hero + microstate field (1 session)
-- OGL canvas with microstate shader
-- Reduced-motion fallback
-- Performance budget enforcement
+### Phase 3 — Hero + microstate field (COMPLETE as of 2026-05-14)
+
+- [x] **3.1 OGL installed** — `ogl ^1.0.11` as a runtime dependency.
+- [x] **3.2 HeroCanvas component** — `$lib/components/HeroCanvas.svelte`. `$effect` gates on `browser`, `prefers-reduced-motion`, and `webgl2/webgl` context availability before importing the OGL chunk. Empty `<canvas>` rendered at SSR for byte-identical hydration.
+- [x] **3.3 CSS gradient fallback** — radial-gradients on `.hero-canvas-frame` using `color-mix(in oklab, ...)` against `--color-phosphor` and `--color-violet`, masked with a soft elliptical fade. Visible always; canvas fades over it on mount.
+- [x] **3.4 CSR re-enabled on `/`** — `+page.ts` sets `csr = true`. Prerender remains true. SvelteKit runtime + router land in the initial bundle.
+- [x] **3.5 Hero markup updated** — wrapped in `relative isolate overflow-hidden` container; `HeroCanvas` at z-index 0 with `aria-hidden`; `Container` at `z-10` so text overlays cleanly.
+- [x] **3.6 Bundle budget verified** — initial JS on `/`: **36.5 KB gzip** (budget: 50 KB, 14 KB headroom). OGL + shader code in chunk `9MU678sT.js` (14 KB gzip) — NOT preloaded on `/`, lazy-loaded via dynamic import inside `$effect`.
+- [x] **3.7 Quality gates** — `pnpm check` 0/0, `pnpm lint` clean, `pnpm build` clean.
+- [x] **3.8 Adversarial review** — 2 parallel agents (bundle/a11y/lifecycle + shader/OGL). 4 distinct findings.
+- [x] **3.9 Review fixes applied:**
+  - **State-machine refactor** for the RAF loop. `isPaused() = !isIntersecting || document.hidden`. Both observers (IntersectionObserver + visibilitychange) recompute and call `schedule()`/`cancel()`. This fixes (a) the visibilitychange path overwriting intersection state and (b) RAF running unconditionally even when paused (was burning CPU/battery off-screen).
+  - **`webglcontextrestored` listener** added — iOS Safari aggressively evicts WebGL contexts under memory pressure; without this, canvas stays black until full reload.
+  - **Comment fix** in shader source ("value noise" → "gradient noise"; implementation is Perlin-style).
+- [x] **3.10 Phase 1 regression fix in `src/app.html`** — the pre-paint-theme HTML comment contained the literal text `%sveltekit.head%`; SvelteKit's string substitution replaced it INSIDE the comment, breaking the comment's structure and emitting visible text in the browser. Rewrote the comment to describe the placeholder by intent ("SvelteKit's head injection point") instead of by literal name. Discovered by Saheed during Phase 3 preview.
+- [x] **3.11 Commit + memory update.**
 
 ### Phase 4 — About + Research sections (1 session)
 - Portrait optimization

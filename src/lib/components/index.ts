@@ -5,3 +5,4 @@ export { default as Link } from './Link.svelte';
 export { default as Tag } from './Tag.svelte';
 export { default as Card } from './Card.svelte';
 export { default as ThemeToggle } from './ThemeToggle.svelte';
+export { default as HeroCanvas } from './HeroCanvas.svelte';

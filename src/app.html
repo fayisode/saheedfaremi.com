@@ -3,8 +3,14 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!-- Pre-paint theme: external file so script-src 'self' covers it on csr=false pages.
-		     Must be synchronous and BEFORE %sveltekit.head% so data-theme is set before first paint. -->
+		<!--
+			Pre-paint theme — external file so script-src 'self' covers it on
+			csr=false pages. Must be synchronous and run before SvelteKit injects
+			its own head content, so data-theme is set before first paint.
+			NOTE: do not write the literal placeholder name inside this comment;
+			SvelteKit string-substitutes it even inside comments and that breaks
+			the HTML comment's structure.
+		-->
 		<script src="/theme-init.js"></script>
 		%sveltekit.head%
 	</head>
