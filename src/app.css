@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+	--color-ink: #0a0e1a;
+	--color-ink-soft: #111726;
+	--color-paper: #f8f6f1;
+	--color-paper-soft: #efebe1;
+	--color-phosphor: #5eead4;
+	--color-violet: #a78bfa;
+
+	--color-signal-50: #e2e8f0;
+	--color-signal-200: #94a3b8;
+	--color-signal-400: #475569;
+	--color-signal-700: #1e293b;
+	--color-signal-900: #0a0e1a;
+
+	--font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--font-display: 'Fraunces', ui-serif, Georgia, serif;
+	--font-mono: 'Geist Mono', ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
+
+	--text-display-sm: 2.5rem;
+	--text-display-md: 4rem;
+	--text-display-lg: 6rem;
+	--text-display-xl: 9rem;
+
+	--radius-card: 1rem;
+}
+
+@layer base {
+	html {
+		color-scheme: dark;
+		background-color: var(--color-ink);
+		color: var(--color-signal-50);
+		font-family: var(--font-sans);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-rendering: optimizeLegibility;
+	}
+
+	body {
+		min-height: 100dvh;
+	}
+
+	::selection {
+		background-color: var(--color-phosphor);
+		color: var(--color-ink);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.001ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.001ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+}
