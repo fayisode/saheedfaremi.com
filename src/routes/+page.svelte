@@ -9,6 +9,7 @@
 		Tag,
 		Link
 	} from '$lib/components';
+	import portraitUrl from '$lib/assets/portrait.jpg';
 
 	const tagline = 'Researcher of the brain. Engineer of the systems people rely on.';
 </script>
@@ -73,7 +74,7 @@
 	>
 		<div class="mt-12 grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] md:gap-16">
 			<div class="md:max-w-xs">
-				<Portrait caption="Portrait · pending" />
+				<Portrait src={portraitUrl} alt="Saheed Faremi" />
 			</div>
 
 			<!-- Bio prose uses manual typography classes rather than @tailwindcss/typography's
