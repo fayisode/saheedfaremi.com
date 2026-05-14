@@ -14,3 +14,8 @@ plan.md
 # Build artifacts
 /build/
 /.svelte-kit/
+
+# GitHub Actions workflow files — see ~/.claude/CLAUDE.md "Workflow YML Discipline".
+# Auto-formatting these is destructive (line-ending normalization shows as a
+# spurious diff and risks bypassing the no-edit rule).
+/.github/workflows/

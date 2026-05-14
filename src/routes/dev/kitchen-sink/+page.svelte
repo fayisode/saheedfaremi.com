@@ -1,5 +1,27 @@
 <script lang="ts">
 	import { Container, Section, Button, Link, Tag, Card, ThemeToggle } from '$lib/components';
+	import {
+		projects,
+		awards,
+		education,
+		experience,
+		publications,
+		talks,
+		news,
+		sortByStartedAtDesc
+	} from '$lib/content/loader';
+
+	const collectionSummary = [
+		{ name: 'projects', count: projects.length },
+		{ name: 'awards', count: awards.length },
+		{ name: 'education', count: education.length },
+		{ name: 'experience', count: experience.length },
+		{ name: 'publications', count: publications.length },
+		{ name: 'talks', count: talks.length },
+		{ name: 'news', count: news.length }
+	];
+
+	const projectsByRecency = sortByStartedAtDesc(projects);
 
 	const colorTokens = [
 		{ name: '--color-bg', token: 'bg-bg' },
@@ -168,6 +190,41 @@
 			<div class="aspect-square rounded-pill bg-bg-soft border border-border p-4">
 				<code class="font-mono text-xs text-fg-muted">pill</code>
 			</div>
+		</div>
+	</Section>
+
+	<Section eyebrow="08 — Content layer" heading="Loaded collections" labelledById="sec-content">
+		<p class="mt-2 text-fg-soft">
+			Zod-validated content loaded at build time. All current entries are
+			<code class="font-mono text-xs">status: draft</code>
+			(except the UNESCO award) until verified.
+		</p>
+		<div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-7">
+			{#each collectionSummary as { name, count } (name)}
+				<Card variant="outlined">
+					<p class="font-mono text-xs tracking-[0.2em] text-fg-muted uppercase">{name}</p>
+					<p class="font-display mt-2 text-3xl text-fg">{count}</p>
+				</Card>
+			{/each}
+		</div>
+		<div class="mt-10">
+			<p class="font-mono text-xs tracking-[0.2em] text-fg-muted uppercase">
+				Sample · projects by recency
+			</p>
+			<ul class="mt-4 space-y-3">
+				{#each projectsByRecency.slice(0, 5) as project (project.slug)}
+					<li class="flex items-baseline gap-4 border-b border-border pb-3">
+						<span class="font-mono text-xs text-fg-muted w-16 shrink-0">
+							{project.startedAt ?? '—'}
+						</span>
+						<div class="min-w-0 flex-1">
+							<p class="font-display text-lg text-fg">{project.title}</p>
+							<p class="text-sm text-fg-soft">{project.summary ?? ''}</p>
+						</div>
+						<Tag variant="accent">{project.domain}</Tag>
+					</li>
+				{/each}
+			</ul>
 		</div>
 	</Section>
 

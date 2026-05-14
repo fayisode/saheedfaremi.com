@@ -183,10 +183,23 @@ Resumable sub-units. Each one captures its own pre-state so a cold restart can r
 - [x] **1.11 Final quality gates + commit** — check/lint/build all clean; CSP verified per-route in built HTML.
 - [x] **1.12 Memory updated** — `lessons_phase1_design_system.md` (font loading, CSP gotcha, Svelte 5 component patterns).
 
-### Phase 2 — Content schema + seed (1 session)
-- Define Zod schemas for: project, publication, talk, award, experience, education
-- Seed with stubbed content from your existing repos (READMEs become drafts)
-- Build content loaders + type-safe imports
+### Phase 2 — Content schema + seed (COMPLETE as of 2026-05-14)
+
+- [x] **2.1 Dependencies installed** — `zod ^4.4.3`, `mdsvex ^0.12.7`.
+- [x] **2.2 MDsveX wired** — preprocessor in `svelte.config.js`, `extensions: ['.svelte', '.md']`.
+- [x] **2.3 Zod schemas authored** — `src/lib/content/schemas.ts` with `Project`, `Publication`, `Talk`, `Award`, `Experience`, `Education`, `News`. Shared `BaseFields`. `ProjectDomain` enum has `consulting` added.
+- [x] **2.4 Loader authored** — `src/lib/content/loader.ts` validates each module's frontmatter via `import.meta.glob({eager: true})` + `schema.safeParse`. Throws on bad shape with helpful path-prefixed error. Slug derived from filename with reserved-slug denylist.
+- [x] **2.5 Content directory created** — `src/content/{projects,publications,talks,awards,experience,education,news}/`.
+- [x] **2.6 Seed drafts** — 10 projects + 1 verified award (UNESCO 2022) + 1 PhD education stub + 2 experience stubs. Empty collections (publications, talks, news) have `.gitkeep`.
+- [x] **2.7 Quality gates pass** — `pnpm check` 0/0, `pnpm lint` clean, `pnpm build` clean. `/` still 0 KB JS. Schemas validated against all 14 seed files at build time.
+- [x] **2.8 Adversarial review** — 3 parallel agents (schema/loader, content accuracy, build/bundle); 12 distinct findings.
+- [x] **2.9 Review findings applied:**
+  - **Loader/Schema fixes:** reserved-slug denylist (`index`, `readme`, etc.); `sortByYearDesc`/`sortByStartedAtDesc` undefined-fallback floats undated items to TOP (current/ongoing semantics) with explicit comment; `ExperienceSchema.startedAt` + `EducationSchema.startedAt` made optional so drafts don't need fake dates; `ProjectDomain` enum gains `consulting`.
+  - **Section component:** JSDoc explicitly documents the `heading` + `labelledById` contract.
+  - **Phase 1 regression repaired:** Section h2 was being suppressed when both `heading` and `labelledById` were set; fixed so h2 always renders when `heading` is set, with `labelledById` overriding the auto-generated id.
+  - **Content corrections:** Curnance drops unverified `Flutter` from tech list; `farmer-call-center.md` → `status: published` with UNESCO facts cross-referenced to the award page (not duplicated); `mira-ai` → `domain: other` (was unverified `research`); `predict-dx` "low-resource settings" framing moved from summary to verify block; `gatsheni-advisory` → `domain: consulting`; unverified `startedAt` removed from Curnance/Etihuku experience and PhD education drafts.
+- [x] **2.10 Bundle-architecture finding DEFERRED to Phase 5** — agent flagged that `import.meta.glob({eager: true})` bundles full Zod runtime (~28 KB) + all markdown component bodies into every consumer of `loader.ts`. **Currently only `/dev/kitchen-sink` (internal, robots-blocked) imports the loader**, so production users are unaffected. When Phase 5 builds public `/projects` listing, the loader must be refactored: build-time JSON generation via Vite plugin or pre-build script, lazy component loaders for prose bodies. Logged as a hard precondition for any public route that consumes the loader.
+- [x] **2.11 Commit + memory update**.
 
 ### Phase 3 — Hero + microstate field (1 session)
 - OGL canvas with microstate shader
