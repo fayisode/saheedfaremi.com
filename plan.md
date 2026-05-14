@@ -251,10 +251,21 @@ Sections live on `/` (single-page scroll), not separate routes.
   - `/` regression: **40.3 KB gzip** (unchanged from Phase 4).
 - [x] **P5p.7 Quality gates + commit + memory.**
 
-### Phase 5 — Projects grid + detail pages (1–2 sessions)
-- Grid with domain filter
-- One detail page per real project (need your input on which 8–10 to feature)
-- Live demo embeds where appropriate
+### Phase 5 — Projects grid + detail pages (COMPLETE as of 2026-05-14)
+
+- [x] **5.1 Nav updated** — SiteNav `links` now includes `/projects`.
+- [x] **5.2 ProjectCard component** — `$lib/components/ProjectCard.svelte`. Renders domain tag, status badge (draft only), title, summary, role, hover-arrow. Entire card is one focusable link to `/projects/[slug]`.
+- [x] **5.3 `/projects/+page.ts`** — `prerender = true`; `load()` returns plain metadata from the loader. No Zod runtime, no prose bodies in the bundle.
+- [x] **5.4 `/projects/+page.svelte`** — grid (1/2/3 cols responsive); domain-chip filter with counts per domain via `$derived.by(...)`; sort: featured first, then recent-startedAt-desc, then title.
+- [x] **5.5 `/projects/[slug]/+page.ts`** — dynamic route. `entries()` returns `{ slug }` for every project so adapter-static prerenders one HTML page per project. `load()` returns metadata sync + lazy-imported `Component` via `loadComponent('projects', slug)`.
+- [x] **5.6 `/projects/[slug]/+page.svelte`** — detail layout: breadcrumb to /projects + domain tag, title, draft notice (if applicable), summary, two-column body+aside. Aside has Role / Stack / Highlights / Links cards. Body renders via `<Body />` snippet from the lazy import.
+- [x] **5.7 Bundle measured:**
+  - `/` JS: **42 KB gzip** (was 40.3 in Phase 4; small bump from nav link + shared chunks). Budget 50 KB.
+  - `/projects` JS: **43.2 KB gzip**. Budget 50 KB.
+  - All 10 project detail HTMLs prerendered: curnance, etihuku-hris, farmer-call-center, gatsheni-advisory, his-core, microstate-eeg, mira-ai, predict-dx, skills-hub, webgis.
+- [x] **5.8 Quality gates** — check 0/0, lint clean, build clean.
+- [x] **5.9 Inline fixes** — ProjectCard `$derived` for the prop-referencing href (was flagged by svelte-check); unused `Tag` import removed; `/awards` added to prerender allowlist for the farmer-call-center → award cross-reference.
+- [x] **5.10 Commit + memory update.**
 
 ### Phase 6 — Publications + Talks (1 session)
 - Year-grouped list

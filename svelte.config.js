@@ -16,9 +16,11 @@ const config = {
 		adapter: adapter(),
 		prerender: {
 			handleHttpError: ({ path, message }) => {
-				// Allowlist routes that are referenced from the design-system kitchen
-				// sink but don't exist yet. They get built in later phases (see plan.md).
-				const planned = ['/projects', '/about', '/publications', '/cv', '/now', '/uses'];
+				// Allowlist routes that are referenced from existing content but
+				// don't have their own pages built yet. They get built in later
+				// phases (see plan.md). Routes here disappear from the list as
+				// each phase ships its routes.
+				const planned = ['/about', '/publications', '/cv', '/now', '/uses', '/awards'];
 				if (planned.some((p) => path === p || path.startsWith(p + '/'))) {
 					console.warn(`prerender: planned route ${path} not yet built — skipping`);
 					return;

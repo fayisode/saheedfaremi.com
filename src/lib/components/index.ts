@@ -10,3 +10,4 @@ export { default as SiteNav } from './SiteNav.svelte';
 export { default as Portrait } from './Portrait.svelte';
 export { default as DiagramFigure } from './DiagramFigure.svelte';
 export { default as PulledQuote } from './PulledQuote.svelte';
+export { default as ProjectCard } from './ProjectCard.svelte';

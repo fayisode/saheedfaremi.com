@@ -11,7 +11,8 @@
 	// land here per phase (Projects in Phase 5, Publications in Phase 6, etc.).
 	const navLinks = [
 		{ href: '/#about', label: 'About' },
-		{ href: '/#research', label: 'Research' }
+		{ href: '/#research', label: 'Research' },
+		{ href: '/projects', label: 'Projects' }
 	];
 </script>
 
