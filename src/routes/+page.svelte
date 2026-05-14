@@ -53,14 +53,6 @@
 				<Link href="#research" variant="plain">Or jump to the research</Link>
 			</div>
 		</section>
-
-		<footer
-			class="font-mono text-fg-muted flex flex-col gap-1 text-xs tracking-[0.2em] uppercase
-				sm:flex-row sm:items-center sm:justify-between"
-		>
-			<span>SvelteKit · Tailwind v4 · OGL</span>
-			<span>Azure Static Web Apps</span>
-		</footer>
 	</Container>
 </div>
 
