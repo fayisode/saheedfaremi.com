@@ -14,6 +14,4 @@ tags:
   - financial-inclusion
 ---
 
-> **DRAFT — VERIFY.** Drawn from `~/WebstormProjects/cfi_eswatini*` and
-> `~/WebstormProjects/gatsheni-advisory`. Replace with the real client-facing
-> description and confirm what's public.
+> _Draft. This entry is pending review._

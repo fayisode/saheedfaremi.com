@@ -1,11 +1,11 @@
 ---
-title: PhD — EEG microstates with deep generative models
+title: 'PhD: EEG microstates with deep generative models'
 status: draft
-institution: TBD — verify
+institution: TBD
 degree: PhD
-field: Neural engineering / machine learning
+field: Neural engineering and machine learning
 progressionStatus: in-progress
-location: TBD
+location: Dublin, Ireland
 summary: Doctoral research on segmenting EEG into microstate sequences using variational autoencoders.
 tags:
   - phd
@@ -13,12 +13,9 @@ tags:
   - vae
 ---
 
-> **DRAFT — VERIFY.** PhD is in progress per the `~/Documents/PHD` folder and the
-> microstate-eeg research artefacts. Institution, supervisor, start date, and
-> expected completion need confirmation from Saheed.
+> _Draft. This entry is pending review._
 
 Doctoral research focused on segmenting EEG into microstate sequences using
-variational-autoencoder architectures, comparing single-Gaussian and Gaussian-mixture
-latent priors, and evaluating segmentation stability and behavioural predictiveness.
-
-Replace with the verified programme details.
+variational-autoencoder architectures, comparing single-Gaussian and
+Gaussian-mixture latent priors, and evaluating segmentation stability and
+behavioural predictiveness.

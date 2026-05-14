@@ -42,7 +42,7 @@
 	const internalId = nextSectionId();
 	// When a caller provides `labelledById`, it's an *override* for the heading's id
 	// (and the section's aria-labelledby). The internal h2 still renders if `heading`
-	// is set — `labelledById` just changes what its id is. To omit the internal h2
+	// is set; `labelledById` just changes what its id is. To omit the internal h2
 	// entirely (e.g. caller renders their own external heading), pass no `heading`.
 	const headingId = $derived(labelledById ?? internalId);
 	const ariaLabelledBy = $derived(heading ? headingId : labelledById);

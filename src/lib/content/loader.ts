@@ -1,6 +1,6 @@
 /**
  * Runtime content loader. Imports validated metadata from the build-time
- * `virtual:content` module — Zod runtime never reaches the client because
+ * `virtual:content` module. Zod runtime never reaches the client because
  * validation happens Node-side during build (see `_plugin.ts`).
  *
  * Prose bodies (the Svelte components produced by MDsveX from each .md file)
@@ -11,7 +11,7 @@ import content from 'virtual:content';
 import type { Award, Education, Experience, News, Project, Publication, Talk } from './schemas';
 
 /* ------------------------------------------------------------------ */
-/* Collections — plain JSON, no Zod runtime, no component bodies       */
+/* Collections. Plain JSON, no Zod runtime, no component bodies.       */
 /* ------------------------------------------------------------------ */
 
 export const projects: readonly Project[] = content.projects;
@@ -23,7 +23,7 @@ export const education: readonly Education[] = content.education;
 export const news: readonly News[] = content.news;
 
 /* ------------------------------------------------------------------ */
-/* Lazy component access — for detail pages that render prose          */
+/* Lazy component access. Used by detail pages that render prose.       */
 /* ------------------------------------------------------------------ */
 
 type LazyMap = Record<string, () => Promise<unknown>>;
@@ -43,7 +43,7 @@ const lazyModules: Record<string, LazyMap> = {
 };
 
 export type MdsvexModule = {
-	default: unknown; // Svelte 5 component constructor — typed loosely on purpose
+	default: unknown; // Svelte 5 component constructor, typed loosely on purpose
 	metadata?: Record<string, unknown>;
 };
 
@@ -71,7 +71,7 @@ export async function loadComponent(
 }
 
 /* ------------------------------------------------------------------ */
-/* Helpers — pure, no I/O, no Zod                                      */
+/* Helpers. Pure, no I/O, no Zod.                                       */
 /* ------------------------------------------------------------------ */
 
 export function publishedOnly<T extends { status: 'draft' | 'published' | 'archived' }>(

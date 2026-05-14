@@ -7,13 +7,14 @@
 
 	let { children } = $props();
 
-	// Public anchors / routes — surface only what's currently live. New entries
+	// Public anchors / routes · surface only what's currently live. New entries
 	// land here per phase (Projects in Phase 5, Publications in Phase 6, etc.).
 	const navLinks = [
 		{ href: '/#about', label: 'About' },
 		{ href: '/#research', label: 'Research' },
 		{ href: '/projects', label: 'Projects' },
 		{ href: '/awards', label: 'Recognition' },
+		{ href: '/news', label: 'News' },
 		{ href: '/cv', label: 'CV' },
 		{ href: '/contact', label: 'Contact' }
 	];
@@ -23,7 +24,7 @@
 	<link rel="icon" href={favicon} />
 	<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={frauncesLatin} />
 	<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={interLatin} />
-	<!-- Open Graph + Twitter — global defaults; individual routes can override
+	<!-- Open Graph + Twitter · global defaults; individual routes can override
 	     via their own <svelte:head> if richer cards are needed later. -->
 	<meta property="og:type" content="website" />
 	<meta property="og:site_name" content="Saheed Faremi" />

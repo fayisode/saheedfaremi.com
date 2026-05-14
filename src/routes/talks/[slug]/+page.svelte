@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>{meta.title} — Talks — Saheed Faremi</title>
+	<title>{meta.title} · Talks · Saheed Faremi</title>
 	{#if meta.summary}
 		<meta name="description" content={meta.summary} />
 	{/if}

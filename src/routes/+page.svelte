@@ -14,10 +14,10 @@
 </script>
 
 <svelte:head>
-	<title>Saheed Faremi — Researcher & Engineer</title>
+	<title>Saheed Faremi · Researcher & Engineer</title>
 	<meta
 		name="description"
-		content="Saheed Faremi — PhD-track EEG-microstate researcher and full-stack engineer building production systems in fintech, healthcare, education, HR, and agriculture."
+		content="Saheed Faremi: PhD-track EEG-microstate researcher and full-stack engineer building production systems in fintech, healthcare, education, HR, and agriculture."
 	/>
 </svelte:head>
 
@@ -34,7 +34,7 @@
 
 		<section class="my-auto" aria-labelledby="hero-heading">
 			<p class="font-mono text-fg-soft text-xs tracking-[0.2em] uppercase">
-				Researcher · Engineer · PhD-track
+				Researcher · Engineer · Dublin
 			</p>
 			<h1
 				id="hero-heading"
@@ -67,37 +67,36 @@
 <Container width="wide" class="scroll-anchor" id="about">
 	<Section
 		spacing="loose"
-		eyebrow="01 — About"
+		eyebrow="01 · About"
 		heading="A researcher who ships."
 		labelledById="about-heading"
 	>
 		<div class="mt-12 grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] md:gap-16">
 			<div class="md:max-w-xs">
-				<Portrait caption="Portrait — pending" />
+				<Portrait caption="Portrait · pending" />
 			</div>
 
 			<!-- Bio prose uses manual typography classes rather than @tailwindcss/typography's
 			     `prose` + `prose-invert` because `prose-invert` is hardcoded to dark-mode
-			     palette regardless of `data-theme` — it would render near-white body text
+			     palette regardless of `data-theme`. it would render near-white body text
 			     on the cream light-mode background. Manual classes consume the semantic
 			     `text-fg` / `text-fg-soft` tokens and rebalance correctly with the theme. -->
 			<div class="max-w-none space-y-5 text-lg leading-relaxed text-fg">
 				<p>I work at the intersection of cognitive neuroscience and production engineering.</p>
 				<p>
-					By day I build software people rely on — multi-asset fintech (Curnance), HR for African
+					By day I build software people rely on: multi-asset fintech (Curnance), HR for African
 					mid-market employers (Etihuku), healthcare data infrastructure (HIS Core, predict-dx), and
 					learning systems (Skills Hub, Moodle). The through-line is that infrastructure for
-					under-served users — geographically, economically, or computationally — needs the same
+					under-served users (geographically, economically, or computationally) needs the same
 					engineering rigour as infrastructure for everyone else, and tends to need it more.
 				</p>
 				<p>
-					My doctoral research turns from the systems people use to the people themselves —
-					specifically, what the brain looks like when it's running. <strong>EEG microstates</strong
-					>
-					are quasi-stable scalp topographies that segment continuous EEG into a discrete temporal alphabet;
-					I'm working on whether deep generative models — variational autoencoders and Gaussian-mixture
-					VAEs — can learn a microstate segmentation that's more stable across sessions and more behaviourally
-					predictive than classical clustering. <Tag variant="accent">DRAFT — verify framing</Tag>
+					My doctoral research turns from the systems people use to the people themselves;
+					specifically, what the brain looks like when it's running.
+					<strong>EEG microstates</strong> are quasi-stable scalp topographies that segment continuous
+					EEG into a discrete temporal alphabet. I'm working on whether deep generative models, variational
+					autoencoders and Gaussian-mixture VAEs, can learn a microstate segmentation that's more stable
+					across sessions and more behaviourally predictive than classical clustering.
 				</p>
 				<p>
 					In 2022 I represented Eswatini at the
@@ -106,19 +105,19 @@
 						variant="inline">UNESCO India-Africa Hackathon</Link
 					>
 					at Gautam Buddha University in Uttar Pradesh. Team
-					<em>Geeks_on_Fire</em> — five countries, five people — won problem statement AGRI12: an AI-assisted
+					<em>Geeks_on_Fire</em> (five countries, five people) won problem statement AGRI12: an AI-assisted
 					voice contact centre that lets farmers without smartphones report issues by phone and receive
 					guidance back in their language. Gold medals and a ₹3 lakh team prize.
 				</p>
 				<p class="text-fg-soft text-base">
-					Based in Eswatini. Travel for research. <Tag>open to collaboration</Tag>
+					Based in Dublin, Ireland. Travel for research. <Tag>open to collaboration</Tag>
 				</p>
 			</div>
 		</div>
 
 		<PulledQuote attribution="Working principle">
 			Infrastructure for under-served users needs the same engineering rigour as infrastructure for
-			everyone else — and tends to need it more.
+			everyone else, and tends to need it more.
 		</PulledQuote>
 	</Section>
 </Container>
@@ -127,24 +126,23 @@
 <Container width="wide" class="scroll-anchor" id="research">
 	<Section
 		spacing="loose"
-		eyebrow="02 — Research"
+		eyebrow="02 · Research"
 		heading="EEG microstates with deep generative models."
 		labelledById="research-heading"
 	>
 		<div class="mt-10 grid gap-12 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:gap-16">
 			<div class="space-y-5 text-lg leading-relaxed text-fg">
 				<p>
-					EEG microstates are quasi-stable scalp topographies — typically four to seven canonical
-					classes — that segment continuous EEG signal into a discrete temporal alphabet. The
+					EEG microstates are quasi-stable scalp topographies, typically four to seven canonical
+					classes, that segment continuous EEG signal into a discrete temporal alphabet. The
 					classical approach uses modified k-means clustering over the global field power maxima. It
 					works, but it depends on hard choices (the number of states, the reference electrode, the
 					band-pass) and the resulting segmentation can be brittle across sessions.
 				</p>
 				<p>
-					This project asks whether a <em>learned</em> latent geometry — via a variational
-					autoencoder — produces a microstate alphabet that is more interpretable, more stable
-					across sessions, and more predictive of behaviour than the classical pipeline.
-					<Tag variant="accent">DRAFT — confirm with supervisor</Tag>
+					This project asks whether a <em>learned</em> latent geometry, via a variational autoencoder,
+					produces a microstate alphabet that is more interpretable, more stable across sessions, and
+					more predictive of behaviour than the classical pipeline.
 				</p>
 
 				<h3
@@ -160,8 +158,8 @@
 						error.
 					</li>
 					<li>
-						<strong class="text-fg">GMM-VAE.</strong> Gaussian-mixture latent prior — one component per
-						microstate class — so the segmentation falls out of the latent prior structure rather than
+						<strong class="text-fg">GMM-VAE.</strong> Gaussian-mixture latent prior with one component
+						per microstate class, so the segmentation falls out of the latent prior structure rather than
 						a post-hoc clustering step.
 					</li>
 					<li>
@@ -177,7 +175,7 @@
 					<p class="font-display text-fg mt-2 text-2xl">In progress</p>
 					<p class="text-fg-soft mt-3 text-sm">
 						Preprints, publications, and code releases will land on a dedicated publications section
-						here — coming in Phase 6.
+						here as they happen.
 					</p>
 				</div>
 				<div class="rounded-card border-border border p-6">
@@ -196,7 +194,7 @@
 		<div class="mt-16 grid gap-8 md:grid-cols-3">
 			<DiagramFigure
 				title="VAE"
-				caption="Vanilla variational autoencoder — single Gaussian latent prior."
+				caption="Vanilla variational autoencoder with a single Gaussian latent prior."
 			/>
 			<DiagramFigure
 				title="VAE-GMM"
@@ -204,7 +202,7 @@
 			/>
 			<DiagramFigure
 				title="GMM-VAE"
-				caption="Mixture-of-Gaussians latent prior — class structure native to the prior."
+				caption="Mixture-of-Gaussians latent prior with class structure native to the prior."
 			/>
 		</div>
 		<p class="font-mono text-fg-muted mt-6 text-xs tracking-[0.15em] uppercase">

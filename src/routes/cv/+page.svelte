@@ -27,10 +27,10 @@
 </script>
 
 <svelte:head>
-	<title>CV — Saheed Faremi</title>
+	<title>CV · Saheed Faremi</title>
 	<meta
 		name="description"
-		content="Curriculum vitae for Saheed Faremi — researcher and engineer."
+		content="Curriculum vitae for Saheed Faremi · researcher and engineer."
 	/>
 </svelte:head>
 
@@ -46,7 +46,7 @@
 		<p class="text-fg-soft mt-4 font-mono text-sm">
 			<a class="text-accent" href={`mailto:${EMAIL}`}>{EMAIL}</a>
 			· <a class="text-accent" href={GITHUB}>github.com/fayisode</a>
-			· Based in Eswatini
+			· Based in Dublin, Ireland
 		</p>
 		<button
 			type="button"
@@ -68,7 +68,7 @@
 							{item.role} · <span class="text-fg-soft">{item.organization}</span>
 						</h3>
 						<p class="font-mono text-fg-muted text-xs tracking-[0.15em]">
-							{item.startedAt ?? '—'}{item.endedAt ? ` → ${item.endedAt}` : ' → present'}
+							{item.startedAt ?? '·'}{item.endedAt ? ` → ${item.endedAt}` : ' → present'}
 						</p>
 					</div>
 					{#if item.summary}<p class="text-fg-soft mt-2 text-sm">{item.summary}</p>{/if}
@@ -93,7 +93,7 @@
 							{item.degree} · <span class="text-fg-soft">{item.institution}</span>
 						</h3>
 						<p class="font-mono text-fg-muted text-xs tracking-[0.15em]">
-							{item.startedAt ?? '—'}{item.endedAt
+							{item.startedAt ?? '·'}{item.endedAt
 								? ` → ${item.endedAt}`
 								: ` → ${item.progressionStatus}`}
 						</p>
@@ -165,7 +165,7 @@
 				{#each data.talks as t (t.slug)}
 					<li class="text-sm">
 						<span class="text-fg">{t.title}</span>
-						<span class="text-fg-soft">— {t.event},</span>
+						<span class="text-fg-soft">· {t.event},</span>
 						<span class="text-fg-muted">{t.year}</span>
 					</li>
 				{/each}

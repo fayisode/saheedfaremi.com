@@ -13,5 +13,4 @@ tags:
   - mapping
 ---
 
-> **DRAFT — VERIFY.** Drawn from `~/WebstormProjects/WebGis`. Add the use case,
-> dataset, and intended audience.
+> _Draft. This entry is pending review._

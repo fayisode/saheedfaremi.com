@@ -6,14 +6,14 @@
 </script>
 
 <svelte:head>
-	<title>Talks — Saheed Faremi</title>
+	<title>Talks · Saheed Faremi</title>
 	<meta name="description" content="Talks and presentations by Saheed Faremi." />
 </svelte:head>
 
 <Container width="wide">
 	<Section
 		spacing="loose"
-		eyebrow="Index — Talks"
+		eyebrow="Index · Talks"
 		heading="Talks & presentations."
 		labelledById="talks-heading"
 	>

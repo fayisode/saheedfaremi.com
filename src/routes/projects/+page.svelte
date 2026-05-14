@@ -4,7 +4,7 @@
 
 	let { data }: { data: { projects: Project[] } } = $props();
 
-	// Domain filter — defaults to "all". Counts derived from the current dataset
+	// Domain filter · defaults to "all". Counts derived from the current dataset
 	// so the UI never claims a domain has projects it doesn't.
 	type Filter = 'all' | Project['domain'];
 	let filter = $state<Filter>('all');
@@ -48,7 +48,7 @@
 </script>
 
 <svelte:head>
-	<title>Projects — Saheed Faremi</title>
+	<title>Projects · Saheed Faremi</title>
 	<meta
 		name="description"
 		content="Production systems Saheed Faremi has built across fintech, healthcare, HR, education, agriculture, GIS, and research."
@@ -58,7 +58,7 @@
 <Container width="wide">
 	<Section
 		spacing="loose"
-		eyebrow="Index — Projects"
+		eyebrow="Index · Projects"
 		heading="Production work across many verticals."
 		labelledById="projects-heading"
 	>
@@ -71,7 +71,7 @@
 			are first-pass descriptions drawn from public repos and will be edited as I verify each one.
 		</p>
 
-		<!-- Filter chip row. Pure client-side filter — works only with JS. Without JS,
+		<!-- Filter chip row. Pure client-side filter · works only with JS. Without JS,
 		     the list below renders all projects (default state), which is correct. -->
 		<div class="mt-10 flex flex-wrap gap-2" role="group" aria-label="Filter by domain">
 			{#each visibleDomains as domain (domain)}

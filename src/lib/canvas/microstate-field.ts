@@ -155,7 +155,7 @@ uniform vec2 uResolution;
 
 varying vec2 vUv;
 
-// 2D gradient (Perlin-style) noise — cheap and only used for subtle texture
+// 2D gradient (Perlin-style) noise. Cheap and only used for subtle texture.
 vec2 hash22(vec2 p) {
 	p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
 	return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);

@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>{page.status} — Saheed Faremi</title>
+	<title>{page.status} · Saheed Faremi</title>
 </svelte:head>
 
 <Container width="default">
@@ -25,8 +25,8 @@
 				The page you're looking for isn't on this site (yet). The links below should land you
 				somewhere intentional.
 			{:else}
-				An unexpected error — {page.error?.message ?? 'unknown'}. Try again in a moment, or report
-				it via the contact page.
+				An unexpected error: {page.error?.message ?? 'unknown'}. Try again in a moment, or report it
+				via the contact page.
 			{/if}
 		</p>
 		<ul class="font-mono mt-10 space-y-2 text-sm">

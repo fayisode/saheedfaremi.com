@@ -14,3 +14,4 @@ export { default as ProjectCard } from './ProjectCard.svelte';
 export { default as AwardCard } from './AwardCard.svelte';
 export { default as PublicationCard } from './PublicationCard.svelte';
 export { default as TalkCard } from './TalkCard.svelte';
+export { default as NewsCard } from './NewsCard.svelte';

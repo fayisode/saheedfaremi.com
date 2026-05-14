@@ -7,12 +7,12 @@
 	$effect(() => {
 		if (!browser || !canvas) return;
 
-		// Respect prefers-reduced-motion — never load the OGL chunk at all.
+		// Respect prefers-reduced-motion. Never load the OGL chunk at all.
 		const prefersReducedMotion =
 			window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		if (prefersReducedMotion) return;
 
-		// Bail if WebGL isn't available — the CSS gradient under the canvas remains
+		// Bail if WebGL isn't available. The CSS gradient under the canvas remains
 		// the user's view.
 		const ctx = canvas.getContext('webgl2') ?? canvas.getContext('webgl');
 		if (!ctx) return;
@@ -28,7 +28,7 @@
 				// fade-in: avoid first-frame pop
 				canvas.style.opacity = '0.35';
 			} catch (err) {
-				// Log but do not throw — the gradient fallback is already visible.
+				// Log but do not throw. The gradient fallback is already visible.
 				if (typeof console !== 'undefined') {
 					console.error('microstate-field failed to load', err);
 				}

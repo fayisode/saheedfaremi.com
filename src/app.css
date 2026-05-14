@@ -7,7 +7,7 @@
 
 /*
  * Metric-matched fallback faces so the fallback text sits at the same
- * dimensions as the web font once it loads — eliminates CLS on the hero <h1>.
+ * dimensions as the web font once it loads. Eliminates CLS on the hero <h1>.
  * Values are approximate (fontaine-style); empirically tunable.
  */
 @font-face {
@@ -58,7 +58,7 @@
 	--color-accent-soft: var(--color-violet);
 	--color-border: #1f2a3d;
 
-	/* Type families — Variable fonts via Fontsource, metric-matched fallback in front of system stack */
+	/* Type families. Variable fonts via Fontsource, metric-matched fallback in front of system stack. */
 	--font-sans:
 		'Inter Variable', 'Inter Fallback', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
 		sans-serif;

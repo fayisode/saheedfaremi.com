@@ -19,7 +19,7 @@
 				copied = false;
 			}, 1800);
 		} catch {
-			// clipboard API can fail in private mode or without HTTPS — fall through
+			// clipboard API can fail in private mode or without HTTPS. Fall through
 			// silently. The mailto button below stays available as a fallback.
 		}
 	}
@@ -35,7 +35,7 @@
 
 	const mailtoHref = $derived.by(() => {
 		const subject = name ? `Hello from ${name}` : 'Hello from your site';
-		const body = message ? message + (email ? `\n\n— Reply to: ${email}` : '') : '';
+		const body = message ? message + (email ? `\n\nReply to: ${email}` : '') : '';
 		const params = new SvelteURLSearchParams();
 		params.set('subject', subject);
 		if (body) params.set('body', body);
@@ -44,17 +44,17 @@
 </script>
 
 <svelte:head>
-	<title>Contact — Saheed Faremi</title>
+	<title>Contact · Saheed Faremi</title>
 	<meta
 		name="description"
-		content="Get in touch with Saheed Faremi — research collaboration, engineering work, talks, or just to say hi."
+		content="Get in touch with Saheed Faremi for research collaboration, engineering work, talks, or just to say hi."
 	/>
 </svelte:head>
 
 <Container width="default">
 	<Section spacing="loose" eyebrow="Contact" heading="Send a note." labelledById="contact-heading">
 		<p class="text-fg mt-6 max-w-2xl text-xl leading-relaxed">
-			Research collaboration, engineering work, talks, or anything else — write a quick note below
+			Research collaboration, engineering work, talks, or anything else. Write a quick note below
 			and I'll get back to you.
 		</p>
 
@@ -88,7 +88,7 @@
 			</button>
 		</div>
 
-		<!-- Slow path: a structured note. Static for now — no Function endpoint. -->
+		<!-- Slow path: a structured note. Static for now (no Function endpoint). -->
 		<form class="mt-14 max-w-2xl space-y-6" action={mailtoHref} method="get">
 			<div class="grid gap-6 sm:grid-cols-2">
 				<label class="block">
@@ -152,10 +152,10 @@
 			</div>
 			<div class="rounded-card border-border bg-bg-soft border p-6">
 				<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Based in</p>
-				<p class="text-fg mt-2">Eswatini. Travel for research.</p>
+				<p class="text-fg mt-2">Dublin, Ireland. Travel for research.</p>
 				<div class="mt-3 flex flex-wrap gap-2">
-					<Tag>Africa</Tag>
 					<Tag>Europe</Tag>
+					<Tag>Africa</Tag>
 					<Tag>open to collaboration</Tag>
 				</div>
 			</div>

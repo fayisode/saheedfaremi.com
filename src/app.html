@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--
-			Pre-paint theme — external file so script-src 'self' covers it on
+			Pre-paint theme. External file so script-src 'self' covers it on
 			csr=false pages. Must be synchronous and run before SvelteKit injects
 			its own head content, so data-theme is set before first paint.
 			NOTE: do not write the literal placeholder name inside this comment;
@@ -25,7 +25,11 @@
 				"jobTitle": "Researcher & Software Engineer",
 				"description": "PhD-track EEG-microstate researcher and full-stack engineer building production systems in fintech, healthcare, education, HR, and agriculture.",
 				"url": "https://saheedfaremi.com",
-				"address": { "@type": "PostalAddress", "addressCountry": "SZ" },
+				"address": {
+					"@type": "PostalAddress",
+					"addressLocality": "Dublin",
+					"addressCountry": "IE"
+				},
 				"sameAs": [
 					"https://github.com/fayisode",
 					"https://medium.com/@sonirudrakshi99/unesco-india-africa-hackathon-2022-2ec88cea6eb9"

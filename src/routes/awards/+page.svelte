@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Recognition — Saheed Faremi</title>
+	<title>Recognition · Saheed Faremi</title>
 	<meta
 		name="description"
 		content="Awards, prizes, and external recognition received by Saheed Faremi."
@@ -16,7 +16,7 @@
 <Container width="wide">
 	<Section
 		spacing="loose"
-		eyebrow="Index — Recognition"
+		eyebrow="Index · Recognition"
 		heading="Awards & external recognition."
 		labelledById="awards-heading"
 	>

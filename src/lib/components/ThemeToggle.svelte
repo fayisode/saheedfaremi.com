@@ -5,7 +5,7 @@
 
 	// On the client, read the live `data-theme` attribute set by /theme-init.js
 	// before the component hydrates. On the server (prerender), default to dark
-	// so the rendered HTML is consistent — the client immediately corrects after
+	// so the rendered HTML is consistent. The client immediately corrects after
 	// hydration if the user's actual preference is light.
 	let theme = $state<Theme>(
 		browser ? (document.documentElement.dataset.theme === 'light' ? 'light' : 'dark') : 'dark'

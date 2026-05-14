@@ -17,6 +17,4 @@ tags:
   - education
 ---
 
-> **DRAFT — VERIFY.** Drawn from `~/WebstormProjects/skill_hub`, `skills_hub_admin`,
-> and `skillshub-api`. Add the audience, scale, and any institutional deployment
-> context.
+> _Draft. This entry is pending review._

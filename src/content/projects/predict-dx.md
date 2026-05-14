@@ -11,7 +11,7 @@ tags:
   - clinical-prediction
 ---
 
-> **DRAFT — VERIFY.** Drawn from `~/WebstormProjects/predict_dx`. Hypothesis (to
-> verify): aimed at low-resource settings, given the adjacency to the
-> `pressure_ulcer` and `HIS-Core-release` repos. Replace with the real clinical
-> target, dataset, methods, validation, and any partner institution.
+> _Draft. This entry is pending review._
+
+Diagnostic-prediction models from clinical features. Replace with the clinical
+target, dataset, methods, validation, and any partner institution.

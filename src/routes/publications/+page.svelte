@@ -6,14 +6,14 @@
 </script>
 
 <svelte:head>
-	<title>Publications — Saheed Faremi</title>
+	<title>Publications · Saheed Faremi</title>
 	<meta name="description" content="Preprints, papers, and citable work by Saheed Faremi." />
 </svelte:head>
 
 <Container width="wide">
 	<Section
 		spacing="loose"
-		eyebrow="Index — Publications"
+		eyebrow="Index · Publications"
 		heading="Preprints, papers, and citable work."
 		labelledById="publications-heading"
 	>

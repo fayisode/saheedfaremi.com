@@ -21,7 +21,7 @@
 	</blockquote>
 	{#if attribution}
 		<figcaption class="font-mono text-fg-muted mt-4 pl-6 text-xs tracking-[0.2em] uppercase">
-			— {attribution}
+			· {attribution}
 		</figcaption>
 	{/if}
 </figure>

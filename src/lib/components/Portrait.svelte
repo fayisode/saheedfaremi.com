@@ -17,7 +17,7 @@
 		<!--
 			Placeholder portrait. Replace with a real <Portrait src="…"> once the photo
 			lands in src/lib/assets/. Until then, render as a clearly intentional
-			placeholder — not a broken box — so the layout reads as designed.
+			placeholder (not a broken box) so the layout reads as designed.
 		-->
 		<div class="relative aspect-[4/5] overflow-hidden rounded-card border border-border bg-bg-soft">
 			<div

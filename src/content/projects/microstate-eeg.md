@@ -22,22 +22,17 @@ tags:
   - microstates
 ---
 
-> **DRAFT — VERIFY.** Drawn from the diagrams in `~/Documents` (VAE.drawio,
-> VAE_GMM.drawio, GMMVAE.drawio, Variational Autoencoder.docx) and the
-> `~/PythonProject-microstate-eeg` repository. Add the formal abstract, supervisor,
-> institution, and any preprint or paper links when ready.
+> _Draft. This entry is pending review._
 
-EEG microstates are quasi-stable scalp topographies (typically 4–7 canonical classes)
-that segment continuous EEG into a discrete temporal alphabet. This work asks whether a
-learned latent geometry — via a variational autoencoder — produces a microstate
-segmentation that is more interpretable, more stable across sessions, or more
-predictive of behaviour than classical clustering.
+EEG microstates are quasi-stable scalp topographies (typically four to seven
+canonical classes) that segment continuous EEG into a discrete temporal
+alphabet. This work asks whether a learned latent geometry, via a variational
+autoencoder, produces a microstate segmentation that is more interpretable,
+more stable across sessions, or more predictive of behaviour than classical
+clustering.
 
 Variants explored:
 
-- **VAE** — single Gaussian latent prior; learns continuous embedding.
-- **GMM-VAE** — Gaussian-mixture latent prior; one component per microstate class.
-- Architecture-search experiments to compare codebook capacity, regularisation, and
-  decoder choices.
-
-Pending: methods detail, dataset citations, results, supervisor credit, paper links.
+- **VAE.** Single Gaussian latent prior; learns continuous embedding.
+- **GMM-VAE.** Gaussian-mixture latent prior; one component per microstate class.
+- Architecture-search experiments to compare codebook capacity, regularisation, and decoder choices.

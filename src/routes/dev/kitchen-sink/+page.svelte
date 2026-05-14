@@ -60,7 +60,7 @@
 	<header class="flex items-center justify-between py-10">
 		<div>
 			<p class="font-mono text-xs tracking-[0.2em] text-fg-muted uppercase">
-				<span class="text-accent">●</span> Internal — not indexed
+				<span class="text-accent">●</span> Internal · not indexed
 			</p>
 			<h1 class="font-display mt-3 text-4xl tracking-tight text-fg sm:text-5xl">Kitchen sink</h1>
 			<p class="mt-2 max-w-prose text-fg-soft">
@@ -70,7 +70,7 @@
 		<ThemeToggle />
 	</header>
 
-	<Section eyebrow="01 — Color tokens" heading="Semantic palette" labelledById="sec-color">
+	<Section eyebrow="01 · Color tokens" heading="Semantic palette" labelledById="sec-color">
 		<p class="mt-2 text-fg-soft">
 			Theme-aware tokens. Switch the theme above and watch them rebalance.
 		</p>
@@ -87,7 +87,7 @@
 		</div>
 	</Section>
 
-	<Section eyebrow="02 — Typography" heading="Type scale" labelledById="sec-type">
+	<Section eyebrow="02 · Typography" heading="Type scale" labelledById="sec-type">
 		<div class="mt-8 space-y-4">
 			{#each typeScale as { label, class: cls } (label)}
 				<div class="flex items-baseline gap-6 border-b border-border pb-4">
@@ -97,17 +97,17 @@
 			{/each}
 		</div>
 		<div class="mt-10 space-y-3">
-			<p class="font-display text-2xl text-fg">Fraunces — display serif</p>
+			<p class="font-display text-2xl text-fg">Fraunces · display serif</p>
 			<p class="font-sans text-base text-fg-soft">
-				Inter — body sans. The quick brown fox jumps over the lazy dog. 0123456789.
+				Inter · body sans. The quick brown fox jumps over the lazy dog. 0123456789.
 			</p>
 			<p class="font-mono text-sm text-fg-soft">
-				Geist Mono — for code, captions, metadata. `const microstate = ...`
+				Geist Mono · for code, captions, metadata. `const microstate = ...`
 			</p>
 		</div>
 	</Section>
 
-	<Section eyebrow="03 — Buttons" heading="Action affordances" labelledById="sec-btn">
+	<Section eyebrow="03 · Buttons" heading="Action affordances" labelledById="sec-btn">
 		<div class="mt-8 flex flex-wrap items-end gap-4">
 			<Button variant="primary" size="lg">Primary · lg</Button>
 			<Button variant="primary" size="md">Primary · md</Button>
@@ -124,7 +124,7 @@
 		</div>
 	</Section>
 
-	<Section eyebrow="04 — Tags" heading="Inline labels" labelledById="sec-tag">
+	<Section eyebrow="04 · Tags" heading="Inline labels" labelledById="sec-tag">
 		<div class="mt-8 flex flex-wrap gap-3">
 			<Tag>outline</Tag>
 			<Tag variant="solid">solid</Tag>
@@ -135,7 +135,7 @@
 		</div>
 	</Section>
 
-	<Section eyebrow="05 — Links" heading="Navigation affordances" labelledById="sec-link">
+	<Section eyebrow="05 · Links" heading="Navigation affordances" labelledById="sec-link">
 		<div class="mt-8 space-y-4">
 			<p class="text-fg-soft">
 				This is an
@@ -150,7 +150,7 @@
 		</div>
 	</Section>
 
-	<Section eyebrow="06 — Cards" heading="Content containers" labelledById="sec-card">
+	<Section eyebrow="06 · Cards" heading="Content containers" labelledById="sec-card">
 		<div class="mt-8 grid gap-6 md:grid-cols-3">
 			<Card>
 				<p class="font-mono text-xs tracking-[0.2em] text-fg-muted uppercase">Default</p>
@@ -165,7 +165,7 @@
 				</p>
 				<h3 class="font-display mt-3 text-xl text-fg">Curnance</h3>
 				<p class="mt-2 text-sm text-fg-soft">
-					Multi-asset fintech platform — admin, wallet, KYC, monorepo.
+					Multi-asset fintech platform · admin, wallet, KYC, monorepo.
 				</p>
 			</Card>
 			<Card variant="outlined">
@@ -176,7 +176,7 @@
 		</div>
 	</Section>
 
-	<Section eyebrow="07 — Surfaces" heading="Radii & motion" labelledById="sec-surface">
+	<Section eyebrow="07 · Surfaces" heading="Radii & motion" labelledById="sec-surface">
 		<div class="mt-8 grid gap-4 sm:grid-cols-4">
 			<div class="aspect-square rounded-sharp bg-bg-soft border border-border p-4">
 				<code class="font-mono text-xs text-fg-muted">sharp</code>
@@ -193,7 +193,7 @@
 		</div>
 	</Section>
 
-	<Section eyebrow="08 — Content layer" heading="Loaded collections" labelledById="sec-content">
+	<Section eyebrow="08 · Content layer" heading="Loaded collections" labelledById="sec-content">
 		<p class="mt-2 text-fg-soft">
 			Zod-validated content loaded at build time. All current entries are
 			<code class="font-mono text-xs">status: draft</code>
@@ -215,7 +215,7 @@
 				{#each projectsByRecency.slice(0, 5) as project (project.slug)}
 					<li class="flex items-baseline gap-4 border-b border-border pb-3">
 						<span class="font-mono text-xs text-fg-muted w-16 shrink-0">
-							{project.startedAt ?? '—'}
+							{project.startedAt ?? '·'}
 						</span>
 						<div class="min-w-0 flex-1">
 							<p class="font-display text-lg text-fg">{project.title}</p>

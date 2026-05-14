@@ -18,12 +18,9 @@ tags:
   - go
 ---
 
-> **DRAFT — VERIFY.** Drawn from `~/GolangProjects/Go-Etihuku-hr-system` and
-> `~/WebstormProjects/etihuku_website`. Confirm what's public and add real product
-> details when ready.
+> _Draft. This entry is pending review._
 
-Etihuku HRIS is a human-resource information system targeted at the African mid-market.
-The backend is in Go, with a Svelte-based admin interface and a planned employee
-self-service surface. Core domains: people, contracts, leave, payroll, and reports.
-
-Replace this paragraph with the real positioning when you confirm what's public.
+Etihuku HRIS is a human-resource information system targeted at the African
+mid-market. The backend is in Go, with a Svelte-based admin interface and a
+planned employee self-service surface. Core domains: people, contracts, leave,
+payroll, and reports.
