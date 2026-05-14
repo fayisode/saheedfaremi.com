@@ -159,10 +159,14 @@ Resumable sub-units. Each one captures its own pre-state so a cold restart can r
   - DEFERRED: web font preloading → Phase 1 (design system).
 - [x] **0.10 Quality gates re-run** — `pnpm check` 0/0, `pnpm lint` clean, `pnpm build` clean. Measured: HTML 4.3 KB, CSS 12 KB raw, JS 0 KB. CSP meta tag emitted with `script-src 'self'`.
 - [x] **0.11 Initial commit** — local `main` branch with one commit; tree clean.
-- [ ] **0.12 User inputs for deploy half** *(PAUSE POINT — needs Saheed)* — see "What I need from you" at end of plan.
-- [ ] **0.13 Create GitHub repo + push** — `gh auth login` then `gh repo create` then push `main`.
-- [ ] **0.14 Create Azure SWA + wire token** — `az staticwebapp create`; grab deployment token; set as repo secret `AZURE_STATIC_WEB_APPS_API_TOKEN`; first deploy runs.
-- [ ] **0.15 Verify staging URL live** — curl the SWA hostname; confirm the seed page renders.
+- [x] **0.12 User inputs locked** — Azure: Saheed to create SWA in portal (CLI auth proved expensive — fayisode@gmail.com has no Azure sub, Etihuku token revoked, Curnance token expired). GitHub: public repo `fayisode/saheedfaremi.com`. Region: West Europe.
+- [x] **0.13 Git remote configured** — `origin = https://github.com/fayisode/saheedfaremi.com.git` (HTTPS, so `gh auth login` can store the credential).
+- [ ] **0.14 Saheed pushes `main`** *(manual)* — `git push -u origin main`. Will prompt for GitHub auth on first push; either run `! gh auth login` first (preferred) OR use a personal access token.
+- [ ] **0.15 Saheed creates Azure SWA via portal** *(manual)* — portal.azure.com → "Create a resource" → "Static Web App". Settings: Subscription = any sub with Owner/Contributor (Curnance works once admin@curnance.com re-authenticates), Resource group = `rg-saheedfaremi-com` (create new), Name = `saheedfaremi-com`, Plan type = **Free**, Region = **West Europe**, **Source = "Other"** (NOT GitHub — that path generates a duplicate workflow file that conflicts with ours). Click "Review + create".
+- [ ] **0.16 Saheed copies deployment token** *(manual)* — once SWA is provisioned, open it in portal → left nav → "Manage deployment token" → copy the value (treat like a password).
+- [ ] **0.17 Saheed adds GitHub secret** *(manual)* — github.com/fayisode/saheedfaremi.com → Settings → Secrets and variables → Actions → "New repository secret" → Name = `AZURE_STATIC_WEB_APPS_API_TOKEN`, Value = paste token. Click "Add secret".
+- [ ] **0.18 First deploy fires** — once secret is set, any push to `main` triggers `.github/workflows/azure-static-web-apps.yml`; workflow runs check + lint + build + upload to SWA.
+- [ ] **0.19 Verify staging URL live** — portal → SWA resource → "URL" field (looks like `https://<name>-<random>.westeurope-NN.azurestaticapps.net`); open in browser; confirm hero renders.
 
 ### Phase 1 — Design system (1 session)
 - Tokens: colors, type scale, spacing, radii
