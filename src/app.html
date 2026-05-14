@@ -3,6 +3,9 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Pre-paint theme: external file so script-src 'self' covers it on csr=false pages.
+		     Must be synchronous and BEFORE %sveltekit.head% so data-theme is set before first paint. -->
+		<script src="/theme-init.js"></script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

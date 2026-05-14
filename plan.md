@@ -168,11 +168,20 @@ Resumable sub-units. Each one captures its own pre-state so a cold restart can r
 - [ ] **0.18 First deploy fires** — once secret is set, any push to `main` triggers `.github/workflows/azure-static-web-apps.yml`; workflow runs check + lint + build + upload to SWA.
 - [ ] **0.19 Verify staging URL live** — portal → SWA resource → "URL" field (looks like `https://<name>-<random>.westeurope-NN.azurestaticapps.net`); open in browser; confirm hero renders.
 
-### Phase 1 — Design system (1 session)
-- Tokens: colors, type scale, spacing, radii
-- Components: Button, Link, Tag, Card, Section, Container, Prose
-- Storybook-free: route `/dev/kitchen-sink` shows every component
-- Dark/light theme toggle wired
+### Phase 1 — Design system (COMPLETE as of 2026-05-14)
+
+- [x] **1.1 Fonts installed** — Fontsource variable: `@fontsource-variable/{inter,fraunces,geist-mono}` (5.2.x).
+- [x] **1.2 Fonts wired + preload** — `@import` in `app.css` (wght axis); preload links for Fraunces + Inter latin in `+layout.svelte` `<svelte:head>` using Vite `?url` imports for content-hashed URLs.
+- [x] **1.3 `@theme` tokens expanded** — semantic bg/fg/accent + raw palette + radii (sharp/soft/card/pill) + motion durations + z-scale; light-mode overrides via `[data-theme='light']` selectors.
+- [x] **1.4 Pre-paint theme script** — initially inline in `app.html`, but review found CSP `script-src 'self'` doesn't auto-hash app.html scripts on csr=false routes (only routes that go through SvelteKit's render pipeline). MOVED to external `static/theme-init.js`; same-origin script passes without hash.
+- [x] **1.5 Base components built** — `Container`, `Section` (counter-based unique id), `Button` (primary/ghost/subtle × sm/md/lg), `Link` (inline/arrow/plain + auto-external), `Tag` (outline/solid/accent), `Card` (default/elevated/outlined + interactive).
+- [x] **1.6 `ThemeToggle.svelte`** — reads theme via `$app/environment.browser` guarded init; sun/moon SVGs; aria-pressed; reduced-motion respected.
+- [x] **1.7 Kitchen sink route** — `/dev/kitchen-sink` with csr=true; noindex meta + robots.txt Disallow + (defense in depth).
+- [x] **1.8 Hero refactored** — wrapped in `Container`, uses semantic tokens (`text-fg-soft`, `bg-bg-soft`, `text-accent`) so light mode works.
+- [x] **1.9 Quality gates** — check 0/0, lint clean, build clean.
+- [x] **1.10 Adversarial review** — 3 parallel agents (component / build+perf / security+SEO); 11 distinct findings. **Fixed:** CSP-blocks-inline-on-`/` (external file), Section id collision (counter), reduced-motion transforms (`transform: none !important`), font preload, metric-matched fallback @font-faces (size-adjust), frame-ancestors moved to HTTP header, ThemeToggle init via `$app/environment.browser`, Section heading+labelledById guard, handleHttpError allowlist. **Deferred:** sitemap.xml (Phase 2 — needs content), OG/Twitter cards (Phase 2), theme-transition flash suppression (LOW probability).
+- [x] **1.11 Final quality gates + commit** — check/lint/build all clean; CSP verified per-route in built HTML.
+- [x] **1.12 Memory updated** — `lessons_phase1_design_system.md` (font loading, CSP gotcha, Svelte 5 component patterns).
 
 ### Phase 2 — Content schema + seed (1 session)
 - Define Zod schemas for: project, publication, talk, award, experience, education

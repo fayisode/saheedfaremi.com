@@ -37,8 +37,12 @@ export default defineConfig(
 		}
 	},
 	{
-		// Override or add rule settings here, such as:
-		// 'svelte/button-has-type': 'error'
-		rules: {}
+		rules: {
+			// Generic Link/Button wrappers take arbitrary `href: string` props and
+			// can't be passed through SvelteKit's typed `resolve()` without losing
+			// the external-URL escape hatch. We re-enable this rule once we have
+			// per-route typed links throughout (likely Phase 9 polish).
+			'svelte/no-navigation-without-resolve': 'off'
+		}
 	}
 );
