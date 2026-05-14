@@ -218,11 +218,23 @@ Resumable sub-units. Each one captures its own pre-state so a cold restart can r
 - [x] **3.10 Phase 1 regression fix in `src/app.html`** — the pre-paint-theme HTML comment contained the literal text `%sveltekit.head%`; SvelteKit's string substitution replaced it INSIDE the comment, breaking the comment's structure and emitting visible text in the browser. Rewrote the comment to describe the placeholder by intent ("SvelteKit's head injection point") instead of by literal name. Discovered by Saheed during Phase 3 preview.
 - [x] **3.11 Commit + memory update.**
 
-### Phase 4 — About + Research sections (1 session)
-- Portrait optimization
-- Bio narrative
-- Embed VAE/GMMVAE architecture diagrams from your Documents folder
-- Pulled quotes
+### Phase 4 — About + Research sections (COMPLETE as of 2026-05-14)
+
+Sections live on `/` (single-page scroll), not separate routes.
+
+- [x] **4.1 SiteNav in `+layout.svelte`** — sticky top, brand left, anchor links centre (About · Research), ThemeToggle right. Backdrop blur appears after first 16px of scroll. Skip-to-content link at top.
+- [x] **4.2 New components built** — `Portrait.svelte` (styled placeholder with radial-gradient + sketch silhouette + caption "Portrait — pending"), `DiagramFigure.svelte` (placeholder with diagram-grid SVG + caption prefix), `PulledQuote.svelte` (Fraunces italic display quote with phosphor open-quote glyph).
+- [x] **4.3 About section** — `#about` anchor, two-column on desktop (1fr portrait + 1.5fr narrative). ~250-word DRAFT bio. Pulled quote at the bottom (`"Infrastructure for under-served users needs the same engineering rigour as infrastructure for everyone else — and tends to need it more."`).
+- [x] **4.4 Research section** — `#research` anchor; framing paragraph + "Approach" bullets (VAE / GMM-VAE / architecture search); side aside with status + stack tags; 3 DiagramFigure placeholders for VAE / VAE-GMM / GMM-VAE diagrams (Saheed exports `~/Documents/*.drawio` as SVG to fill in).
+- [x] **4.5 Anchor offset** — `.scroll-anchor` class with `scroll-margin-top: 5rem`. Smooth scroll honours `prefers-reduced-motion`.
+- [x] **4.6 Quality gates** — check 0/0, lint clean, build clean. JS on `/`: **40.3 KB gzip** (10.9 KB headroom under the 50 KB budget).
+- [x] **4.7 Adversarial review** — one focused agent (a11y + visual). 5 findings.
+- [x] **4.8 Fixes applied:**
+  - **`prose-invert` removed from bio column** — was hardcoded dark-mode palette regardless of `data-theme`; would have made body text invisible in light mode. Replaced with manual classes using semantic `text-fg` tokens.
+  - **`transform: none !important` removed from reduced-motion block** — Phase 1 review wanted it added to suppress 1px hover-jumps; Phase 4 review found it breaks layout-positioning transforms (`translate(-50%, -50%)` etc.). The `transition-duration: 0.001ms !important` already collapses motion to imperceptibility; aggressive transform-zeroing is a layout hazard with no marginal a11y value.
+  - **Duplicate banner landmark fixed** — hero's `<header>` was an ARIA `banner` landmark conflicting with SiteNav's. Changed to `<div>` (it's a decorative version stamp, not actually a header).
+  - **`SiteNav` `as NavLink[]` cast removed** — redundant and could mask narrowing errors.
+  - **`DiagramFigure` placeholder no longer double-prints the title** — title shows once via the figcaption prefix.
 
 ### Phase 5 — Projects grid + detail pages (1–2 sessions)
 - Grid with domain filter

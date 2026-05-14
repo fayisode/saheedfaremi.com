@@ -94,6 +94,17 @@
 }
 
 @layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+
+	/* `scroll-margin-top` offsets jump-to-anchor targets so the sticky SiteNav
+	   doesn't cover the section heading. Applied to any element marked with
+	   `.scroll-anchor` (Container width="wide" class="scroll-anchor"). */
+	.scroll-anchor {
+		scroll-margin-top: 5rem;
+	}
+
 	html,
 	html[data-theme='dark'] {
 		color-scheme: dark;
@@ -147,6 +158,9 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
 		*,
 		*::before,
 		*::after {
@@ -154,8 +168,11 @@
 			animation-iteration-count: 1 !important;
 			transition-duration: 0.001ms !important;
 			scroll-behavior: auto !important;
-			/* Suppress translate/scale hover affordances entirely — WCAG 2.3.3 */
-			transform: none !important;
+			/* Note: we deliberately do NOT set `transform: none !important` here.
+			   Doing so breaks layout-positioning transforms (e.g.,
+			   `translate(-50%, -50%)` for centering). The 0.001ms transition cap
+			   already collapses motion to imperceptibility; hover-state translate
+			   affordances snap into place instantly without an animated transition. */
 		}
 	}
 }
