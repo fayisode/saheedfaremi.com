@@ -1,9 +1,10 @@
 import { defineConfig } from 'vitest/config';
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
+import { contentPlugin } from './src/lib/content/_plugin';
 
 export default defineConfig({
-	plugins: [tailwindcss(), sveltekit()],
+	plugins: [tailwindcss(), contentPlugin(), sveltekit()],
 	test: {
 		expect: { requireAssertions: true },
 		projects: [

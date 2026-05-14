@@ -236,6 +236,21 @@ Sections live on `/` (single-page scroll), not separate routes.
   - **`SiteNav` `as NavLink[]` cast removed** — redundant and could mask narrowing errors.
   - **`DiagramFigure` placeholder no longer double-prints the title** — title shows once via the figcaption prefix.
 
+### Phase 5-prep — Loader architecture refactor (COMPLETE as of 2026-05-14)
+
+- [x] **P5p.1 `gray-matter` installed** — `^4.0.3` devDependency, Node-side only.
+- [x] **P5p.2 Vite plugin** — `src/lib/content/_plugin.ts` reads every `src/content/<collection>/*.md` at build time, parses frontmatter via gray-matter, validates against the right Zod schema, exposes the data as `virtual:content`. Hot-reloads on .md changes in dev via `handleHotUpdate`.
+- [x] **P5p.3 Type declarations** — `src/types/virtual-content.d.ts` declares the virtual module's shape so consumers get full TS inference without importing schemas.
+- [x] **P5p.4 Plugin wired** — `vite.config.ts` plugin order: `tailwindcss → contentPlugin → sveltekit`.
+- [x] **P5p.5 Loader refactored** — `import content from 'virtual:content'` returns the validated JSON; readonly typed exports for each collection; lazy `loadComponent(collection, slug)` returns the prose Svelte component on demand via `import.meta.glob({ eager: false })`. Helpers unchanged.
+- [x] **P5p.6 Bundle verified:**
+  - Zod runtime ABSENT from kitchen-sink chunks (grepped for `ZodObject`/`ZodString`/`ZodArray`/`ZodType` — zero matches).
+  - MD prose bodies (post-frontmatter content) ABSENT from listing-route bundles (grepped for body-only phrases like "Inbound layer", "smallholder farmers", "PSTN gateway" — zero matches).
+  - Frontmatter (titles, summaries, tags, highlights) present as JSON — the intended payload.
+  - Server-side kitchen-sink page chunk: **was 10.4 KB gzip → now 5.67 KB gzip** (~46% reduction).
+  - `/` regression: **40.3 KB gzip** (unchanged from Phase 4).
+- [x] **P5p.7 Quality gates + commit + memory.**
+
 ### Phase 5 — Projects grid + detail pages (1–2 sessions)
 - Grid with domain filter
 - One detail page per real project (need your input on which 8–10 to feature)
