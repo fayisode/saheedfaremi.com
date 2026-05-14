@@ -16,17 +16,20 @@ const config = {
 		adapter: adapter(),
 		prerender: {
 			handleHttpError: ({ path, message }) => {
-				// Allowlist routes that are referenced from existing content but
-				// don't have their own pages built yet. They get built in later
-				// phases (see plan.md). Routes here disappear from the list as
-				// each phase ships its routes.
-				const planned = ['/about', '/publications', '/cv', '/now', '/uses', '/awards'];
+				const planned = ['/about', '/now', '/uses'];
 				if (planned.some((p) => path === p || path.startsWith(p + '/'))) {
 					console.warn(`prerender: planned route ${path} not yet built — skipping`);
 					return;
 				}
 				throw new Error(`Unexpected 404 during prerender: ${message}`);
-			}
+			},
+			// /publications/[slug] and /talks/[slug] are declared prerenderable but
+			// their collections (publications, talks) are currently empty — `entries()`
+			// returns []. SvelteKit flags this as "marked prerenderable but not seen
+			// during crawl". 'ignore' is correct here: when Saheed adds his first
+			// publication or talk to src/content/, entries() returns the new slug and
+			// the route prerenders without further config change.
+			handleUnseenRoutes: 'ignore'
 		},
 		csp: {
 			mode: 'hash',

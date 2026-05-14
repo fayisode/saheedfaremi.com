@@ -12,6 +12,27 @@
 			the HTML comment's structure.
 		-->
 		<script src="/theme-init.js"></script>
+
+		<!-- JSON-LD Person schema. Search engines + LLM crawlers use this to
+		     understand who the page describes. Update the URL once the domain is
+		     wired; sameAs lists every authoritative profile that confirms identity. -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Person",
+				"name": "Saheed Faremi",
+				"alternateName": "fayisode",
+				"jobTitle": "Researcher & Software Engineer",
+				"description": "PhD-track EEG-microstate researcher and full-stack engineer building production systems in fintech, healthcare, education, HR, and agriculture.",
+				"url": "https://saheedfaremi.com",
+				"address": { "@type": "PostalAddress", "addressCountry": "SZ" },
+				"sameAs": [
+					"https://github.com/fayisode",
+					"https://medium.com/@sonirudrakshi99/unesco-india-africa-hackathon-2022-2ec88cea6eb9"
+				]
+			}
+		</script>
+
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

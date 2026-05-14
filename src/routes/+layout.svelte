@@ -12,7 +12,10 @@
 	const navLinks = [
 		{ href: '/#about', label: 'About' },
 		{ href: '/#research', label: 'Research' },
-		{ href: '/projects', label: 'Projects' }
+		{ href: '/projects', label: 'Projects' },
+		{ href: '/awards', label: 'Recognition' },
+		{ href: '/cv', label: 'CV' },
+		{ href: '/contact', label: 'Contact' }
 	];
 </script>
 
@@ -20,6 +23,15 @@
 	<link rel="icon" href={favicon} />
 	<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={frauncesLatin} />
 	<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={interLatin} />
+	<!-- Open Graph + Twitter — global defaults; individual routes can override
+	     via their own <svelte:head> if richer cards are needed later. -->
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Saheed Faremi" />
+	<meta property="og:image" content="/og-image.svg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="/og-image.svg" />
 </svelte:head>
 
 <SiteNav links={navLinks} />

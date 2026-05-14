@@ -267,27 +267,36 @@ Sections live on `/` (single-page scroll), not separate routes.
 - [x] **5.9 Inline fixes** — ProjectCard `$derived` for the prop-referencing href (was flagged by svelte-check); unused `Tag` import removed; `/awards` added to prerender allowlist for the farmer-call-center → award cross-reference.
 - [x] **5.10 Commit + memory update.**
 
-### Phase 6 — Publications + Talks (1 session)
-- Year-grouped list
-- BibTeX export
-- Pagefind search index
+### Phase 6 — Publications + Talks (COMPLETE as of 2026-05-14)
 
-### Phase 7 — Recognition + Contact (1 session)
-- UNESCO 2022 with link to the Medium piece
-- Azure Function contact endpoint
-- Turnstile spam protection
+- [x] **6.1 PublicationCard + TalkCard** in `$lib/components/`.
+- [x] **6.2 `/publications` + `/publications/[slug]`** — empty-state copy on the listing; BibTeX accordion + DOI/URL/PDF links on the detail.
+- [x] **6.3 `/talks` + `/talks/[slug]`** — empty-state copy; event/location/year fields; slides/recording links.
+- [x] **6.4 `prerender.handleUnseenRoutes: 'ignore'`** — empty collections (currently both) don't fail the build; the moment a .md lands the dynamic route prerenders.
 
-### Phase 8 — CV print mode + PDF export (1 session)
-- `/cv` route with print stylesheet
-- Build-time PDF generation via Playwright
+### Phase 7 — Recognition + Contact (COMPLETE as of 2026-05-14)
 
-### Phase 9 — Polish + ship (1 session)
-- Lighthouse CI green across the board
-- View Transitions between routes
-- SEO: Open Graph images per route, sitemap, robots, JSON-LD Person + ScholarlyArticle
-- Custom domain + SSL
-- Plausible analytics
-- Final visual QA
+- [x] **7.1 AwardCard + `/awards` + `/awards/[slug]`** — mirrors the projects pattern. UNESCO 2022 verified entry renders with title, organisation, prize chip, body, source link.
+- [x] **7.2 `/contact`** — static-site appropriate: large mailto button, copy-email button (clipboard API with private-mode fallback), structured form whose `action` is the rebuildable mailto: URL (opens default mail client prefilled — no server). Find-me + based-in cards beneath.
+- [x] **7.3 Nav updated** — Projects · Recognition · CV · Contact added.
+- [x] **7.4 Azure Function (server-side contact form)** — DEFERRED. Static site path is sufficient for now; if Saheed wants a true serverless POST endpoint later, that requires (a) creating an Azure Function under `api/`, (b) authoring a new `staticwebapp.config.json` route rule, (c) potentially editing the Azure-generated workflow yml to deploy the function — that last step requires Saheed's per-turn approval per the Workflow YML Discipline rule.
+
+### Phase 8 — CV print mode (COMPLETE as of 2026-05-14)
+
+- [x] **8.1 `/cv`** — single consolidated page: identity header, Experience, Education, Recognition, Selected projects (featured-only for density), Publications, Talks. Each section reads from the existing content collections via the typed loader.
+- [x] **8.2 Print stylesheet** — `@media print` block scoped in the cv page: forces white-on-black for ink-saving, hides SiteNav + canvas frame + print button, marks `li`/`section` as `break-inside: avoid` to keep entries together across page breaks.
+- [x] **8.3 "Print or save as PDF" button** — calls `window.print()`. Browsers' native PDF export is the simplest path for a static site; Playwright build-time PDF DEFERRED.
+
+### Phase 9 — Polish + ship (PARTIAL — domain-dependent items DEFERRED)
+
+- [x] **9.1 sitemap.xml** — `src/lib/content/_sitemap-plugin.ts` runs after adapter-static prerender; walks `build/`, lists every .html as a `<url>` entry, excludes `/dev/*` and `/api/*`. Today's build produced 18 entries.
+- [x] **9.2 robots.txt** — `Disallow: /dev/`, `Sitemap: https://saheedfaremi.com/sitemap.xml` directive.
+- [x] **9.3 JSON-LD Person schema** — added to `src/app.html`. `@type: Person`, `jobTitle`, `description`, `url`, `address` (SZ), `sameAs` (GitHub, Medium piece).
+- [x] **9.4 OG image fallback** — `static/og-image.svg` (1200×630) with brand-matched gradient + name + tagline. `og:image` + `twitter:image` meta in `+layout.svelte`.
+- [x] **9.5 404 page** — `src/routes/+error.svelte`. Brand-matched headline, 404 vs other-status branching, jump-links home/projects/awards/contact.
+- [ ] **9.6 Final Lighthouse / a11y sweep** — Saheed runs locally via `pnpm preview` + DevTools Lighthouse; flag any < 100 score.
+- [ ] **9.7 Domain wiring** — DEFERRED until `saheedfaremi.com` purchased (Azure SWA custom-domain CNAME + TXT verification).
+- [ ] **9.8 Playwright build-time PDF + Plausible analytics** — DEFERRED to a polish pass after first traffic.
 
 **Total:** ~10 focused sessions. Each phase can pause at a deployable state.
 

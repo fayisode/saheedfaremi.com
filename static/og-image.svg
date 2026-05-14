@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="g1" cx="30%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#5EEAD4" stop-opacity="0.35" />
+      <stop offset="60%" stop-color="#0A0E1A" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="g2" cx="75%" cy="65%" r="55%">
+      <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.32" />
+      <stop offset="60%" stop-color="#0A0E1A" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0A0E1A" />
+  <rect width="1200" height="630" fill="url(#g1)" />
+  <rect width="1200" height="630" fill="url(#g2)" />
+  <text x="80" y="180" font-family="Inter, sans-serif" font-size="20" letter-spacing="6" fill="#94a3b8" text-transform="uppercase">● saheed faremi · digital profile</text>
+  <text x="80" y="360" font-family="Fraunces, Georgia, serif" font-size="140" font-weight="500" fill="#e2e8f0">Saheed</text>
+  <text x="80" y="500" font-family="Fraunces, Georgia, serif" font-size="140" font-weight="500" font-style="italic" fill="#5EEAD4">Faremi.</text>
+  <text x="80" y="580" font-family="Inter, sans-serif" font-size="22" fill="#94a3b8">Researcher of the brain. Engineer of the systems people rely on.</text>
+</svg>
