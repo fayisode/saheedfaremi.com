@@ -10,8 +10,13 @@
 		Link
 	} from '$lib/components';
 	import portraitUrl from '$lib/assets/portrait.jpg';
+	import { publications, sortByYearDesc } from '$lib/content/loader';
 
 	const tagline = 'Researcher of the brain. Engineer of the systems people rely on.';
+
+	// Recent publications surfaced on the Research section. Sort newest-first;
+	// /publications carries the full archive.
+	const recentPublications = sortByYearDesc([...publications]);
 </script>
 
 <svelte:head>
@@ -160,6 +165,38 @@
 						and decoder choices; compare reconstruction-vs-segmentation tradeoff curves across architectures.
 					</li>
 				</ul>
+
+				{#if recentPublications.length > 0}
+					<h3
+						id="research-publications"
+						class="font-display text-fg pt-8 text-2xl tracking-tight sm:text-3xl"
+					>
+						Recent publications
+					</h3>
+					<ul class="mt-2 space-y-5">
+						{#each recentPublications as pub (pub.slug)}
+							<li class="border-l-2 border-border pl-4">
+								<a
+									href={`/publications/${pub.slug}`}
+									class="font-display text-fg hover:text-accent text-lg leading-tight
+										transition-colors duration-[var(--duration-fast)]"
+								>
+									{pub.title}
+								</a>
+								<p class="font-mono text-fg-muted mt-1 text-xs tracking-[0.1em]">
+									{pub.authors.join(', ')}
+								</p>
+								<p class="text-fg-soft mt-1 text-sm">
+									{#if pub.venue}{pub.venue} ·
+									{/if}{pub.year}
+								</p>
+							</li>
+						{/each}
+					</ul>
+					<p class="mt-6">
+						<Link href="/publications" variant="arrow">View all publications</Link>
+					</p>
+				{/if}
 			</div>
 
 			<aside class="space-y-6">
@@ -167,8 +204,15 @@
 					<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Status</p>
 					<p class="font-display text-fg mt-2 text-2xl">In progress</p>
 					<p class="text-fg-soft mt-3 text-sm">
-						Preprints, publications, and code releases will land on a dedicated publications section
-						here as they happen.
+						PhD at University College Cork. {recentPublications.length}
+						{recentPublications.length === 1 ? 'publication' : 'publications'} so far across microstate
+						analysis and adjacent ML/health work.
+					</p>
+				</div>
+				<div class="rounded-card border-border border p-6">
+					<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Supervisor</p>
+					<p class="text-fg mt-2">
+						<Link href="https://lucalongo.eu" variant="inline">Luca Longo</Link>, UCC
 					</p>
 				</div>
 				<div class="rounded-card border-border border p-6">
