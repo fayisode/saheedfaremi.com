@@ -18,7 +18,14 @@ const config = {
 			handleHttpError: ({ path, message }) => {
 				const planned = ['/about', '/now', '/uses'];
 				if (planned.some((p) => path === p || path.startsWith(p + '/'))) {
-					console.warn(`prerender: planned route ${path} not yet built — skipping`);
+					console.warn(`prerender: planned route ${path} not yet built, skipping`);
+					return;
+				}
+				// Blog figures Saheed will drop in over time, named per-stage. The
+				// markdown embed is wired ahead of the asset landing; once the PNG is
+				// in static/blog/<slug>/, the prerender check naturally passes.
+				if (/^\/blog\/[a-z0-9-]+\/(stage|fig)[\w-]*\.png$/i.test(path)) {
+					console.warn(`prerender: blog figure ${path} not yet shipped, skipping`);
 					return;
 				}
 				throw new Error(`Unexpected 404 during prerender: ${message}`);

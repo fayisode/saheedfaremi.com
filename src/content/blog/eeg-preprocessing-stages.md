@@ -185,8 +185,6 @@ _Same window, same evolution as Stage 4, but the color scale is now z-units. Thi
 
 ## Stage 7: GFP peaks (and why they don't look like Stage 4)
 
-(No figure for this stage. The peak plot looks visually similar to a Stage 6 z-scored grid but represents something very different, and I'd rather explain the difference than show two grids that look the same.)
-
 Stage 4 was 20 consecutive samples. Stage 7 is 20 consecutive GFP peaks. Those are not the same thing. Adjacent GFP peaks can be 50 to 200 ms apart, and polarity at each peak is arbitrary (peaks are detected on instantaneous global field power, which is the absolute spatial standard deviation).
 
 ```python
@@ -202,6 +200,10 @@ peak_range = peak_range[peak_range < n_peaks]
 peak_frames = peaks_data[:, peak_range]
 ```
 
+![Stage 7: 20 consecutive GFP peaks (peak indices, not consecutive samples), polarity arbitrary](/blog/eeg-preprocessing/stage7.png)
+
+_Compare this grid against Stage 4. Same plotting code, same layout, but the frame-to-frame relationship is gone. Each cell is a distinct topographic configuration captured at a moment of locally-maximal global field power. The titles are peak indices, not millisecond timestamps._
+
 Non-smoothness between consecutive peaks is by design. Microstates are stable topographic configurations separated by rapid reorganisation events. The reorganisation is what GFP peak detection captures. Plotting consecutive peaks and expecting them to evolve smoothly like the Stage 4 frames is a category error.
 
 This is also why polarity invariance matters. If peak #1059 happens to be polarity-flipped relative to peak #1060, they may represent the same underlying configuration. The clustering pipeline (and my model) has to be invariant to that sign. More on that in the next post.
@@ -210,6 +212,6 @@ This is also why polarity invariance matters. If peak #1059 happens to be polari
 
 Each stage encodes a methodological choice. Get the wrong reference, or the wrong bandpass, or skip the corner mask after griddata, and your microstate alphabet is measuring artefacts instead of brain configurations. Going stage by stage on a fixed window means I can verify each step visually instead of trusting the code.
 
-Code lives in [microstate-architecture-search](https://github.com/saheedfaremi/microstate-architecture-search) (the public companion to the XAI 2026 paper) and the active development repo [microstate_eeg](https://github.com/saheedfaremi/microstate_eeg).
+Code lives in [microstate-architecture-search](https://github.com/saheedfaremi/microstate-architecture-search), the public companion to the XAI 2026 paper.
 
 Next post: the topomap masking convention, and why every metric in the project ignores the four corners of the 40x40 image.
