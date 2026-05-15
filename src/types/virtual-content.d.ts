@@ -11,6 +11,7 @@
 declare module 'virtual:content' {
 	import type {
 		Award,
+		BlogPost,
 		Education,
 		Experience,
 		News,
@@ -27,6 +28,7 @@ declare module 'virtual:content' {
 		experience: Experience[];
 		education: Education[];
 		news: News[];
+		blog: BlogPost[];
 	};
 
 	const content: Readonly<ContentMap>;

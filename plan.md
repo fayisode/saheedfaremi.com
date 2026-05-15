@@ -298,7 +298,25 @@ Sections live on `/` (single-page scroll), not separate routes.
 - [ ] **9.7 Domain wiring** — DEFERRED until `saheedfaremi.com` purchased (Azure SWA custom-domain CNAME + TXT verification).
 - [ ] **9.8 Playwright build-time PDF + Plausible analytics** — DEFERRED to a polish pass after first traffic.
 
-**Total:** ~10 focused sessions. Each phase can pause at a deployable state.
+### Phase 10 — Blog (COMPLETE as of 2026-05-15)
+
+- [x] **10.1 BlogPostSchema** in `src/lib/content/schemas.ts`: publishedAt (z.iso.date) required, updatedAt optional, readingTime optional positive int, repo optional z.url().
+- [x] **10.2 Plugin + loader + virtual-content typing** all extended for the `blog` collection (no Zod runtime ships to the client; the lessons-phase5prep pattern continues to hold).
+- [x] **10.3 BlogCard.svelte** + exported from `$lib/components`.
+- [x] **10.4 Routes `/blog` + `/blog/[slug]`** — dynamic prerender via `entries()`, lazy component body via loadComponent.
+- [x] **10.5 SiteNav** has Blog link between Research and Projects.
+- [x] **10.6 First post shipped:** `src/content/blog/eeg-preprocessing-stages.md` — Saheed's Stages 0-7 walkthrough, his exact phrasing in code blocks, terse-Saheed voice in prose, six figures, "category error" / "smoke test" voice. Zero em-dashes in prose (verified by grep).
+- [x] **10.7 Figures** copied to `static/blog/eeg-preprocessing/stage{0,2,3,4,5,6}.png` (~2 MB total). Stage 7 has no figure deliberately; called out in body.
+- [x] **10.8 arXiv publication entry updated** with XAI 2026 venue (Late-breaking work + Doctoral Consortium track, Fortaleza, Brazil), `kind: conference`, UCC + ATU + Insight SFI affiliations noted in body. Cross-link added to the blog post.
+- [x] **10.9 Adversarial review** — two parallel agents (code+bundle, voice). All findings consistent-with-site-pattern (drafts visible with badges, established in Phase 5) were skipped as non-regressions. Real bugs fixed:
+  - `.blog-prose :global(em)` was block-level for ALL `<em>`, breaking inline italics. Scoped to caption-pattern (em following an image).
+  - `repo` field schema comment claimed `owner/repo` short-form was valid but `Link href={repo}` would emit a relative URL. Schema tightened to `z.url()`.
+  - Voice slip at "show, not argue" line: rewritten plainer.
+  - Stage 7 figure-asymmetry: explicit parenthetical added explaining the deliberate absence.
+  - Caption-as-instruction (Stage 4): advice moved from italic caption into body prose.
+- [x] **10.10 Quality gates** — check 0/0, lint clean, build clean. JS on /: 50.67 KB gzip (under 51.2 KB ceiling). 27 prerendered pages total, sitemap 26 entries.
+
+**Total:** ~10 focused sessions + blog (Phase 10). Each phase can pause at a deployable state.
 
 ---
 

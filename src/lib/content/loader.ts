@@ -8,7 +8,16 @@
  * render listings (titles, tags, dates) never pay the body-bundle cost.
  */
 import content from 'virtual:content';
-import type { Award, Education, Experience, News, Project, Publication, Talk } from './schemas';
+import type {
+	Award,
+	BlogPost,
+	Education,
+	Experience,
+	News,
+	Project,
+	Publication,
+	Talk
+} from './schemas';
 
 /* ------------------------------------------------------------------ */
 /* Collections. Plain JSON, no Zod runtime, no component bodies.       */
@@ -21,6 +30,7 @@ export const awards: readonly Award[] = content.awards;
 export const experience: readonly Experience[] = content.experience;
 export const education: readonly Education[] = content.education;
 export const news: readonly News[] = content.news;
+export const blog: readonly BlogPost[] = content.blog;
 
 /* ------------------------------------------------------------------ */
 /* Lazy component access. Used by detail pages that render prose.       */
@@ -39,7 +49,8 @@ const lazyModules: Record<string, LazyMap> = {
 	awards: import.meta.glob('/src/content/awards/*.md'),
 	experience: import.meta.glob('/src/content/experience/*.md'),
 	education: import.meta.glob('/src/content/education/*.md'),
-	news: import.meta.glob('/src/content/news/*.md')
+	news: import.meta.glob('/src/content/news/*.md'),
+	blog: import.meta.glob('/src/content/blog/*.md')
 };
 
 export type MdsvexModule = {

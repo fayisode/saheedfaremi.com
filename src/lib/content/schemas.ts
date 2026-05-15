@@ -165,6 +165,20 @@ export const NewsSchema = z.object({
 });
 
 /* ------------------------------------------------------------------ */
+/* Blog                                                               */
+/* ------------------------------------------------------------------ */
+
+export const BlogPostSchema = z.object({
+	...BaseFields,
+	publishedAt: z.iso.date(),
+	updatedAt: z.iso.date().optional(),
+	readingTime: z.number().int().positive().optional(),
+	// Optional source repo URL when the post talks about a specific codebase.
+	// Must be a full URL so it can be used directly as an href.
+	repo: z.url().optional()
+});
+
+/* ------------------------------------------------------------------ */
 /* Inferred types                                                     */
 /* ------------------------------------------------------------------ */
 
@@ -176,3 +190,4 @@ export type Award = z.infer<typeof AwardSchema>;
 export type Experience = z.infer<typeof ExperienceSchema>;
 export type Education = z.infer<typeof EducationSchema>;
 export type News = z.infer<typeof NewsSchema>;
+export type BlogPost = z.infer<typeof BlogPostSchema>;

@@ -17,6 +17,7 @@ import type { ZodType } from 'zod';
 
 import {
 	AwardSchema,
+	BlogPostSchema,
 	EducationSchema,
 	ExperienceSchema,
 	NewsSchema,
@@ -32,7 +33,8 @@ const COLLECTIONS: Record<string, ZodType> = {
 	awards: AwardSchema,
 	experience: ExperienceSchema,
 	education: EducationSchema,
-	news: NewsSchema
+	news: NewsSchema,
+	blog: BlogPostSchema
 };
 
 const VIRTUAL_ID = 'virtual:content';
