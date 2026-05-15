@@ -15,7 +15,6 @@
 		{ href: '/blog', label: 'Blog' },
 		{ href: '/projects', label: 'Projects' },
 		{ href: '/awards', label: 'Recognition' },
-		{ href: '/news', label: 'News' },
 		{ href: '/cv', label: 'CV' },
 		{ href: '/contact', label: 'Contact' }
 	];

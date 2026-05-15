@@ -19,7 +19,7 @@
 <Container width="default">
 	<Section spacing="loose" labelledById="news-item-heading">
 		<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
-			<Link href="/news" variant="plain">← News</Link>
+			<Link href="/awards" variant="plain">← Recognition</Link>
 			{#if meta.publishedAt}· {meta.publishedAt}{/if}
 		</p>
 		<h1
