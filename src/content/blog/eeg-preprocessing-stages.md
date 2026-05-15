@@ -214,4 +214,4 @@ Each stage encodes a methodological choice. Get the wrong reference, or the wron
 
 Code lives in [microstate-architecture-search](https://github.com/saheedfaremi/microstate-architecture-search), the public companion to the XAI 2026 paper.
 
-Next post: the topomap masking convention, and why every metric in the project ignores the four corners of the 40x40 image.
+Next post: [the topomap masking convention](/blog/topomap-masking-convention), and why every metric in the project ignores the four corners of the 40x40 image.
