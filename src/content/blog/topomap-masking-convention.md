@@ -85,4 +85,4 @@ The masking convention applies to any consumer of the LEMON 40x40 topographic-ma
 
 Most pipelines that publish a "40x40 EEG topomap" archive document the format and stop there. The dead-corner question is one of those things you only discover when you compute a metric, get a suspicious number, dig in, and realise 30% of your image is uniform zeros. Posting it as a convention means anyone using the data starts on the right side of the wall.
 
-Next post: 4-quadrant evaluation. Why one cluster score is never enough for EEG, and what the `{latent, decoded}` x `{Euclidean, |1/r|-1}` grid actually tells you.
+Next post: [4-quadrant evaluation](/blog/four-quadrant-evaluation). Why one cluster score is never enough for EEG, and what the `{latent, decoded}` x `{Euclidean, |1/r|-1}` grid actually tells you.
