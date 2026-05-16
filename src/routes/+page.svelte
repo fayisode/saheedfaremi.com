@@ -81,17 +81,17 @@
 			     `text-fg` / `text-fg-soft` tokens and rebalance correctly with the theme. -->
 			<div class="max-w-none space-y-5 text-lg leading-relaxed text-fg">
 				<p>
-					Two thinkers, one head. The left side is a researcher whose PhD goal is finding recurrent
-					patterns toward real-time detection of disorder. The right side is an engineer shipping
-					production systems people rely on.
+					I am a left and right thinker: my doctorate decodes recurrent patterns in brain signal
+					towards real-time detection of brain disorder, and my engineering practice ships the
+					production systems that under-served users (geographically, economically, or
+					computationally) rely on.
 				</p>
 				<p>
 					Production work spans fintech (Curnance), HR (Etihuku), healthcare data (HIS Core,
 					Predict-Dx), advisory tooling (Gatsheni Advisory, CFI Eswatini), AI-assisted proposal
 					generation (Cleva, built for Gijima), and learning systems (Skills Hub, Moodle).
-					Infrastructure for under-served users (geographically, economically, or computationally)
-					needs the same engineering rigour as infrastructure for everyone else. It tends to need
-					more.
+					Infrastructure for under-served users needs the same engineering rigour as infrastructure
+					for everyone else. It tends to need more.
 				</p>
 				<p>
 					The doctoral side: <strong>EEG microstates</strong> are quasi-stable scalp topographies that
