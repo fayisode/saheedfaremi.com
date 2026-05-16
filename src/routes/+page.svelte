@@ -81,8 +81,9 @@
 			     `text-fg` / `text-fg-soft` tokens and rebalance correctly with the theme. -->
 			<div class="max-w-none space-y-5 text-lg leading-relaxed text-fg">
 				<p>
-					Two thinkers, one head. The left side reads brain signal for recurrent patterns toward
-					real-time detection of disorder. The right side ships production systems people rely on.
+					Two thinkers, one head. The left side is a researcher whose PhD goal is finding recurrent
+					patterns toward real-time detection of disorder. The right side is an engineer shipping
+					production systems people rely on.
 				</p>
 				<p>
 					Production work spans fintech (Curnance), HR (Etihuku), healthcare data (HIS Core,
@@ -93,13 +94,12 @@
 					more.
 				</p>
 				<p>
-					The doctoral side: <strong>EEG microstates</strong> are quasi-stable scalp topographies
-					that segment continuous brain signal into a discrete temporal alphabet. Find the recurrent
-					patterns and you have a candidate biomarker. The work asks whether deep generative models,
-					variational autoencoders and Gaussian-mixture VAEs, can learn a microstate alphabet that's
-					more stable across sessions and more behaviourally predictive than classical clustering.
-					Target: a representation reliable enough to anchor real-time detection of disorder-relevant
-					brain states.
+					The doctoral side: <strong>EEG microstates</strong> are quasi-stable scalp topographies that
+					segment continuous brain signal into a discrete temporal alphabet. Find the recurrent patterns
+					and you have a candidate biomarker. The work asks whether deep generative models, variational
+					autoencoders and Gaussian-mixture VAEs, can learn a microstate alphabet that's more stable across
+					sessions and more behaviourally predictive than classical clustering. Target: a representation
+					reliable enough to anchor real-time detection of disorder-relevant brain states.
 				</p>
 				<p>
 					In 2022 I represented Eswatini at the
