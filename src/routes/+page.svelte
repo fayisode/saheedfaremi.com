@@ -80,21 +80,26 @@
 			     on the cream light-mode background. Manual classes consume the semantic
 			     `text-fg` / `text-fg-soft` tokens and rebalance correctly with the theme. -->
 			<div class="max-w-none space-y-5 text-lg leading-relaxed text-fg">
-				<p>I work at the intersection of cognitive neuroscience and production engineering.</p>
 				<p>
-					By day I build software people rely on: multi-asset fintech (Curnance), HR for African
-					mid-market employers (Etihuku), healthcare data infrastructure (HIS Core, predict-dx), and
-					learning systems (Skills Hub, Moodle). The through-line is that infrastructure for
-					under-served users (geographically, economically, or computationally) needs the same
-					engineering rigour as infrastructure for everyone else, and tends to need it more.
+					Two thinkers, one head. The left side reads brain signal for recurrent patterns toward
+					real-time detection of disorder. The right side ships production systems people rely on.
 				</p>
 				<p>
-					My doctoral research turns from the systems people use to the people themselves;
-					specifically, what the brain looks like when it's running.
-					<strong>EEG microstates</strong> are quasi-stable scalp topographies that segment continuous
-					EEG into a discrete temporal alphabet. I'm working on whether deep generative models, variational
-					autoencoders and Gaussian-mixture VAEs, can learn a microstate segmentation that's more stable
-					across sessions and more behaviourally predictive than classical clustering.
+					Production work spans fintech (Curnance), HR (Etihuku), healthcare data (HIS Core,
+					Predict-Dx), advisory tooling (Gatsheni Advisory, CFI Eswatini), AI-assisted proposal
+					generation (Cleva, built for Gijima), and learning systems (Skills Hub, Moodle).
+					Infrastructure for under-served users (geographically, economically, or computationally)
+					needs the same engineering rigour as infrastructure for everyone else. It tends to need
+					more.
+				</p>
+				<p>
+					The doctoral side: <strong>EEG microstates</strong> are quasi-stable scalp topographies
+					that segment continuous brain signal into a discrete temporal alphabet. Find the recurrent
+					patterns and you have a candidate biomarker. The work asks whether deep generative models,
+					variational autoencoders and Gaussian-mixture VAEs, can learn a microstate alphabet that's
+					more stable across sessions and more behaviourally predictive than classical clustering.
+					Target: a representation reliable enough to anchor real-time detection of disorder-relevant
+					brain states.
 				</p>
 				<p>
 					In 2022 I represented Eswatini at the
@@ -113,9 +118,8 @@
 			</div>
 		</div>
 
-		<PulledQuote attribution="Working principle">
-			Infrastructure for under-served users needs the same engineering rigour as infrastructure for
-			everyone else, and tends to need it more.
+		<PulledQuote attribution="Working hypothesis">
+			Find the recurrent patterns and you have a candidate biomarker.
 		</PulledQuote>
 	</Section>
 </Container>

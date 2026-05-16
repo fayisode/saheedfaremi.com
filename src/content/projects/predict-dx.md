@@ -13,5 +13,5 @@ tags:
 
 > _Draft. This entry is pending review._
 
-Diagnostic-prediction models from clinical features. Replace with the clinical
-target, dataset, methods, validation, and any partner institution.
+Predict-Dx trains diagnostic-prediction models on clinical-feature data. Clinical target,
+dataset, validation protocol, and partner institution pending publication.
