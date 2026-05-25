@@ -220,6 +220,10 @@
 					<p class="text-fg mt-2">
 						<Link href="https://lucalongo.eu" variant="inline">Luca Longo</Link>, UCC
 					</p>
+					<p class="text-fg-soft mt-2 text-sm">
+						Part of the
+						<Link href="https://lucalongo.eu/LongoLab.php" variant="inline">Longo Lab</Link>.
+					</p>
 				</div>
 				<div class="rounded-card border-border border p-6">
 					<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Stack</p>
@@ -230,6 +234,19 @@
 						<Tag>NumPy</Tag>
 						<Tag>scikit-learn</Tag>
 					</div>
+				</div>
+
+				<div class="rounded-card border-border bg-bg-soft border p-6">
+					<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
+						<span class="text-accent" aria-hidden="true">●</span> Support this work
+					</p>
+					<p class="text-fg-soft mt-3 text-sm leading-relaxed">
+						I am seeking collaboration, funding, and computing resources for this doctoral
+						research, and welcome sponsorship and research partnerships.
+					</p>
+					<p class="mt-3">
+						<Link href="mailto:fayisode@gmail.com" variant="arrow">fayisode@gmail.com</Link>
+					</p>
 				</div>
 			</aside>
 		</div>
