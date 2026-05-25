@@ -4,6 +4,9 @@ domain: agriculture
 status: published
 featured: true
 role: Team engineer, Eswatini representative
+links:
+  repo: https://github.com/fayisode/Farmer-Call-Center
+  live: https://krashak-ai.netlify.app/
 tech:
   - Python
   - Voice AI

@@ -1,9 +1,11 @@
 ---
 title: EEG microstate analysis with variational autoencoders
 domain: research
-status: draft
+status: published
 featured: true
 role: PhD researcher
+links:
+  repo: https://github.com/fayisode/microstate-architecture-search
 tech:
   - Python
   - PyTorch
@@ -21,8 +23,6 @@ tags:
   - gmm-vae
   - microstates
 ---
-
-> _Draft. This entry is pending review._
 
 EEG microstates are quasi-stable scalp topographies (typically four to seven
 canonical classes) that segment continuous EEG into a discrete temporal

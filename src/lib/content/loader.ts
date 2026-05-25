@@ -116,3 +116,51 @@ export function sortByStartedAtDesc<T extends { startedAt?: string }>(items: rea
 export function featured<T extends { featured?: boolean }>(items: readonly T[]): T[] {
 	return items.filter((i) => i.featured === true);
 }
+
+// Build a BibTeX entry from publication metadata. Used as the default for the
+// "cite" widget so every publication is citable without hand-maintaining a
+// `bibtex` field; an explicit `pub.bibtex` (if set) overrides this.
+type CitablePub = {
+	authors: string[];
+	title: string;
+	year: number;
+	venue?: string;
+	kind: string;
+	doi?: string;
+	url?: string;
+};
+
+export function toBibtex(pub: CitablePub): string {
+	const typeMap: Record<string, string> = {
+		journal: 'article',
+		conference: 'inproceedings',
+		workshop: 'inproceedings',
+		preprint: 'misc',
+		thesis: 'phdthesis',
+		'book-chapter': 'incollection'
+	};
+	const entry = typeMap[pub.kind] ?? 'misc';
+
+	const slugPart = (s: string) =>
+		s
+			.toLowerCase()
+			.normalize('NFKD')
+			.replace(/[^a-z0-9]/g, '');
+	const firstSurname = slugPart(pub.authors[0]?.split(/\s+/).pop() ?? 'anon') || 'anon';
+	const firstTitleWord = slugPart(pub.title.split(/\s+/).find((w) => w.length > 3) ?? 'untitled');
+	const key = `${firstSurname}${pub.year}${firstTitleWord}`;
+
+	const venueField =
+		entry === 'inproceedings' ? 'booktitle' : entry === 'article' ? 'journal' : 'howpublished';
+
+	const fields: string[] = [
+		`  author = {${pub.authors.join(' and ')}}`,
+		`  title = {${pub.title}}`
+	];
+	if (pub.venue) fields.push(`  ${venueField} = {${pub.venue}}`);
+	fields.push(`  year = {${pub.year}}`);
+	if (pub.doi) fields.push(`  doi = {${pub.doi}}`);
+	if (pub.url) fields.push(`  url = {${pub.url}}`);
+
+	return `@${entry}{${key},\n${fields.join(',\n')}\n}`;
+}

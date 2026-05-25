@@ -66,15 +66,26 @@
 			· Based in Dublin, Ireland
 		</p>
 		<SocialLinks class="mt-4" />
-		<button
-			type="button"
-			class="cv-print-btn font-mono text-fg-soft hover:text-fg hover:bg-bg-soft rounded-soft
-				border-border mt-6 inline-flex h-9 items-center gap-2 border px-3 text-xs
-				tracking-[0.15em] uppercase transition-colors duration-[var(--duration-fast)]"
-			onclick={() => window.print()}
-		>
-			Print or save as PDF
-		</button>
+		<div class="mt-6 flex flex-wrap gap-2">
+			<a
+				href="/saheed-faremi-cv.pdf"
+				download
+				class="cv-print-btn font-mono text-fg-soft hover:text-fg hover:bg-bg-soft rounded-soft
+					border-border inline-flex h-9 items-center gap-2 border px-3 text-xs
+					tracking-[0.15em] uppercase transition-colors duration-[var(--duration-fast)]"
+			>
+				Download PDF
+			</a>
+			<button
+				type="button"
+				class="cv-print-btn font-mono text-fg-soft hover:text-fg hover:bg-bg-soft rounded-soft
+					border-border inline-flex h-9 items-center gap-2 border px-3 text-xs
+					tracking-[0.15em] uppercase transition-colors duration-[var(--duration-fast)]"
+				onclick={() => window.print()}
+			>
+				Print
+			</button>
+		</div>
 	</header>
 
 	<Section spacing="tight" eyebrow="Experience" labelledById="cv-exp">
@@ -219,6 +230,7 @@
 		:global(.hero-canvas-frame),
 		:global(header[class*='fixed']),
 		:global(.cv-print-btn),
+		:global(.skip-link),
 		:global(nav[aria-label='Primary']) {
 			display: none !important;
 		}

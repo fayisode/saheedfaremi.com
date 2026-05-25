@@ -1,7 +1,7 @@
 ---
 title: Curnance
 domain: fintech
-status: draft
+status: published
 featured: true
 role: Founding engineer
 tech:
@@ -19,8 +19,6 @@ tags:
   - founding-engineer
   - multi-app
 ---
-
-> _Draft. This entry is pending review._
 
 Curnance is a fintech platform with several first-party clients:
 

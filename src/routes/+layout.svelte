@@ -28,11 +28,12 @@
 	     via their own <svelte:head> if richer cards are needed later. -->
 	<meta property="og:type" content="website" />
 	<meta property="og:site_name" content="Saheed Faremi" />
-	<meta property="og:image" content="/og-image.svg" />
+	<meta property="og:image" content="/og-image.png" />
+	<meta property="og:image:type" content="image/png" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:image" content="/og-image.svg" />
+	<meta name="twitter:image" content="/og-image.png" />
 </svelte:head>
 
 <SiteNav links={navLinks} />

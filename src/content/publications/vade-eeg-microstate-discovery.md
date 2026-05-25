@@ -34,6 +34,6 @@ University College Cork. Affiliated with the AI and Cognitive Load Research Lab
 (UCC) and the Insight SFI Research Centre for Data Analytics (UCC).
 
 Companion repo with the full sweep code and 4,832 trained-model results:
-[microstate-architecture-search](https://github.com/saheedfaremi/microstate-architecture-search).
+[microstate-architecture-search](https://github.com/fayisode/microstate-architecture-search).
 A stage-by-stage walkthrough of the preprocessing pipeline is on the
 [blog](/blog/eeg-preprocessing-stages).

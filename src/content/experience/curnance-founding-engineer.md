@@ -1,6 +1,6 @@
 ---
 title: Founding engineer
-status: draft
+status: published
 organization: Curnance
 role: Founding engineer
 type: founder
@@ -14,4 +14,7 @@ tags:
   - fintech
 ---
 
-> _Draft. This entry is pending review._
+As founding engineer I set up the engineering organisation and shipped the first
+production subsystems: a Go service monorepo with shared authentication and event
+plumbing, a Svelte admin console, a mobile wallet, and the KYC identity-verification
+pipeline. The platform is multi-asset by design and built for African markets first.
