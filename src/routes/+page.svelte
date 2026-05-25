@@ -7,7 +7,8 @@
 		PulledQuote,
 		DiagramFigure,
 		Tag,
-		Link
+		Link,
+		SocialLinks
 	} from '$lib/components';
 	import portraitUrl from '$lib/assets/portrait.jpg';
 	import { publications, sortByYearDesc } from '$lib/content/loader';
@@ -115,6 +116,7 @@
 				<p class="text-fg-soft text-base">
 					Based in Dublin, Ireland. Travel for research. <Tag>open to collaboration</Tag>
 				</p>
+				<SocialLinks class="pt-2" />
 			</div>
 		</div>
 

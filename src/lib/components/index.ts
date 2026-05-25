@@ -7,6 +7,7 @@ export { default as Card } from './Card.svelte';
 export { default as ThemeToggle } from './ThemeToggle.svelte';
 export { default as HeroCanvas } from './HeroCanvas.svelte';
 export { default as SiteNav } from './SiteNav.svelte';
+export { default as SocialLinks } from './SocialLinks.svelte';
 export { default as Portrait } from './Portrait.svelte';
 export { default as DiagramFigure } from './DiagramFigure.svelte';
 export { default as PulledQuote } from './PulledQuote.svelte';

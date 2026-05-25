@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Container, Section } from '$lib/components';
+	import { Container, Section, SocialLinks } from '$lib/components';
 	import type {
 		Award,
 		Education,
@@ -23,7 +23,25 @@
 	} = $props();
 
 	const EMAIL = 'saheedfaremi@gmail.com';
-	const GITHUB = 'https://github.com/fayisode';
+
+	// Technical skills matrix. Hardcoded here (not a content collection) because
+	// it is CV-specific and small. British spelling per the rest of the site.
+	const skills: { group: string; items: string[] }[] = [
+		{
+			group: 'Data science & ML',
+			items: ['Statistical modelling', 'Optimisation', 'Neural networks', 'Transformers', 'LLMs']
+		},
+		{ group: 'Programming', items: ['Python', 'SQL', 'JavaScript', 'Go', 'R'] },
+		{
+			group: 'Tools & frameworks',
+			items: ['PyTorch', 'TensorFlow', 'Pandas', 'scikit-learn', 'Spark', 'Hadoop']
+		},
+		{
+			group: 'Cloud & databases',
+			items: ['AWS', 'Azure', 'MongoDB', 'PostgreSQL', 'MySQL', 'Redis']
+		},
+		{ group: 'Visualisation', items: ['Matplotlib', 'Seaborn', 'Tableau', 'Power BI'] }
+	];
 </script>
 
 <svelte:head>
@@ -45,9 +63,9 @@
 		</p>
 		<p class="text-fg-soft mt-4 font-mono text-sm">
 			<a class="text-accent" href={`mailto:${EMAIL}`}>{EMAIL}</a>
-			· <a class="text-accent" href={GITHUB}>github.com/fayisode</a>
 			· Based in Dublin, Ireland
 		</p>
+		<SocialLinks class="mt-4" />
 		<button
 			type="button"
 			class="cv-print-btn font-mono text-fg-soft hover:text-fg hover:bg-bg-soft rounded-soft
@@ -93,9 +111,13 @@
 							{item.degree} · <span class="text-fg-soft">{item.institution}</span>
 						</h3>
 						<p class="font-mono text-fg-muted text-xs tracking-[0.15em]">
-							{item.startedAt ?? '·'}{item.endedAt
-								? ` → ${item.endedAt}`
-								: ` → ${item.progressionStatus}`}
+							{#if item.endedAt}
+								{item.startedAt ? `${item.startedAt} → ` : ''}{item.endedAt}
+							{:else if item.progressionStatus === 'in-progress'}
+								{item.startedAt ? `${item.startedAt} → present` : 'In progress'}
+							{:else if item.startedAt}
+								{item.startedAt}
+							{/if}
 						</p>
 					</div>
 					{#if item.field}<p class="text-fg-soft mt-2 text-sm">{item.field}</p>{/if}
@@ -105,6 +127,19 @@
 				<li class="text-fg-muted text-sm italic">No education listed yet.</li>
 			{/each}
 		</ol>
+	</Section>
+
+	<Section spacing="tight" eyebrow="Technical skills" labelledById="cv-skills">
+		<dl class="mt-6 space-y-4">
+			{#each skills as group (group.group)}
+				<div class="grid gap-1 sm:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] sm:gap-4">
+					<dt class="font-mono text-fg-soft text-xs tracking-[0.15em] uppercase sm:pt-0.5">
+						{group.group}
+					</dt>
+					<dd class="text-fg-soft text-sm">{group.items.join(' · ')}</dd>
+				</div>
+			{/each}
+		</dl>
 	</Section>
 
 	{#if data.awards.length}

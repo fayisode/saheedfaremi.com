@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { SvelteURLSearchParams } from 'svelte/reactivity';
-	import { Container, Section, Tag, Link, Button } from '$lib/components';
+	import { Container, Section, Tag, Link, Button, SocialLinks } from '$lib/components';
 
 	// Replace with whichever address Saheed wants surfaced publicly.
 	const EMAIL = 'saheedfaremi@gmail.com';
@@ -138,17 +138,13 @@
 		<div class="mt-14 grid gap-4 sm:grid-cols-2">
 			<div class="rounded-card border-border border p-6">
 				<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Find me</p>
-				<ul class="mt-3 space-y-2 text-sm">
-					<li>
-						<Link href="https://github.com/fayisode" variant="arrow">GitHub</Link>
-					</li>
-					<li>
-						<Link
-							href="https://medium.com/@sonirudrakshi99/unesco-india-africa-hackathon-2022-2ec88cea6eb9"
-							variant="arrow">UNESCO 2022 piece</Link
-						>
-					</li>
-				</ul>
+				<SocialLinks class="mt-3" />
+				<p class="mt-4 text-sm">
+					<Link
+						href="https://medium.com/@sonirudrakshi99/unesco-india-africa-hackathon-2022-2ec88cea6eb9"
+						variant="arrow">UNESCO 2022 piece</Link
+					>
+				</p>
 			</div>
 			<div class="rounded-card border-border bg-bg-soft border p-6">
 				<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Based in</p>
