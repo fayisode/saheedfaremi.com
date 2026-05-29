@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { ThemeToggle } from '$lib/components';
+	import { page } from '$app/state';
+	import { slide } from 'svelte/transition';
 
 	type NavLink = { href: string; label: string };
 
@@ -7,6 +9,19 @@
 
 	let scrolled = $state(false);
 	let open = $state(false);
+	let reducedMotion = $state(false);
+	let toggleButton = $state<HTMLButtonElement | null>(null);
+	let mobileNav = $state<HTMLElement | null>(null);
+
+	// "You are here": highlight the route link matching the current page (incl. its
+	// detail pages, e.g. /projects/x → Projects). In-page anchors (/#about) are not
+	// route changes, so they never read as the active page.
+	function isActive(href: string): boolean {
+		const path = href.split('#')[0];
+		if (!path || path === '/') return false;
+		const current = page.url.pathname;
+		return current === path || current.startsWith(path + '/');
+	}
 
 	$effect(() => {
 		const onScroll = () => {
@@ -17,14 +32,32 @@
 		return () => window.removeEventListener('scroll', onScroll);
 	});
 
-	// While the mobile menu is open, let Escape close it (keyboard users).
+	$effect(() => {
+		const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+		reducedMotion = mq.matches;
+		const onChange = (e: MediaQueryListEvent) => (reducedMotion = e.matches);
+		mq.addEventListener('change', onChange);
+		return () => mq.removeEventListener('change', onChange);
+	});
+
+	// While the mobile menu is open: close on Escape, lock body scroll so the page
+	// behind the overlay can't drift, and move focus into the menu (restoring it to
+	// the toggle on close) so keyboard users aren't stranded behind the panel.
 	$effect(() => {
 		if (!open) return;
 		const onKey = (e: KeyboardEvent) => {
 			if (e.key === 'Escape') open = false;
 		};
 		window.addEventListener('keydown', onKey);
-		return () => window.removeEventListener('keydown', onKey);
+		const prevOverflow = document.body.style.overflow;
+		document.body.style.overflow = 'hidden';
+		const firstLink = mobileNav?.querySelector<HTMLElement>('a');
+		firstLink?.focus();
+		return () => {
+			window.removeEventListener('keydown', onKey);
+			document.body.style.overflow = prevOverflow;
+			toggleButton?.focus();
+		};
 	});
 </script>
 
@@ -55,13 +88,17 @@
 			<span class="ml-1">Saheed Faremi</span>
 		</a>
 
-		<nav aria-label="Primary" class="hidden items-center gap-1 sm:flex">
+		<nav aria-label="Primary" class="hidden items-center gap-1 md:flex">
 			{#each links as link (link.href)}
 				<a
 					href={link.href}
-					class="text-fg-soft hover:text-fg hover:bg-bg-soft rounded-soft px-3 py-2 font-mono
-						text-xs tracking-[0.15em] uppercase transition-colors duration-[var(--duration-fast)]
-						focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+					aria-current={isActive(link.href) ? 'page' : undefined}
+					class="rounded-soft px-3 py-2 font-mono text-xs tracking-[0.15em] uppercase
+						transition-colors duration-[var(--duration-fast)] hover:text-fg hover:bg-bg-soft
+						focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent
+						{isActive(link.href)
+						? 'text-fg underline decoration-accent decoration-2 underline-offset-[6px]'
+						: 'text-fg-soft'}"
 				>
 					{link.label}
 				</a>
@@ -74,11 +111,12 @@
 			     `sm` breakpoint that nav is display:none, so this disclosure is the
 			     only way to reach the links on a phone. -->
 			<button
+				bind:this={toggleButton}
 				type="button"
 				class="text-fg-soft hover:text-fg hover:bg-bg-soft rounded-soft inline-flex h-9 w-9
 					items-center justify-center transition-colors duration-[var(--duration-fast)]
 					focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent
-					sm:hidden"
+					md:hidden"
 				aria-label={open ? 'Close menu' : 'Open menu'}
 				aria-expanded={open}
 				aria-controls="mobile-nav"
@@ -109,17 +147,21 @@
 
 	{#if open}
 		<nav
+			bind:this={mobileNav}
 			id="mobile-nav"
 			aria-label="Primary"
-			class="bg-bg border-border flex flex-col border-t px-4 pb-4 sm:hidden"
+			class="bg-bg border-border flex flex-col border-t px-4 pb-4 md:hidden"
+			transition:slide={{ duration: reducedMotion ? 0 : 150 }}
 		>
 			{#each links as link (link.href)}
 				<a
 					href={link.href}
+					aria-current={isActive(link.href) ? 'page' : undefined}
 					onclick={() => (open = false)}
-					class="text-fg-soft hover:text-fg hover:bg-bg-soft rounded-soft px-3 py-3 font-mono
-						text-sm tracking-[0.15em] uppercase transition-colors duration-[var(--duration-fast)]
-						focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+					class="rounded-soft px-3 py-3 font-mono text-sm tracking-[0.15em] uppercase
+						transition-colors duration-[var(--duration-fast)] hover:text-fg hover:bg-bg-soft
+						focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent
+						{isActive(link.href) ? 'text-fg' : 'text-fg-soft'}"
 				>
 					{link.label}
 				</a>

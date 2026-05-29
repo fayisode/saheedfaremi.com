@@ -8,7 +8,8 @@
 		DiagramFigure,
 		Tag,
 		Link,
-		SocialLinks
+		SocialLinks,
+		Seo
 	} from '$lib/components';
 	import portraitUrl from '$lib/assets/portrait.jpg';
 	import { publications, sortByYearDesc } from '$lib/content/loader';
@@ -20,23 +21,22 @@
 	const recentPublications = sortByYearDesc([...publications]);
 </script>
 
-<svelte:head>
-	<title>Saheed Faremi · Researcher & Engineer</title>
-	<meta
-		name="description"
-		content="Saheed Faremi: PhD-track EEG-microstate researcher and full-stack engineer building production systems in fintech, healthcare, education, HR, and agriculture."
-	/>
-</svelte:head>
+<Seo
+	title="Saheed Faremi · Researcher & Engineer"
+	description="Saheed Faremi: PhD-track EEG-microstate researcher and full-stack engineer building production systems in fintech, healthcare, education, HR, and agriculture."
+/>
 
 <!-- HERO -->
 <div class="relative isolate min-h-dvh overflow-hidden">
 	<HeroCanvas />
 
 	<Container width="default" class="relative z-10 flex min-h-dvh flex-col justify-between py-24">
-		<!-- Decorative version stamp. Not a <header> element: the layout's SiteNav
-		     is the page's banner landmark, and ARIA only permits one per page. -->
+		<!-- Top-of-hero credential. Carries the strongest external proof above the
+		     fold instead of a decorative version stamp. Not a <header> element: the
+		     layout's SiteNav is the page's banner landmark (one per page). -->
 		<div class="font-mono text-fg-soft text-xs tracking-[0.2em] uppercase">
-			<span class="text-accent">●</span> saheed faremi · digital profile · v0.0.1
+			<span class="text-accent" aria-hidden="true">●</span> UNESCO India-Africa 2022 · Gold medal · PhD-track, University
+			College Cork
 		</div>
 
 		<section class="my-auto" aria-labelledby="hero-heading">
@@ -54,9 +54,12 @@
 			<p class="text-fg mt-8 max-w-xl text-lg leading-relaxed sm:text-xl">
 				{tagline}
 			</p>
-			<div class="mt-8 flex flex-wrap items-center gap-4">
-				<Link href="#about" variant="arrow">Read more</Link>
-				<Link href="#research" variant="plain">Or jump to the research</Link>
+			<!-- One primary conversion (the CV) plus two audience-specific shortcuts:
+			     publications for academics, research write-up for everyone. -->
+			<div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+				<Link href="/cv" variant="arrow">View CV</Link>
+				<Link href="/publications" variant="plain">Publications</Link>
+				<Link href="#research" variant="plain">The research</Link>
 			</div>
 		</section>
 	</Container>
@@ -88,19 +91,19 @@
 					computationally) rely on.
 				</p>
 				<p>
-					Production work spans fintech (Curnance), HR (Etihuku), healthcare data (HIS Core,
-					Predict-Dx), advisory tooling (Gatsheni Advisory, CFI Eswatini), AI-assisted proposal
-					generation (Cleva, built for Gijima), and learning systems (Skills Hub, Moodle).
-					Infrastructure for under-served users needs the same engineering rigour as infrastructure
-					for everyone else. It tends to need more.
-				</p>
-				<p>
 					The doctoral side: <strong>EEG microstates</strong> are quasi-stable scalp topographies that
 					segment continuous brain signal into a discrete temporal alphabet. Find the recurrent patterns
 					and you have a candidate biomarker. The work asks whether deep generative models, variational
 					autoencoders and Gaussian-mixture VAEs, can learn a microstate alphabet that's more stable across
 					sessions and more behaviourally predictive than classical clustering. Target: a representation
 					reliable enough to anchor real-time detection of disorder-relevant brain states.
+				</p>
+				<p>
+					Production work spans fintech (Curnance), HR (Etihuku), healthcare data (HIS Core,
+					Predict-Dx), advisory tooling (Gatsheni Advisory, CFI Eswatini), AI-assisted proposal
+					generation (Cleva, built for Gijima), and learning systems (Skills Hub, Moodle).
+					Infrastructure for under-served users needs the same engineering rigour as infrastructure
+					for everyone else. It tends to need more.
 				</p>
 				<p>
 					In 2022 I represented Eswatini at the
@@ -245,7 +248,7 @@
 						research, and welcome sponsorship and research partnerships.
 					</p>
 					<p class="mt-3">
-						<Link href="mailto:fayisode@gmail.com" variant="arrow">fayisode@gmail.com</Link>
+						<Link href="mailto:saheedfaremi@gmail.com" variant="arrow">saheedfaremi@gmail.com</Link>
 					</p>
 				</div>
 			</aside>
@@ -265,11 +268,5 @@
 				caption="Mixture-of-Gaussians latent prior with class structure native to the prior."
 			/>
 		</div>
-		<p class="font-mono text-fg-muted mt-6 text-xs tracking-[0.15em] uppercase">
-			Diagrams export from <code class="text-fg-soft">~/Documents/*.drawio</code> as SVG and drop
-			into
-			<code class="text-fg-soft">src/lib/assets/</code>; pass via
-			<code class="text-fg-soft">src</code>.
-		</p>
 	</Section>
 </Container>

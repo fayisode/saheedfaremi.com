@@ -14,8 +14,16 @@
 
 <figure class="space-y-3">
 	{#if src}
-		<div class="rounded-card border-border bg-bg-soft overflow-hidden border p-4">
-			<img {src} alt={alt ?? title} class="block w-full" loading="lazy" decoding="async" />
+		<!-- aspect-[16/10] reserves space so the image load doesn't cause CLS once a real
+		     SVG/PNG lands (the img carries no intrinsic width/height attributes). -->
+		<div class="rounded-card border-border bg-bg-soft aspect-[16/10] overflow-hidden border p-4">
+			<img
+				{src}
+				alt={alt ?? title}
+				class="block h-full w-full object-contain"
+				loading="lazy"
+				decoding="async"
+			/>
 		</div>
 	{:else if children}
 		<div class="rounded-card border-border bg-bg-soft border p-4">

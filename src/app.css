@@ -36,11 +36,17 @@
 	--color-paper-soft: #efebe1;
 	--color-phosphor: #5eead4;
 	--color-phosphor-soft: #2dd4bf;
+	/* Deep teal for light-theme accent TEXT. #2dd4bf is only 1.72:1 on paper (fails
+	   WCAG AA); teal-700 #0f766e is 5.07:1 and passes AA for body text. */
+	--color-phosphor-deep: #0f766e;
 	--color-violet: #a78bfa;
 
 	--color-signal-50: #e2e8f0;
 	--color-signal-100: #cbd5e1;
 	--color-signal-200: #94a3b8;
+	/* #718096 ≈ 4.8:1 on ink: a "muted" tone that still clears WCAG AA for small text,
+	   while staying visibly dimmer than fg-soft (signal-200, 7.5:1) for hierarchy. */
+	--color-signal-250: #718096;
 	--color-signal-300: #64748b;
 	--color-signal-400: #475569;
 	--color-signal-500: #334155;
@@ -53,7 +59,7 @@
 	--color-surface: #131a2b;
 	--color-fg: var(--color-signal-50);
 	--color-fg-soft: var(--color-signal-200);
-	--color-fg-muted: var(--color-signal-400);
+	--color-fg-muted: var(--color-signal-250);
 	--color-accent: var(--color-phosphor);
 	--color-accent-soft: var(--color-violet);
 	--color-border: #1f2a3d;
@@ -113,7 +119,7 @@
 		--color-surface: #131a2b;
 		--color-fg: var(--color-signal-50);
 		--color-fg-soft: var(--color-signal-200);
-		--color-fg-muted: var(--color-signal-400);
+		--color-fg-muted: var(--color-signal-250);
 		--color-accent: var(--color-phosphor);
 		--color-border: #1f2a3d;
 	}
@@ -125,8 +131,11 @@
 		--color-surface: #ffffff;
 		--color-fg: var(--color-ink);
 		--color-fg-soft: var(--color-signal-500);
-		--color-fg-muted: var(--color-signal-300);
-		--color-accent: var(--color-phosphor-soft);
+		/* signal-300 #64748b is only 4.41:1 on paper (fails AA for small text);
+		   signal-400 #475569 is 7.02:1 and clears AA. */
+		--color-fg-muted: var(--color-signal-400);
+		/* phosphor-soft #2dd4bf is 1.72:1 on paper; phosphor-deep #0f766e is 5.07:1. */
+		--color-accent: var(--color-phosphor-deep);
 		--color-border: #d6d3c9;
 	}
 

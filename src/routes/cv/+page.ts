@@ -9,6 +9,7 @@ import {
 	talks
 } from '$lib/content/loader';
 import type { Education } from '$lib/content/schemas';
+import { TRACKS, DEFAULT_TRACK } from '$lib/cv/tracks';
 
 export const prerender = true;
 
@@ -39,6 +40,8 @@ function orderEducation(items: readonly Education[]): Education[] {
 
 export function load() {
 	return {
+		tracks: TRACKS,
+		defaultTrack: DEFAULT_TRACK,
 		experience: sortByStartedAtDesc([...experience]),
 		education: orderEducation(education),
 		awards: sortByYearDesc([...awards]),

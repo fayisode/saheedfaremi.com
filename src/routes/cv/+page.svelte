@@ -1,5 +1,10 @@
 <script lang="ts">
-	import { Container, Section, SocialLinks } from '$lib/components';
+	import { Container, Section, SocialLinks, Seo } from '$lib/components';
+	import TrackSelector from '$lib/cv/TrackSelector.svelte';
+	import { page } from '$app/state';
+	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
+	import { DEFAULT_TRACK, type Track, type TrackKeyT } from '$lib/cv/tracks';
 	import type {
 		Award,
 		Education,
@@ -13,6 +18,8 @@
 		data
 	}: {
 		data: {
+			tracks: readonly Track[];
+			defaultTrack: TrackKeyT;
 			experience: Experience[];
 			education: Education[];
 			awards: Award[];
@@ -24,33 +31,27 @@
 
 	const EMAIL = 'saheedfaremi@gmail.com';
 
-	// Technical skills matrix. Hardcoded here (not a content collection) because
-	// it is CV-specific and small. British spelling per the rest of the site.
-	const skills: { group: string; items: string[] }[] = [
-		{
-			group: 'Data science & ML',
-			items: ['Statistical modelling', 'Optimisation', 'Neural networks', 'Transformers', 'LLMs']
-		},
-		{ group: 'Programming', items: ['Python', 'SQL', 'JavaScript', 'Go', 'R'] },
-		{
-			group: 'Tools & frameworks',
-			items: ['PyTorch', 'TensorFlow', 'Pandas', 'scikit-learn', 'Spark', 'Hadoop']
-		},
-		{
-			group: 'Cloud & databases',
-			items: ['AWS', 'Azure', 'MongoDB', 'PostgreSQL', 'MySQL', 'Redis']
-		},
-		{ group: 'Visualisation', items: ['Matplotlib', 'Seaborn', 'Tableau', 'Power BI'] }
-	];
+	// Track selector. The page is prerendered to one static file, so track state is a
+	// pure render concern: default track is server-rendered, then on the client the
+	// effect reads ?track for deep links and the buttons drive state + the querystring.
+	let activeTrack = $state<TrackKeyT>(DEFAULT_TRACK);
+	$effect(() => {
+		const q = page.url.searchParams.get('track');
+		const match = data.tracks.find((t) => t.key === q);
+		if (match) activeTrack = match.key;
+	});
+	const active = $derived(data.tracks.find((t) => t.key === activeTrack) ?? data.tracks[0]);
+
+	function selectTrack(key: TrackKeyT) {
+		activeTrack = key;
+		if (browser) goto(`?track=${key}`, { replaceState: false, noScroll: true, keepFocus: true });
+	}
 </script>
 
-<svelte:head>
-	<title>CV · Saheed Faremi</title>
-	<meta
-		name="description"
-		content="Curriculum vitae for Saheed Faremi · researcher and engineer."
-	/>
-</svelte:head>
+<Seo
+	title="CV · Saheed Faremi"
+	description="Curriculum vitae for Saheed Faremi: PhD-track EEG-microstate researcher and multi-domain software engineer. Switch emphasis between research, data science, and software."
+/>
 
 <Container width="default" class="cv-page">
 	<header class="cv-header py-12">
@@ -66,9 +67,20 @@
 			· Based in Dublin, Ireland
 		</p>
 		<SocialLinks class="mt-4" />
+
+		<!-- Track selector: swaps the summary, skills emphasis, and selected work below.
+		     Experience, education, recognition, publications, and talks stay constant. -->
+		<div class="mt-6">
+			<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Emphasis</p>
+			<div class="mt-2">
+				<TrackSelector tracks={data.tracks} active={activeTrack} onselect={selectTrack} />
+			</div>
+		</div>
+		<p class="text-fg-soft mt-4 max-w-2xl text-sm leading-relaxed">{active.summary}</p>
+
 		<div class="mt-6 flex flex-wrap gap-2">
 			<a
-				href="/saheed-faremi-cv.pdf"
+				href={`/${active.pdfFile}`}
 				download
 				class="cv-print-btn font-mono text-fg-soft hover:text-fg hover:bg-bg-soft rounded-soft
 					border-border inline-flex h-9 items-center gap-2 border px-3 text-xs
@@ -142,7 +154,7 @@
 
 	<Section spacing="tight" eyebrow="Technical skills" labelledById="cv-skills">
 		<dl class="mt-6 space-y-4">
-			{#each skills as group (group.group)}
+			{#each active.skillGroups as group (group.group)}
 				<div class="grid gap-1 sm:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] sm:gap-4">
 					<dt class="font-mono text-fg-soft text-xs tracking-[0.15em] uppercase sm:pt-0.5">
 						{group.group}
@@ -151,6 +163,19 @@
 				</div>
 			{/each}
 		</dl>
+	</Section>
+
+	<Section spacing="tight" eyebrow={`Selected for ${active.label.toLowerCase()}`} labelledById="cv-focus">
+		<ul class="text-fg-soft mt-6 list-disc space-y-2 pl-5 text-sm">
+			{#each active.highlightFocus as item (item)}<li>{item}</li>{/each}
+		</ul>
+		{#if active.featuredProjects.length}
+			<ul class="mt-6 space-y-2">
+				{#each active.featuredProjects as project (project)}
+					<li class="text-fg text-sm">{project}</li>
+				{/each}
+			</ul>
+		{/if}
 	</Section>
 
 	{#if data.awards.length}

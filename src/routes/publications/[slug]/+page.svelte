@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { Container, Section, Link } from '$lib/components';
+	import { Container, Section, Link, Seo } from '$lib/components';
 	import { toBibtex } from '$lib/content/loader';
 	import type { Component } from 'svelte';
 	import type { Publication } from '$lib/content/schemas';
@@ -58,11 +58,11 @@
 	}
 </script>
 
+<Seo
+	title={`${meta.title} · Publications · Saheed Faremi`}
+	description={meta.summary ?? `${meta.title} (${meta.authors.join(', ')}, ${meta.year}).`}
+/>
 <svelte:head>
-	<title>{meta.title} · Publications · Saheed Faremi</title>
-	{#if meta.summary}
-		<meta name="description" content={meta.summary} />
-	{/if}
 	{@html ldScript}
 </svelte:head>
 

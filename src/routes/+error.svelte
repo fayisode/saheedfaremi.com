@@ -31,8 +31,10 @@
 		</p>
 		<ul class="font-mono mt-10 space-y-2 text-sm">
 			<li><Link href="/" variant="arrow">Home</Link></li>
+			<li><Link href="/publications" variant="arrow">Publications</Link></li>
 			<li><Link href="/projects" variant="arrow">Projects</Link></li>
-			<li><Link href="/awards" variant="arrow">Recognition</Link></li>
+			<li><Link href="/blog" variant="arrow">Blog</Link></li>
+			<li><Link href="/cv" variant="arrow">CV</Link></li>
 			<li><Link href="/contact" variant="arrow">Contact</Link></li>
 		</ul>
 	</Section>

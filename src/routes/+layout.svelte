@@ -12,8 +12,9 @@
 	const navLinks = [
 		{ href: '/#about', label: 'About' },
 		{ href: '/#research', label: 'Research' },
-		{ href: '/blog', label: 'Blog' },
+		{ href: '/publications', label: 'Publications' },
 		{ href: '/projects', label: 'Projects' },
+		{ href: '/blog', label: 'Blog' },
 		{ href: '/awards', label: 'Recognition' },
 		{ href: '/cv', label: 'CV' },
 		{ href: '/contact', label: 'Contact' }
