@@ -8,7 +8,7 @@
 	const meta = $derived(data.meta);
 	const Body = $derived(data.Component);
 	const description = $derived(
-		meta.summary ?? `${meta.title} — a post by Saheed Faremi.`
+		meta.summary ?? `${meta.title}, a post by Saheed Faremi.`
 	);
 </script>
 

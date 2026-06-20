@@ -33,7 +33,7 @@
 
 	const variants = {
 		primary:
-			'bg-accent text-bg hover:bg-phosphor-soft active:translate-y-px ' +
+			'bg-accent text-bg hover:bg-accent-hover active:translate-y-px ' +
 			'shadow-[0_1px_0_rgba(255,255,255,0.08)_inset]',
 		ghost:
 			'bg-transparent text-fg border border-border hover:border-accent hover:text-accent ' +

@@ -3,7 +3,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import frauncesLatin from '@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url';
 	import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
-	import { SiteNav } from '$lib/components';
+	import { SiteNav, Footer } from '$lib/components';
 
 	let { children } = $props();
 
@@ -17,6 +17,21 @@
 		{ href: '/blog', label: 'Blog' },
 		{ href: '/awards', label: 'Recognition' },
 		{ href: '/cv', label: 'CV' },
+		{ href: '/contact', label: 'Contact' }
+	];
+
+	// Footer site map. Splits the nav into "the work" vs "everything else", and adds
+	// Talks/News which have live routes but no top-nav slot, so nothing is unreachable.
+	const footerExplore = [
+		{ href: '/publications', label: 'Publications' },
+		{ href: '/projects', label: 'Projects' },
+		{ href: '/blog', label: 'Blog' },
+		{ href: '/talks', label: 'Talks' }
+	];
+	const footerAbout = [
+		{ href: '/#about', label: 'About' },
+		{ href: '/#research', label: 'Research' },
+		{ href: '/awards', label: 'Recognition' },
 		{ href: '/contact', label: 'Contact' }
 	];
 </script>
@@ -42,3 +57,5 @@
 <main id="main">
 	{@render children()}
 </main>
+
+<Footer explore={footerExplore} about={footerAbout} />

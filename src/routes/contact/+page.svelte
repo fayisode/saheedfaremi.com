@@ -63,7 +63,7 @@
 		<div class="mt-10 flex flex-wrap items-center gap-3">
 			<a
 				href={`mailto:${EMAIL}`}
-				class="bg-accent text-bg hover:bg-phosphor-soft rounded-soft font-mono inline-flex h-10
+				class="bg-accent text-bg hover:bg-accent-hover rounded-soft font-mono inline-flex h-10
 					items-center gap-2 px-4 text-sm tracking-wide
 					transition-colors duration-[var(--duration-fast)] focus-visible:outline-2
 					focus-visible:outline-offset-2 focus-visible:outline-accent"

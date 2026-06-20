@@ -47,7 +47,8 @@ export function load() {
 		awards: sortByYearDesc([...awards]),
 		publications: sortByYearDesc([...publications]),
 		talks: sortByYearDesc([...talks]),
-		// "Selected projects" on the CV = those tagged featured, falling back to all.
-		projects: [...projects].filter((p) => p.featured) // featured-only for printable density
+		// "Selected projects" on the CV = featured AND published. Drafts are first-pass
+		// placeholders; surfacing them on a printable CV would present unverified copy as fact.
+		projects: [...projects].filter((p) => p.featured && p.status === 'published')
 	};
 }

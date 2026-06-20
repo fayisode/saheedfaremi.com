@@ -47,7 +47,7 @@ const RAW_TRACKS: Track[] = [
 		key: 'research',
 		label: 'Research',
 		summary:
-			'PhD researcher at University College Cork (supervised by Luca Longo) working on unsupervised deep learning for EEG signal analysis: variational autoencoders and Gaussian-mixture models for interpretable EEG microstate discovery. First Class Honours MSc in Computer Science (Data Science). IEEE-published, with work under review at Brain Informatics.',
+			'PhD researcher at University College Cork (supervised by Luca Longo) working on unsupervised deep learning for EEG signal analysis: variational autoencoders and Gaussian-mixture models for interpretable EEG microstate discovery. MSc in Computer Science (machine-learning concentration), 4.0/4.0 GPA. IEEE-published, with work under review at Brain Informatics.',
 		skillGroups: [
 			{ group: 'Core', items: ['Python', 'PyTorch', 'TensorFlow', 'scikit-learn', 'MATLAB'] },
 			{

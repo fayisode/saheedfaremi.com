@@ -256,6 +256,7 @@
 		:global(header[class*='fixed']),
 		:global(.cv-print-btn),
 		:global(.skip-link),
+		:global(footer),
 		:global(nav[aria-label='Primary']) {
 			display: none !important;
 		}

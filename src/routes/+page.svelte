@@ -26,6 +26,42 @@
 	description="Saheed Faremi: PhD-track EEG-microstate researcher and full-stack engineer building production systems in fintech, healthcare, education, HR, and agriculture."
 />
 
+<!-- Encoder → latent → decoder schematic, shared across the three model variants.
+     Defined at the component top level (not inside a component) so it stays a local
+     snippet rather than being read as a component prop. The latent node carries the
+     accent colour (theme-remapped); only its label differs between architectures. -->
+{#snippet arch(latentTop: string, latentBottom: string)}
+	<svg
+		viewBox="0 0 330 92"
+		fill="none"
+		class="font-mono text-fg-soft block w-full"
+		role="img"
+		aria-label="Encoder to {latentBottom} latent to decoder"
+	>
+		<defs>
+			<marker id="arrowhead" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+				<path d="M0 0L6 3L0 6Z" fill="currentColor" />
+			</marker>
+		</defs>
+		<text x="2" y="50" font-size="11" fill="currentColor">x</text>
+		<line x1="12" y1="46" x2="36" y2="46" stroke="currentColor" marker-end="url(#arrowhead)" />
+		<rect x="40" y="26" width="68" height="40" rx="6" stroke="currentColor" />
+		<text x="74" y="50" font-size="10" fill="currentColor" text-anchor="middle">Encoder</text>
+		<line x1="108" y1="46" x2="124" y2="46" stroke="currentColor" marker-end="url(#arrowhead)" />
+		<g class="text-accent">
+			<rect x="128" y="26" width="74" height="40" rx="6" stroke="currentColor" />
+			<text x="165" y="44" font-size="12" fill="currentColor" text-anchor="middle">{latentTop}</text>
+			<text x="165" y="57" font-size="8" fill="currentColor" text-anchor="middle">{latentBottom}</text
+			>
+		</g>
+		<line x1="202" y1="46" x2="218" y2="46" stroke="currentColor" marker-end="url(#arrowhead)" />
+		<rect x="222" y="26" width="68" height="40" rx="6" stroke="currentColor" />
+		<text x="256" y="50" font-size="10" fill="currentColor" text-anchor="middle">Decoder</text>
+		<line x1="290" y1="46" x2="312" y2="46" stroke="currentColor" marker-end="url(#arrowhead)" />
+		<text x="315" y="50" font-size="11" fill="currentColor">x̂</text>
+	</svg>
+{/snippet}
+
 <!-- HERO -->
 <div class="relative isolate min-h-dvh overflow-hidden">
 	<HeroCanvas />
@@ -85,10 +121,9 @@
 			     `text-fg` / `text-fg-soft` tokens and rebalance correctly with the theme. -->
 			<div class="max-w-none space-y-5 text-lg leading-relaxed text-fg">
 				<p>
-					I am a left and right thinker: my doctorate decodes recurrent patterns in brain signal
-					towards real-time detection of brain disorder, and my engineering practice ships the
-					production systems that under-served users (geographically, economically, or
-					computationally) rely on.
+					Two modes. My doctorate decodes recurrent patterns in brain signal towards real-time
+					detection of brain disorder. My engineering practice ships the production systems that
+					under-served users (geographically, economically, or computationally) rely on.
 				</p>
 				<p>
 					The doctoral side: <strong>EEG microstates</strong> are quasi-stable scalp topographies that
@@ -258,15 +293,21 @@
 			<DiagramFigure
 				title="VAE"
 				caption="Vanilla variational autoencoder with a single Gaussian latent prior."
-			/>
+			>
+				{@render arch('z', 'N(μ,σ)')}
+			</DiagramFigure>
 			<DiagramFigure
 				title="VAE-GMM"
 				caption="VAE with a Gaussian-mixture posterior at the latent level."
-			/>
+			>
+				{@render arch('z', 'GMM post.')}
+			</DiagramFigure>
 			<DiagramFigure
 				title="GMM-VAE"
 				caption="Mixture-of-Gaussians latent prior with class structure native to the prior."
-			/>
+			>
+				{@render arch('z', 'GMM prior')}
+			</DiagramFigure>
 		</div>
 	</Section>
 </Container>
