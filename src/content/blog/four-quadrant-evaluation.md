@@ -10,7 +10,7 @@ tags:
   - evaluation
   - silhouette
   - davies-bouldin
-repo: https://github.com/saheedfaremi/microstate-architecture-search
+repo: https://github.com/fayisode/microstate-architecture-search
 ---
 
 Pick a K. Train the model. Now score it.

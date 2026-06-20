@@ -9,7 +9,7 @@ tags:
   - mne
   - pycrostates
   - lemon
-repo: https://github.com/saheedfaremi/microstate-architecture-search
+repo: https://github.com/fayisode/microstate-architecture-search
 ---
 
 I get asked the same thing a lot: what exactly happens between "raw EEG file on disk" and "the 40x40 topomap the model trains on". So this post walks through it on one participant (`010004`, eyes-closed), one fixed 76 ms window, every stage shown side by side. The point is that each stage does something specific and the figure shows you what.
@@ -212,6 +212,6 @@ This is also why polarity invariance matters. If peak #1059 happens to be polari
 
 Each stage encodes a methodological choice. Get the wrong reference, or the wrong bandpass, or skip the corner mask after griddata, and your microstate alphabet is measuring artefacts instead of brain configurations. Going stage by stage on a fixed window means I can verify each step visually instead of trusting the code.
 
-Code lives in [microstate-architecture-search](https://github.com/saheedfaremi/microstate-architecture-search), the public companion to the XAI 2026 paper.
+Code lives in [microstate-architecture-search](https://github.com/fayisode/microstate-architecture-search), the public companion to the XAI 2026 paper.
 
 Next post: [the topomap masking convention](/blog/topomap-masking-convention), and why every metric in the project ignores the four corners of the 40x40 image.

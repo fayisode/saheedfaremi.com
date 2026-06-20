@@ -9,7 +9,7 @@ tags:
   - topomap
   - preprocessing
   - metrics
-repo: https://github.com/saheedfaremi/microstate-architecture-search
+repo: https://github.com/fayisode/microstate-architecture-search
 ---
 
 In [Post 1](/blog/eeg-preprocessing-stages) I walked through the seven preprocessing stages from raw EEG to the 40x40 input the model sees. Stage 5 mentioned a corner-mask in passing. This post is what's underneath that mention.
@@ -79,7 +79,7 @@ The convention is: mask only for things that look at the image. Anything that lo
 
 ## For people downloading the dataset
 
-The masking convention applies to any consumer of the LEMON 40x40 topographic-map archive on Backblaze B2, not just code inside this project. There's a runnable example at [`b2_docs/download_examples/apply_topomap_mask.py`](https://github.com/saheedfaremi/microstate-architecture-search/blob/main/b2_docs/download_examples/apply_topomap_mask.py) (in the public repo, same masking logic as `mask_utils.py`) with copy-pasteable NumPy and PyTorch snippets. If you're training your own model on the cached `.npy` arrays, import either pair of helpers and stay consistent with `radius_factor=0.95`.
+The masking convention applies to any consumer of the LEMON 40x40 topographic-map archive on Backblaze B2, not just code inside this project. There's a runnable example at [`b2_docs/download_examples/apply_topomap_mask.py`](https://github.com/fayisode/microstate-architecture-search/blob/main/b2_docs/download_examples/apply_topomap_mask.py) (in the public repo, same masking logic as `mask_utils.py`) with copy-pasteable NumPy and PyTorch snippets. If you're training your own model on the cached `.npy` arrays, import either pair of helpers and stay consistent with `radius_factor=0.95`.
 
 ## Why this is worth a post
 

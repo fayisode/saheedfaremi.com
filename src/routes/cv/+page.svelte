@@ -70,7 +70,7 @@
 
 		<!-- Track selector: swaps the summary, skills emphasis, and selected work below.
 		     Experience, education, recognition, publications, and talks stay constant. -->
-		<div class="mt-6">
+		<div class="cv-emphasis mt-6">
 			<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Emphasis</p>
 			<div class="mt-2">
 				<TrackSelector tracks={data.tracks} active={activeTrack} onselect={selectTrack} />
@@ -109,7 +109,9 @@
 							{item.role} · <span class="text-fg-soft">{item.organization}</span>
 						</h3>
 						<p class="font-mono text-fg-muted text-xs tracking-[0.15em]">
-							{item.startedAt ?? '·'}{item.endedAt ? ` → ${item.endedAt}` : ' → present'}
+							{#if item.startedAt}{item.startedAt}{item.endedAt
+									? ` → ${item.endedAt}`
+									: ' → present'}{:else if item.endedAt}{item.endedAt}{:else}Present{/if}
 						</p>
 					</div>
 					{#if item.summary}<p class="text-fg-soft mt-2 text-sm">{item.summary}</p>{/if}
@@ -255,6 +257,7 @@
 		:global(.hero-canvas-frame),
 		:global(header[class*='fixed']),
 		:global(.cv-print-btn),
+		:global(.cv-emphasis),
 		:global(.skip-link),
 		:global(footer),
 		:global(nav[aria-label='Primary']) {

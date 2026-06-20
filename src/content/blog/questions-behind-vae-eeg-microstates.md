@@ -11,7 +11,7 @@ tags:
   - recurrence
   - rqa
   - modkmeans
-repo: https://github.com/saheedfaremi/microstate-architecture-search
+repo: https://github.com/fayisode/microstate-architecture-search
 ---
 
 This note documents the methodological decisions and findings of a project that learns EEG microstates with a variational autoencoder. It reports the negative results alongside the positive ones, because several of the negatives are more informative than the wins.
