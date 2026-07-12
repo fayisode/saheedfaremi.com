@@ -16,7 +16,7 @@ const config = {
 		adapter: adapter(),
 		prerender: {
 			handleHttpError: ({ path, message }) => {
-				const planned = ['/about', '/now', '/uses'];
+				const planned = ['/about', '/uses'];
 				if (planned.some((p) => path === p || path.startsWith(p + '/'))) {
 					console.warn(`prerender: planned route ${path} not yet built, skipping`);
 					return;

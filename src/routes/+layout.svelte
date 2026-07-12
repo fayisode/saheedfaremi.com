@@ -30,6 +30,7 @@
 	];
 	const footerAbout = [
 		{ href: '/#about', label: 'About' },
+		{ href: '/now', label: 'Now' },
 		{ href: '/#research', label: 'Research' },
 		{ href: '/awards', label: 'Recognition' },
 		{ href: '/contact', label: 'Contact' }
@@ -50,6 +51,7 @@
 	<meta property="og:image:height" content="630" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:image" content="/og-image.png" />
+	<link rel="alternate" type="application/atom+xml" title="Saheed Faremi" href="/rss.xml" />
 </svelte:head>
 
 <SiteNav links={navLinks} />

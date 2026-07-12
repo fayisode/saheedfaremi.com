@@ -7,9 +7,29 @@
 
 	const meta = $derived(data.meta);
 	const Body = $derived(data.Component);
-	const description = $derived(
-		meta.summary ?? `${meta.title}, a post by Saheed Faremi.`
-	);
+	const description = $derived(meta.summary ?? `${meta.title}, a post by Saheed Faremi.`);
+
+	// Table of contents: built client-side from the rendered <h2>s inside the
+	// article body. We can't extract them server-side because the body is a
+	// compiled Svelte component (<Body />), not static HTML we own.
+	let articleEl: HTMLElement | undefined;
+	let headings = $state<{ id: string; text: string }[]>([]);
+
+	$effect(() => {
+		if (!articleEl) return;
+		const h2s = articleEl.querySelectorAll('h2');
+		headings = Array.from(h2s).map((h) => {
+			const text = h.textContent?.trim() ?? '';
+			const id =
+				h.id ||
+				text
+					.toLowerCase()
+					.replace(/[^a-z0-9]+/g, '-')
+					.replace(/^-|-$/g, '');
+			if (!h.id) h.id = id;
+			return { id, text };
+		});
+	});
 </script>
 
 <Seo title={`${meta.title} · Blog · Saheed Faremi`} {description} />
@@ -17,7 +37,8 @@
 <Container width="default">
 	<Section spacing="loose" labelledById="post-heading">
 		<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
-			<Link href="/blog" variant="plain">← Blog</Link> · {meta.publishedAt}
+			<Link href="/blog" variant="plain">← Blog</Link> · {meta.publishedAt}{#if meta.readingTime}
+				· {meta.readingTime} min read{/if}
 		</p>
 
 		<h1
@@ -45,13 +66,38 @@
 			</p>
 		{/if}
 
-		<article class="blog-prose mt-12 max-w-2xl space-y-5 text-lg leading-relaxed text-fg">
-			{#if Body}
-				<Body />
-			{:else}
-				<p class="text-fg-muted italic">No body content yet for this entry.</p>
+		<div class="mt-12 flex flex-col gap-12 xl:flex-row xl:items-start xl:justify-center">
+			{#if headings.length > 0}
+				<aside class="hidden xl:block xl:w-64 xl:shrink-0">
+					<nav aria-label="Table of contents" class="xl:sticky xl:top-24">
+						<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">On this page</p>
+						<ul class="mt-3 space-y-2 border-l border-border">
+							{#each headings as heading (heading.id)}
+								<li>
+									<a
+										href={`#${heading.id}`}
+										class="-ml-px block border-l-2 border-transparent pl-4 text-sm leading-snug text-fg-muted transition-colors duration-[var(--duration-fast)] hover:border-accent hover:text-fg"
+									>
+										{heading.text}
+									</a>
+								</li>
+							{/each}
+						</ul>
+					</nav>
+				</aside>
 			{/if}
-		</article>
+
+			<article
+				bind:this={articleEl}
+				class="blog-prose w-full max-w-2xl space-y-5 text-lg leading-relaxed text-fg"
+			>
+				{#if Body}
+					<Body />
+				{:else}
+					<p class="text-fg-muted italic">No body content yet for this entry.</p>
+				{/if}
+			</article>
+		</div>
 	</Section>
 </Container>
 
