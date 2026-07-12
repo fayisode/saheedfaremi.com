@@ -50,8 +50,10 @@
 		<line x1="108" y1="46" x2="124" y2="46" stroke="currentColor" marker-end="url(#arrowhead)" />
 		<g class="text-accent">
 			<rect x="128" y="26" width="74" height="40" rx="6" stroke="currentColor" />
-			<text x="165" y="44" font-size="12" fill="currentColor" text-anchor="middle">{latentTop}</text>
-			<text x="165" y="57" font-size="8" fill="currentColor" text-anchor="middle">{latentBottom}</text
+			<text x="165" y="44" font-size="12" fill="currentColor" text-anchor="middle">{latentTop}</text
+			>
+			<text x="165" y="57" font-size="8" fill="currentColor" text-anchor="middle"
+				>{latentBottom}</text
 			>
 		</g>
 		<line x1="202" y1="46" x2="218" y2="46" stroke="currentColor" marker-end="url(#arrowhead)" />
@@ -71,8 +73,8 @@
 		     fold instead of a decorative version stamp. Not a <header> element: the
 		     layout's SiteNav is the page's banner landmark (one per page). -->
 		<div class="font-mono text-fg-soft text-xs tracking-[0.2em] uppercase">
-			<span class="text-accent" aria-hidden="true">●</span> UNESCO India-Africa 2022 · Gold medal · PhD-track, University
-			College Cork
+			<span class="text-accent" aria-hidden="true">●</span> UNESCO India-Africa 2022 · Gold medal · PhD-track,
+			University College Cork
 		</div>
 
 		<section class="my-auto" aria-labelledby="hero-heading">
@@ -121,17 +123,17 @@
 			     `text-fg` / `text-fg-soft` tokens and rebalance correctly with the theme. -->
 			<div class="max-w-none space-y-5 text-lg leading-relaxed text-fg">
 				<p>
-					Two modes. My doctorate decodes recurrent patterns in brain signal towards real-time
-					detection of brain disorder. My engineering practice ships the production systems that
+					Two modes. My doctorate decodes recurrent patterns in brain signal toward detecting
+					disorder-relevant brain states. My engineering practice ships the production systems that
 					under-served users (geographically, economically, or computationally) rely on.
 				</p>
 				<p>
 					The doctoral side: <strong>EEG microstates</strong> are quasi-stable scalp topographies that
 					segment continuous brain signal into a discrete temporal alphabet. Find the recurrent patterns
-					and you have a candidate biomarker. The work asks whether deep generative models, variational
+					and you have a candidate indicator. The work asks whether deep generative models, variational
 					autoencoders and Gaussian-mixture VAEs, can learn a microstate alphabet that's more stable across
 					sessions and more behaviourally predictive than classical clustering. Target: a representation
-					reliable enough to anchor real-time detection of disorder-relevant brain states.
+					reliable enough to anchor detection of disorder-relevant brain states.
 				</p>
 				<p>
 					Production work spans fintech (Curnance), HR (Etihuku), healthcare data (HIS Core,
@@ -159,7 +161,7 @@
 		</div>
 
 		<PulledQuote attribution="Working hypothesis">
-			Find the recurrent patterns and you have a candidate biomarker.
+			Find the recurrent patterns and you have a candidate indicator.
 		</PulledQuote>
 	</Section>
 </Container>
@@ -279,8 +281,8 @@
 						<span class="text-accent" aria-hidden="true">●</span> Support this work
 					</p>
 					<p class="text-fg-soft mt-3 text-sm leading-relaxed">
-						I am seeking collaboration, funding, and computing resources for this doctoral
-						research, and welcome sponsorship and research partnerships.
+						I am seeking collaboration, funding, and computing resources for this doctoral research,
+						and welcome sponsorship and research partnerships.
 					</p>
 					<p class="mt-3">
 						<Link href="mailto:saheedfaremi@gmail.com" variant="arrow">saheedfaremi@gmail.com</Link>

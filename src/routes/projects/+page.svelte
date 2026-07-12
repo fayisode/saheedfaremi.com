@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Container, Section, ProjectCard } from '$lib/components';
+	import { Container, Section, ProjectCard, Seo } from '$lib/components';
 	import type { Project } from '$lib/content/schemas';
 
 	let { data }: { data: { projects: Project[] } } = $props();
@@ -47,13 +47,10 @@
 	);
 </script>
 
-<svelte:head>
-	<title>Projects · Saheed Faremi</title>
-	<meta
-		name="description"
-		content="Production systems Saheed Faremi has built across fintech, healthcare, HR, education, agriculture, GIS, and research."
-	/>
-</svelte:head>
+<Seo
+	title="Projects · Saheed Faremi"
+	description="Production systems Saheed Faremi has built across fintech, healthcare, HR, education, agriculture, GIS, and research."
+/>
 
 <Container width="wide">
 	<Section

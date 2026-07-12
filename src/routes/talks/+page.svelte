@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { Container, Section, TalkCard } from '$lib/components';
+	import { Container, Section, TalkCard, Seo } from '$lib/components';
 	import type { Talk } from '$lib/content/schemas';
 
 	let { data }: { data: { talks: Talk[] } } = $props();
 </script>
 
-<svelte:head>
-	<title>Talks · Saheed Faremi</title>
-	<meta name="description" content="Talks and presentations by Saheed Faremi." />
-</svelte:head>
+<Seo
+	title="Talks · Saheed Faremi"
+	description="Conference talks and presentations by Saheed Faremi."
+/>
 
 <Container width="wide">
 	<Section

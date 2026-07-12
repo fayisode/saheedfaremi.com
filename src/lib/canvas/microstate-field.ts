@@ -21,28 +21,42 @@ export function startMicrostateField(canvas: HTMLCanvasElement): Stopper {
 		throw new Error('startMicrostateField: canvas must be mounted in the DOM');
 	}
 
-	const renderer = new Renderer({
-		canvas,
-		dpr: Math.min(window.devicePixelRatio || 1, 1.75),
-		alpha: true,
-		antialias: false,
-		premultipliedAlpha: true
-	});
-	const gl = renderer.gl;
-	gl.clearColor(0, 0, 0, 0);
+	let renderer: Renderer;
+	let gl: Renderer['gl'];
+	let geometry: Triangle;
+	let program: Program;
+	let mesh: Mesh;
 
-	const geometry = new Triangle(gl);
+	// Build (or rebuild) every OGL resource that pins itself to the live GL
+	// context. Called once at mount and again from `webglcontextrestored`,
+	// since iOS Safari hands us a brand-new context after memory eviction and
+	// the previous Renderer/Program/Mesh are all bound to the dead one.
+	function initGL() {
+		renderer = new Renderer({
+			canvas,
+			dpr: Math.min(window.devicePixelRatio || 1, 1.75),
+			alpha: true,
+			antialias: false,
+			premultipliedAlpha: true
+		});
+		gl = renderer.gl;
+		gl.clearColor(0, 0, 0, 0);
 
-	const program = new Program(gl, {
-		vertex: VERTEX_SHADER,
-		fragment: FRAGMENT_SHADER,
-		uniforms: {
-			uTime: { value: 0 },
-			uResolution: { value: [parent.clientWidth, parent.clientHeight] }
-		}
-	});
+		geometry = new Triangle(gl);
 
-	const mesh = new Mesh(gl, { geometry, program });
+		program = new Program(gl, {
+			vertex: VERTEX_SHADER,
+			fragment: FRAGMENT_SHADER,
+			uniforms: {
+				uTime: { value: 0 },
+				uResolution: { value: [parent!.clientWidth, parent!.clientHeight] }
+			}
+		});
+
+		mesh = new Mesh(gl, { geometry, program });
+	}
+
+	initGL();
 
 	let rafId = 0;
 	let isIntersecting = true;
@@ -111,9 +125,13 @@ export function startMicrostateField(canvas: HTMLCanvasElement): Stopper {
 	canvas.addEventListener('webglcontextlost', onContextLost);
 
 	// iOS Safari aggressively evicts WebGL contexts under memory pressure and
-	// emits `webglcontextrestored` when the context comes back. Without resuming
-	// here the canvas stays dark forever (until full page reload).
+	// emits `webglcontextrestored` when the context comes back. The restored
+	// context is a fresh one, so we must rebuild every OGL resource that was
+	// pinned to the dead GL before resuming the loop. Without this the canvas
+	// stays dark forever (until full page reload).
 	function onContextRestored() {
+		initGL();
+		resize();
 		schedule();
 	}
 	canvas.addEventListener('webglcontextrestored', onContextRestored);

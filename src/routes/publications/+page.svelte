@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { Container, Section, PublicationCard, Link } from '$lib/components';
+	import { Container, Section, PublicationCard, Link, Seo } from '$lib/components';
 	import type { Publication } from '$lib/content/schemas';
 
 	let { data }: { data: { publications: Publication[] } } = $props();
 </script>
 
-<svelte:head>
-	<title>Publications · Saheed Faremi</title>
-	<meta name="description" content="Preprints, papers, and citable work by Saheed Faremi." />
-</svelte:head>
+<Seo
+	title="Publications · Saheed Faremi"
+	description="Publications and preprints by Saheed Faremi on EEG microstates, variational autoencoders, and machine learning for health."
+/>
 
 <Container width="wide">
 	<Section

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { SvelteURLSearchParams } from 'svelte/reactivity';
-	import { Container, Section, Tag, Link, Button, SocialLinks } from '$lib/components';
+	import { Container, Section, Tag, Link, Button, SocialLinks, Seo } from '$lib/components';
 
 	// Replace with whichever address Saheed wants surfaced publicly.
 	const EMAIL = 'saheedfaremi@gmail.com';
@@ -43,13 +43,10 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Contact · Saheed Faremi</title>
-	<meta
-		name="description"
-		content="Get in touch with Saheed Faremi for research collaboration, engineering work, talks, or just to say hi."
-	/>
-</svelte:head>
+<Seo
+	title="Contact · Saheed Faremi"
+	description="Get in touch with Saheed Faremi about research collaboration, engineering work, or speaking."
+/>
 
 <Container width="default">
 	<Section spacing="loose" eyebrow="Contact" heading="Send a note." labelledById="contact-heading">

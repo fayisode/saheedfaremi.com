@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Container, Section, AwardCard, NewsCard } from '$lib/components';
+	import { Container, Section, AwardCard, NewsCard, Seo } from '$lib/components';
 	import type { Award, News } from '$lib/content/schemas';
 
 	type RecognitionEntry =
@@ -16,10 +16,10 @@
 	} = $props();
 </script>
 
-<svelte:head>
-	<title>Recognition · Saheed Faremi</title>
-	<meta name="description" content="Awards, prizes, and press coverage of Saheed Faremi's work." />
-</svelte:head>
+<Seo
+	title="Recognition · Saheed Faremi"
+	description="Awards and recognition received by Saheed Faremi."
+/>
 
 <Container width="wide">
 	<Section

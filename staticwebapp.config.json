@@ -28,11 +28,5 @@
 		".avif": "image/avif",
 		".webp": "image/webp",
 		".woff2": "font/woff2"
-	},
-	"responseOverrides": {
-		"404": {
-			"rewrite": "/index.html",
-			"statusCode": 200
-		}
 	}
 }

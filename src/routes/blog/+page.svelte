@@ -1,17 +1,14 @@
 <script lang="ts">
-	import { Container, Section, BlogCard } from '$lib/components';
+	import { Container, Section, BlogCard, Seo } from '$lib/components';
 	import type { BlogPost } from '$lib/content/schemas';
 
 	let { data }: { data: { blog: BlogPost[] } } = $props();
 </script>
 
-<svelte:head>
-	<title>Blog · Saheed Faremi</title>
-	<meta
-		name="description"
-		content="Notes on research and engineering by Saheed Faremi. EEG microstates, deep generative models, and the production systems sitting next to them."
-	/>
-</svelte:head>
+<Seo
+	title="Blog · Saheed Faremi"
+	description="Notes on EEG microstate research, deep learning methods, and engineering practice."
+/>
 
 <Container width="wide">
 	<Section
