@@ -5,10 +5,7 @@
 
 	// Grouped site map. Gives every route a reachable entry point from any page, so a
 	// visitor who lands deep or scrolls to the bottom of the home page isn't dead-ended.
-	let {
-		explore = [],
-		about = []
-	}: { explore?: FooterLink[]; about?: FooterLink[] } = $props();
+	let { explore = [], about = [] }: { explore?: FooterLink[]; about?: FooterLink[] } = $props();
 
 	const year = new Date().getFullYear();
 </script>

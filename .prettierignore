@@ -10,6 +10,8 @@ bun.lockb
 
 # Planning docs (hand-formatted tables, leave them alone)
 plan.md
+.plan-*.md
+.ultracode-plan-*.md
 
 # Build artifacts
 /build/
