@@ -25,7 +25,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 9
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -33,10 +33,12 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Type check
+      - name: Check (svelte-check + TS)
         run: pnpm run check
-      - name: Lint
+      - name: Lint (prettier + eslint)
         run: pnpm run lint
+      - name: Build
+        run: pnpm run build
       - name: Install OIDC Client from Core Package
         run: npm install @actions/core@1.6.0 @actions/http-client --legacy-peer-deps --no-save
       - name: Get Id Token
@@ -47,19 +49,22 @@ jobs:
                const coredemo = require('@actions/core')
                return await coredemo.getIDToken()
            result-encoding: string
-      - name: Build And Deploy
+      - name: Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_DUNE_01E76C910 }}
           action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/" # App source code path
-          api_location: "" # No API — adapter-static prerenders static HTML only
-          output_location: "build" # Built app content directory - optional
+          # Build already ran via pnpm on the runner above. Oryx (the Azure
+          # action's built-in builder) does NOT support pnpm and would re-run
+          # npm install on top of the symlinked node_modules, causing ERESOLVE
+          # conflicts. skip_app_build tells it to upload the pre-built build/
+          # folder without running its own install or build.
+          app_location: "build"
+          api_location: ""
+          output_location: ""
+          skip_app_build: true
           github_id_token: ${{ steps.idtoken.outputs.result }}
-          ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
