@@ -38,7 +38,7 @@ jobs:
       - name: Lint
         run: pnpm run lint
       - name: Install OIDC Client from Core Package
-        run: npm install @actions/core@1.6.0 @actions/http-client
+        run: npm install @actions/core@1.6.0 @actions/http-client --legacy-peer-deps --no-save
       - name: Get Id Token
         uses: actions/github-script@v6
         id: idtoken
