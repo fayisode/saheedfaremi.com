@@ -20,16 +20,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true
           lfs: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: '.nvmrc'
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -39,15 +36,17 @@ jobs:
         run: pnpm run lint
       - name: Build
         run: pnpm run build
-      - name: Install OIDC Client from Core Package
-        run: npm install @actions/core@1.6.0 @actions/http-client --legacy-peer-deps --no-save
       - name: Get Id Token
         uses: actions/github-script@v6
         id: idtoken
         with:
+           # github-script@v6 bundles @actions/core (^1.10.0), so no npm
+           # install step is needed. The previous "Install OIDC Client" step
+           # ran npm on top of pnpm's node_modules, which risked polluting the
+           # dependency tree before the deploy step.
            script: |
-               const coredemo = require('@actions/core')
-               return await coredemo.getIDToken()
+               const core = require('@actions/core')
+               return await core.getIDToken()
            result-encoding: string
       - name: Deploy
         id: builddeploy
