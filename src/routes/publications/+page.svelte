@@ -36,15 +36,16 @@
 	);
 
 	// Group the filtered list by year, preserving the descending-year order
-	// already established by the load function's sortByYearDesc.
+	// already established by the load function's sortByYearDesc. Returns an
+	// array of [year, items] pairs sorted by year descending.
 	const grouped = $derived.by(() => {
-		const groups = new Map<number, Publication[]>();
+		const groups: Record<number, Publication[]> = {};
 		for (const p of filtered) {
-			const list = groups.get(p.year);
-			if (list) list.push(p);
-			else groups.set(p.year, [p]);
+			(groups[p.year] ??= []).push(p);
 		}
-		return [...groups.entries()].sort((a, b) => b[0] - a[0]);
+		return Object.entries(groups)
+			.map(([year, items]) => [Number(year), items] as [number, Publication[]])
+			.sort((a, b) => b[0] - a[0]);
 	});
 </script>
 

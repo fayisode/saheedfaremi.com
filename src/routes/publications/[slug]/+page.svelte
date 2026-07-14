@@ -40,6 +40,7 @@
 					: {})
 		}).replace(/</g, '\\u003c')
 	);
+	// eslint-disable-next-line no-useless-escape -- the <\/script> prevents the Svelte compiler from closing the JSON-LD block early
 	const ldScript = $derived(`<script type="application/ld+json">${ldJson}<\/script>`);
 
 	let copied = $state(false);
@@ -63,6 +64,7 @@
 	description={meta.summary ?? `${meta.title} (${meta.authors.join(', ')}, ${meta.year}).`}
 />
 <svelte:head>
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- ldScript is a server-generated JSON-LD string, not user input; the content is escaped via .replace(/</g, '\\u003c') at line 41 -->
 	{@html ldScript}
 </svelte:head>
 

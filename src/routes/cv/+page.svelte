@@ -19,7 +19,6 @@
 	}: {
 		data: {
 			tracks: readonly Track[];
-			defaultTrack: TrackKeyT;
 			experience: Experience[];
 			education: Education[];
 			awards: Award[];
@@ -167,7 +166,11 @@
 		</dl>
 	</Section>
 
-	<Section spacing="tight" eyebrow={`Selected for ${active.label.toLowerCase()}`} labelledById="cv-focus">
+	<Section
+		spacing="tight"
+		eyebrow={`Selected for ${active.label.toLowerCase()}`}
+		labelledById="cv-focus"
+	>
 		<ul class="text-fg-soft mt-6 list-disc space-y-2 pl-5 text-sm">
 			{#each active.highlightFocus as item (item)}<li>{item}</li>{/each}
 		</ul>
