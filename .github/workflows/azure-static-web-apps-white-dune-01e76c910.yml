@@ -40,12 +40,9 @@ jobs:
         uses: actions/github-script@v6
         id: idtoken
         with:
-           # github-script@v6 bundles @actions/core (^1.10.0), so no npm
-           # install step is needed. The previous "Install OIDC Client" step
-           # ran npm on top of pnpm's node_modules, which risked polluting the
-           # dependency tree before the deploy step.
+           # github-script@v6 injects @actions/core as `core` in the script
+           # context automatically — no require() or npm install needed.
            script: |
-               const core = require('@actions/core')
                return await core.getIDToken()
            result-encoding: string
       - name: Deploy
