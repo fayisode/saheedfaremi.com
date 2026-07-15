@@ -36,15 +36,6 @@ jobs:
         run: pnpm run lint
       - name: Build
         run: pnpm run build
-      - name: Get Id Token
-        uses: actions/github-script@v6
-        id: idtoken
-        with:
-           # github-script@v6 injects @actions/core as `core` in the script
-           # context automatically — no require() or npm install needed.
-           script: |
-               return await core.getIDToken()
-           result-encoding: string
       - name: Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -60,7 +51,6 @@ jobs:
           api_location: ""
           output_location: ""
           skip_app_build: true
-          github_id_token: ${{ steps.idtoken.outputs.result }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
