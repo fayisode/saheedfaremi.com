@@ -7,7 +7,7 @@
 <Container width="narrow">
 	<Section spacing="loose" eyebrow="Now" heading="What I'm doing right now.">
 		<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
-			Last updated: July 2026
+			Last updated: August 2026
 		</p>
 
 		<div class="mt-10 space-y-5 text-lg leading-relaxed text-fg">
@@ -19,11 +19,11 @@
 				and more behaviourally predictive than classical clustering.
 			</p>
 
-			<!-- TODO: Saheed, update this section with your current specific task -->
 			<p>
-				Currently working on: <span class="text-fg-soft"
-					>[add the concrete thing on your desk this week]</span
-				>.
+				Currently on the desk: screening studies for the
+				<Link href="https://osf.io/v2w3z" variant="inline">registered systematic review</Link> of autoencoder-based
+				models for scalp EEG (protocol on OSF Registries, with Morteza Akbari and Luca Longo), and extending
+				the Conv-VaDE architecture search beyond the LEMON dataset.
 			</p>
 
 			<p>

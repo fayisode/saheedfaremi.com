@@ -30,19 +30,17 @@ const config = {
 				}
 				throw new Error(`Unexpected 404 during prerender: ${message}`);
 			},
-			// /publications/[slug] and /talks/[slug] are declared prerenderable but
-			// their collections (publications, talks) are currently empty — `entries()`
-			// returns []. SvelteKit flags this as "marked prerenderable but not seen
-			// during crawl". 'ignore' is correct here: when Saheed adds his first
-			// publication or talk to src/content/, entries() returns the new slug and
-			// the route prerenders without further config change.
+			// Detail routes prerender one page per content entry via entries(). When a
+			// collection is empty, entries() returns [] and SvelteKit flags the route
+			// as "marked prerenderable but not seen during crawl" — 'ignore' keeps
+			// that from failing the build when a collection has no entries yet.
 			handleUnseenRoutes: 'ignore'
 		},
 		csp: {
 			mode: 'hash',
 			directives: {
 				'default-src': ['self'],
-				'script-src': ['self'],
+				'script-src': ['self', 'https://plausible.io'],
 				'style-src': ['self', 'unsafe-inline'],
 				'img-src': ['self', 'data:', 'https:'],
 				'font-src': ['self', 'data:'],

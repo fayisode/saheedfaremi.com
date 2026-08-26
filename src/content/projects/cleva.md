@@ -2,7 +2,7 @@
 title: Cleva
 domain: other
 status: draft
-featured: true
+featured: false
 role: Engineer
 tech:
   - TypeScript

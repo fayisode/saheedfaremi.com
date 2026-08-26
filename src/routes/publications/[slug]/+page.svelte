@@ -87,7 +87,9 @@
 		{#if meta.abstract}
 			<div class="rounded-card border-border bg-bg-soft mt-10 max-w-3xl border p-6">
 				<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Abstract</p>
-				<p class="text-fg mt-3 leading-relaxed">{meta.abstract}</p>
+				{#each meta.abstract.split(/\n{2,}/) as paragraph, i (i)}
+					<p class="text-fg mt-3 leading-relaxed">{paragraph}</p>
+				{/each}
 			</div>
 		{/if}
 

@@ -13,6 +13,11 @@
 		-->
 		<script src="/theme-init.js"></script>
 
+		<!-- Privacy-friendly analytics (Plausible). No cookies, no personal data;
+		     deferred so it never blocks first paint. Covered by script-src +
+		     connect-src entries for plausible.io in svelte.config.js. -->
+		<script defer data-domain="saheedfaremi.com" src="https://plausible.io/js/script.js"></script>
+
 		<!-- JSON-LD Person schema. Search engines + LLM crawlers use this to
 		     understand who the page describes. Update the URL once the domain is
 		     wired; sameAs lists every authoritative profile that confirms identity. -->
