@@ -48,7 +48,7 @@
 			{#if draft}
 				<span
 					class="font-mono text-fg-muted bg-bg-soft rounded-pill border-border ml-2 inline-block
-						border px-2 py-0.5 align-middle text-[10px] tracking-[0.2em] uppercase">Draft</span
+						border px-2 py-0.5 align-middle text-xs tracking-[0.2em] uppercase">Draft</span
 				>
 			{/if}
 		</h3>

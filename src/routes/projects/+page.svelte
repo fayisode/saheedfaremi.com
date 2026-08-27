@@ -70,7 +70,7 @@
 			Each entry below summarises a project shipped or in-progress. Entries marked
 			<span
 				class="font-mono text-fg-muted bg-bg-soft rounded-pill border-border mx-1 inline-block
-					border px-2 py-0.5 align-middle text-[10px] tracking-[0.2em] uppercase">Draft</span
+					border px-2 py-0.5 align-middle text-xs tracking-[0.2em] uppercase">Draft</span
 			>
 			are first-pass descriptions drawn from public repos and will be edited as I verify each one.
 		</p>

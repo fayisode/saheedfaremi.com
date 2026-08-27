@@ -12,6 +12,7 @@
 <Seo
 	title={`${meta.title} · Awards · Saheed Faremi`}
 	description={meta.summary ?? `${meta.title}. ${meta.organization}, ${meta.year}.`}
+	image={`https://saheedfaremi.com/og/awards-${meta.slug}.png`}
 />
 
 <Container width="default">

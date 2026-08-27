@@ -32,7 +32,11 @@
 	});
 </script>
 
-<Seo title={`${meta.title} · Blog · Saheed Faremi`} {description} />
+<Seo
+	title={`${meta.title} · Blog · Saheed Faremi`}
+	{description}
+	image={`https://saheedfaremi.com/og/blog-${meta.slug}.png`}
+/>
 
 <Container width="default">
 	<Section spacing="loose" labelledById="post-heading">

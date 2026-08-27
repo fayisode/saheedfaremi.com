@@ -45,8 +45,25 @@
 	// the toggle on close) so keyboard users aren't stranded behind the panel.
 	$effect(() => {
 		if (!open) return;
+		const focusables = () =>
+			Array.from(mobileNav?.querySelectorAll<HTMLElement>('a[href], button') ?? []);
 		const onKey = (e: KeyboardEvent) => {
 			if (e.key === 'Escape') open = false;
+			if (e.key !== 'Tab') return;
+			// Focus trap: keep Tab/Shift-Tab cycling inside the open menu so
+			// focus can't escape into the scroll-locked page behind it.
+			const items = focusables();
+			if (items.length === 0) return;
+			const first = items[0];
+			const last = items[items.length - 1];
+			const active = document.activeElement;
+			if (e.shiftKey && (active === first || !mobileNav?.contains(active))) {
+				e.preventDefault();
+				last.focus();
+			} else if (!e.shiftKey && (active === last || !mobileNav?.contains(active))) {
+				e.preventDefault();
+				first.focus();
+			}
 		};
 		window.addEventListener('keydown', onKey);
 		const prevOverflow = document.body.style.overflow;

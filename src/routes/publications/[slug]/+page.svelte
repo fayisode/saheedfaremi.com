@@ -62,6 +62,7 @@
 <Seo
 	title={`${meta.title} · Publications · Saheed Faremi`}
 	description={meta.summary ?? `${meta.title} (${meta.authors.join(', ')}, ${meta.year}).`}
+	image={`https://saheedfaremi.com/og/publications-${meta.slug}.png`}
 />
 <svelte:head>
 	<!-- eslint-disable-next-line svelte/no-at-html-tags -- ldScript is a server-generated JSON-LD string, not user input; the content is escaped via .replace(/</g, '\\u003c') at line 41 -->

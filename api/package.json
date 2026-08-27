@@ -1,0 +1,14 @@
+{
+	"name": "saheedfaremi-api",
+	"version": "1.0.0",
+	"description": "Managed API for saheedfaremi.com (contact form).",
+	"type": "module",
+	"main": "src/functions/*.js",
+	"scripts": {
+		"start": "func start",
+		"test": "echo \"no tests yet\""
+	},
+	"dependencies": {
+		"@azure/functions": "^4.0.0"
+	}
+}

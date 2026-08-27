@@ -24,14 +24,15 @@
 		}
 	}
 
-	// Form state for the static demo. POST submission is intentionally inert
-	// for now; a future Azure Function (or any same-origin POST endpoint) can
-	// be wired by changing the form's `action` attribute. The mailto: button
-	// + copy widget cover the "I just want to reach Saheed" case without any
-	// server.
+	// Form state. Posts to the managed API (/api/contact); if the endpoint is
+	// unavailable or errors, falls back to opening the visitor's mail client
+	// prefilled, so the form can never dead-end.
 	let name = $state('');
 	let email = $state('');
 	let message = $state('');
+	let website = $state(''); // honeypot: humans never see or fill this
+	type SendState = 'idle' | 'sending' | 'sent' | 'error';
+	let sendState = $state<SendState>('idle');
 
 	const mailtoHref = $derived.by(() => {
 		const subject = name ? `Hello from ${name}` : 'Hello from your site';
@@ -41,6 +42,27 @@
 		if (body) params.set('body', body);
 		return `mailto:${EMAIL}?${params.toString()}`;
 	});
+
+	function fallbackToMailClient() {
+		window.location.href = mailtoHref;
+	}
+
+	async function sendMessage(event: SubmitEvent) {
+		event.preventDefault();
+		if (sendState === 'sending') return;
+		sendState = 'sending';
+		try {
+			const res = await fetch('/api/contact', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ name, email, message, website })
+			});
+			if (!res.ok) throw new Error(String(res.status));
+			sendState = 'sent';
+		} catch {
+			sendState = 'error';
+		}
+	}
 </script>
 
 <Seo
@@ -77,8 +99,15 @@
 			</Button>
 		</div>
 
-		<!-- Slow path: a structured note. Static for now (no Function endpoint). -->
-		<form class="mt-14 max-w-2xl space-y-6" action={mailtoHref} method="get">
+		<!-- Slow path: a structured note, posted to /api/contact (managed API). -->
+		<form class="mt-14 max-w-2xl space-y-6" onsubmit={sendMessage}>
+			<!-- Honeypot: invisible to humans, irresistible to bots. -->
+			<div class="hidden" aria-hidden="true">
+				<label>
+					Website
+					<input type="text" name="website" bind:value={website} tabindex="-1" autocomplete="off" />
+				</label>
+			</div>
 			<div class="grid gap-6 sm:grid-cols-2">
 				<label class="block">
 					<span class="font-mono text-fg-soft text-xs tracking-[0.2em] uppercase">Your name</span>
@@ -117,10 +146,25 @@
 				></textarea>
 			</label>
 			<div class="flex flex-wrap items-center gap-3">
-				<Button type="submit" variant="primary" size="md">Open in mail client</Button>
-				<span class="text-fg-muted text-sm">
-					This form opens your default email app prefilled. No data is sent to a server.
-				</span>
+				<Button type="submit" variant="primary" size="md" disabled={sendState === 'sending'}>
+					{sendState === 'sending' ? 'Sending…' : 'Send message'}
+				</Button>
+				{#if sendState === 'sent'}
+					<p class="text-accent text-sm" role="status">
+						Sent. I read everything and reply personally.
+					</p>
+				{:else if sendState === 'error'}
+					<p class="text-fg-soft text-sm" role="alert">
+						The direct line hiccuped.
+						<button type="button" class="text-accent underline" onclick={fallbackToMailClient}>
+							Open your mail client instead
+						</button>
+					</p>
+				{:else}
+					<span class="text-fg-muted text-sm">
+						Goes straight to my inbox. Nothing is stored on the way.
+					</span>
+				{/if}
 			</div>
 		</form>
 

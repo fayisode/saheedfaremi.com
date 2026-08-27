@@ -13,7 +13,15 @@
 		<div class="aspect-[4/5] overflow-hidden rounded-card border border-border bg-bg-soft">
 			<!-- eager: the portrait sits just below the hero and is often in the first
 			     viewport on large screens; lazy-loading it caused a visible load lag. -->
-			<img {src} {alt} class="h-full w-full object-cover" loading="eager" decoding="async" />
+			<img
+				{src}
+				{alt}
+				width="665"
+				height="832"
+				class="h-full w-full object-cover"
+				loading="eager"
+				decoding="async"
+			/>
 		</div>
 	{:else}
 		<!--

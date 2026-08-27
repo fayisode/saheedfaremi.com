@@ -13,7 +13,11 @@
 	);
 </script>
 
-<Seo title={`${meta.title} · Projects · Saheed Faremi`} {description} />
+<Seo
+	title={`${meta.title} · Projects · Saheed Faremi`}
+	{description}
+	image={`https://saheedfaremi.com/og/projects-${meta.slug}.png`}
+/>
 
 <Container width="default">
 	<Section spacing="loose" labelledById="project-heading">

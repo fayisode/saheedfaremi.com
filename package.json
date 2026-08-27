@@ -18,7 +18,8 @@
 		"format": "prettier --write .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run && npm run test:e2e",
-		"test:e2e": "playwright install && playwright test"
+		"test:e2e": "playwright install && playwright test",
+		"og": "node scripts/generate-og-images.mjs"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^2.0.4",

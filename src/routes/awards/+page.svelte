@@ -44,7 +44,9 @@
 				{#each data.entries as entry (entry.type + entry.data.slug)}
 					<IndexRow
 						number={numbers.get(entry.type + entry.data.slug) ?? 0}
-						href={entry.type === 'award' ? `/awards/${entry.data.slug}` : `/news/${entry.data.slug}`}
+						href={entry.type === 'award'
+							? `/awards/${entry.data.slug}`
+							: `/news/${entry.data.slug}`}
 						title={entry.data.title}
 					>
 						{#snippet overline()}{entry.year}{/snippet}

@@ -47,12 +47,7 @@
 	     via their own <svelte:head> if richer cards are needed later. -->
 	<meta property="og:type" content="website" />
 	<meta property="og:site_name" content="Saheed Faremi" />
-	<meta property="og:image" content="https://saheedfaremi.com/og-image.png" />
-	<meta property="og:image:type" content="image/png" />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:image" content="https://saheedfaremi.com/og-image.png" />
 	<link rel="alternate" type="application/atom+xml" title="Saheed Faremi" href="/rss.xml" />
 </svelte:head>
 
