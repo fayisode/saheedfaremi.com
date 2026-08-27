@@ -1,10 +1,6 @@
 <script lang="ts">
 	import { Container, Section, SocialLinks, Seo } from '$lib/components';
-	import TrackSelector from '$lib/cv/TrackSelector.svelte';
-	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
-	import { DEFAULT_TRACK, type Track, type TrackKeyT } from '$lib/cv/tracks';
+	import type { Track } from '$lib/cv/tracks';
 	import type {
 		Award,
 		Education,
@@ -30,26 +26,13 @@
 
 	const EMAIL = 'saheedfaremi@gmail.com';
 
-	// Track selector. The page is prerendered to one static file, so track state is a
-	// pure render concern: default track is server-rendered, then on the client the
-	// effect reads ?track for deep links and the buttons drive state + the querystring.
-	let activeTrack = $state<TrackKeyT>(DEFAULT_TRACK);
-	$effect(() => {
-		const q = page.url.searchParams.get('track');
-		const match = data.tracks.find((t) => t.key === q);
-		if (match) activeTrack = match.key;
-	});
-	const active = $derived(data.tracks.find((t) => t.key === activeTrack) ?? data.tracks[0]);
-
-	function selectTrack(key: TrackKeyT) {
-		activeTrack = key;
-		if (browser) goto(`?track=${key}`, { replaceState: false, noScroll: true, keepFocus: true });
-	}
+	// Single Data Scientist profile: one track, no selector.
+	const active = $derived(data.tracks[0]);
 </script>
 
 <Seo
 	title="CV · Saheed Faremi"
-	description="Curriculum vitae for Saheed Faremi: PhD-track EEG-microstate researcher and multi-domain software engineer. Switch emphasis between research, data science, and software."
+	description="Curriculum vitae for Saheed Faremi: data scientist shipping production machine-learning and LLM systems, with the software-engineering depth to own them end to end."
 />
 
 <Container width="default" class="cv-page">
@@ -59,7 +42,7 @@
 			Saheed Faremi
 		</h1>
 		<p class="text-fg-soft mt-3 text-lg">
-			PhD-track EEG-microstate researcher · multi-domain software engineer
+			Data scientist · production ML & LLM systems, owned end to end
 		</p>
 		<p class="text-fg-soft mt-4 font-mono text-sm">
 			<a class="text-accent" href={`mailto:${EMAIL}`}>{EMAIL}</a>
@@ -67,15 +50,7 @@
 		</p>
 		<SocialLinks class="mt-4" />
 
-		<!-- Track selector: swaps the summary, skills emphasis, and selected work below.
-		     Experience, education, recognition, publications, and talks stay constant. -->
-		<div class="cv-emphasis mt-6">
-			<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Emphasis</p>
-			<div class="mt-2">
-				<TrackSelector tracks={data.tracks} active={activeTrack} onselect={selectTrack} />
-			</div>
-		</div>
-		<p class="text-fg-soft mt-4 max-w-2xl text-sm leading-relaxed">{active.summary}</p>
+		<p class="text-fg-soft mt-6 max-w-2xl text-sm leading-relaxed">{active.summary}</p>
 
 		<div class="mt-6 flex flex-wrap gap-2">
 			<a
@@ -166,11 +141,7 @@
 		</dl>
 	</Section>
 
-	<Section
-		spacing="tight"
-		eyebrow={`Selected for ${active.label.toLowerCase()}`}
-		labelledById="cv-focus"
-	>
+	<Section spacing="tight" eyebrow="Selected work" labelledById="cv-focus">
 		<ul class="text-fg-soft mt-6 list-disc space-y-2 pl-5 text-sm">
 			{#each active.highlightFocus as item (item)}<li>{item}</li>{/each}
 		</ul>
@@ -260,7 +231,6 @@
 		:global(.hero-canvas-frame),
 		:global(header[class*='fixed']),
 		:global(.cv-print-btn),
-		:global(.cv-emphasis),
 		:global(.skip-link),
 		:global(footer),
 		:global(nav[aria-label='Primary']) {

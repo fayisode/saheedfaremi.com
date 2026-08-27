@@ -123,10 +123,13 @@
 			     `text-fg` / `text-fg-soft` tokens and rebalance correctly with the theme. -->
 			<div class="max-w-none space-y-5 text-lg leading-relaxed text-fg">
 				<p>
-					I work in two modes. As a doctoral researcher, I decode recurrent patterns in brain
-					signals, with the goal of detecting disorder-relevant brain states. As an engineer, I
-					design and ship the production systems that under-served users &mdash; geographically,
-					economically, or computationally &mdash; depend on.
+					I am a PhD researcher at University College Cork, supervised by Luca Longo, working on
+					unsupervised deep learning for EEG signal analysis. Before that I completed an MSc in
+					Computer Science (machine-learning concentration) at Technological University Dublin with
+					a 4.0/4.0 GPA, and a BSc in Information Technology at the University of Eswatini.
+					Alongside the doctorate, I work as a data scientist and engineer, shipping the production
+					systems that under-served users &mdash; geographically, economically, or computationally
+					&mdash; depend on.
 				</p>
 				<p>
 					The research: <strong>EEG microstates</strong> are quasi-stable scalp topographies that segment
@@ -137,11 +140,12 @@
 					a representation reliable enough to support the detection of disorder-relevant brain states.
 				</p>
 				<p>
-					On the engineering side, I have delivered production systems across fintech (Curnance), HR
-					technology (Etihuku), healthcare data (HIS Core, Predict-Dx), advisory tooling (Gatsheni
-					Advisory, CFI Eswatini), AI-assisted proposal generation (Cleva, built for Gijima), and
-					learning platforms (Skills Hub, Moodle). Infrastructure for under-served users demands the
-					same rigour as infrastructure for everyone else; in practice, it usually demands more.
+					On the engineering side, I was founding engineer at Curnance, a multi-asset fintech
+					platform where I shipped the admin console, wallet, and KYC subsystems, and a data
+					scientist at Etihuku, where my LLM document-generation pipeline on Azure ML Studio cut
+					manual document creation by 85% across three compliance regions. Infrastructure for
+					under-served users demands the same rigour as infrastructure for everyone else; in
+					practice, it usually demands more.
 				</p>
 				<p>
 					In 2022 I represented Eswatini at the
