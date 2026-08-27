@@ -96,34 +96,31 @@
 		</div>
 
 		<section class="my-auto" aria-labelledby="hero-heading">
-			<p class="font-mono text-fg-soft text-xs tracking-[0.2em] uppercase">
-				Researcher · Engineer · Dublin
-			</p>
-			<h1
-				id="hero-heading"
-				class="font-display text-fg mt-6 text-5xl leading-[0.95] tracking-tight sm:text-7xl
-					md:text-8xl"
-			>
-				Saheed
-				<span class="text-accent block italic">Faremi.</span>
-			</h1>
-			<p class="text-fg mt-8 max-w-xl text-lg leading-relaxed text-balance sm:text-xl">
-				{tagline}
-			</p>
-			<!-- One primary conversion (the CV) plus two audience-specific shortcuts:
-			     publications for academics, research write-up for everyone. -->
-			<div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-				<a
-					href="/cv"
-					class="bg-accent text-bg hover:bg-accent-hover rounded-soft font-mono inline-flex h-10
-						items-center gap-2 px-4 text-sm tracking-wide transition-colors
-						duration-[var(--duration-fast)] focus-visible:outline-2 focus-visible:outline-offset-2
-						focus-visible:outline-accent"
-				>
-					View CV <span aria-hidden="true">→</span>
-				</a>
-				<Link href="/publications" variant="plain">Publications</Link>
-				<Link href="#research" variant="plain">The research</Link>
+			<div class="grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_auto] md:gap-16">
+				<div>
+					<p class="font-mono text-fg-soft text-xs tracking-[0.2em] uppercase">
+						Researcher · Engineer · Dublin
+					</p>
+					<h1
+						id="hero-heading"
+						class="font-display text-fg mt-6 text-5xl leading-[0.95] tracking-tight sm:text-7xl
+							md:text-8xl"
+					>
+						Saheed
+						<span class="text-accent block italic">Faremi.</span>
+					</h1>
+					<p class="text-fg mt-8 max-w-xl text-lg leading-relaxed text-balance sm:text-xl">
+						{tagline}
+					</p>
+				</div>
+
+				<div class="relative mx-auto w-56 sm:w-64 md:mx-0 md:w-72">
+					<div
+						class="bg-accent/20 absolute -inset-3 rounded-[2rem] blur-2xl"
+						aria-hidden="true"
+					></div>
+					<Portrait src={portraitUrl} alt="Saheed Faremi" />
+				</div>
 			</div>
 		</section>
 
