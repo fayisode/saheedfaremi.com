@@ -128,16 +128,16 @@
 					Computer Science (machine-learning concentration) at Technological University Dublin with
 					a 4.0/4.0 GPA, and a BSc in Information Technology at the University of Eswatini.
 					Alongside the doctorate, I work as a data scientist and engineer, shipping the production
-					systems that under-served users &mdash; geographically, economically, or computationally
-					&mdash; depend on.
+					systems that under-served users (geographically, economically, or computationally) depend
+					on.
 				</p>
 				<p>
 					The research: <strong>EEG microstates</strong> are quasi-stable scalp topographies that segment
 					ongoing brain activity into a discrete temporal alphabet. Find the recurrent patterns and you
-					have a candidate indicator. My doctorate asks whether deep generative models &mdash; variational
-					autoencoders with a Gaussian-mixture prior &mdash; can learn a microstate alphabet that is more
-					stable across sessions and more predictive of behaviour than classical clustering. The aim is
-					a representation reliable enough to support the detection of disorder-relevant brain states.
+					have a candidate indicator. My doctorate asks whether deep generative models (variational autoencoders
+					with a Gaussian-mixture prior) can learn a microstate alphabet that is more stable across sessions
+					and more predictive of behaviour than classical clustering. The aim is a representation reliable
+					enough to support the detection of disorder-relevant brain states.
 				</p>
 				<p>
 					On the engineering side, I was founding engineer at Curnance, a multi-asset fintech
@@ -153,10 +153,10 @@
 						href="https://medium.com/@sonirudrakshi99/unesco-india-africa-hackathon-2022-2ec88cea6eb9"
 						variant="inline">UNESCO India-Africa Hackathon</Link
 					>
-					at Gautam Buddha University, Uttar Pradesh. Team <em>Geeks_on_Fire</em> &mdash; five people,
-					five countries &mdash; won problem statement AGRI12 with an AI-assisted voice contact centre
-					that lets farmers without smartphones report issues by phone and receive guidance in their own
-					language. The win earned gold medals and a &#8377;3 lakh team prize.
+					at Gautam Buddha University, Uttar Pradesh. Team <em>Geeks_on_Fire</em> (five people, five countries)
+					won problem statement AGRI12 with an AI-assisted voice contact centre that lets farmers without
+					smartphones report issues by phone and receive guidance in their own language. The win earned
+					gold medals and a &#8377;3 lakh team prize.
 				</p>
 				<p class="text-fg-soft text-base">
 					Based in Dublin, Ireland. Travel for research. <Tag>open to collaboration</Tag>

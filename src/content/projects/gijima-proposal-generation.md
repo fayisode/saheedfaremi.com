@@ -11,7 +11,7 @@ tech:
   - LangChain
   - FAISS
   - Microsoft Graph
-summary: Azure OpenAI (GPT-4) proposal-generation API for Gijima — structured prompting, deterministic pricing, SharePoint as system of record, and RAG contract analysis.
+summary: Azure OpenAI (GPT-4) proposal-generation API for Gijima, with structured prompting, deterministic pricing, SharePoint as the system of record, and RAG contract analysis.
 highlights:
   - FastAPI service generating seven-section client proposals with Azure OpenAI (GPT-4.1) via structured, chain-of-thought prompting and JSON-constrained output
   - 'Deterministic pricing engine: costs computed from data and injected into the prompt, never invented by the LLM'
