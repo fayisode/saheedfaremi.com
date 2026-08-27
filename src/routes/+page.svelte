@@ -123,24 +123,25 @@
 			     `text-fg` / `text-fg-soft` tokens and rebalance correctly with the theme. -->
 			<div class="max-w-none space-y-5 text-lg leading-relaxed text-fg">
 				<p>
-					Two modes. My doctorate decodes recurrent patterns in brain signal toward detecting
-					disorder-relevant brain states. My engineering practice ships the production systems that
-					under-served users (geographically, economically, or computationally) rely on.
+					I work in two modes. As a doctoral researcher, I decode recurrent patterns in brain
+					signals, with the goal of detecting disorder-relevant brain states. As an engineer, I
+					design and ship the production systems that under-served users &mdash; geographically,
+					economically, or computationally &mdash; depend on.
 				</p>
 				<p>
-					The doctoral side: <strong>EEG microstates</strong> are quasi-stable scalp topographies that
-					segment continuous brain signal into a discrete temporal alphabet. Find the recurrent patterns
-					and you have a candidate indicator. The work asks whether deep generative models, variational
-					autoencoders and Gaussian-mixture VAEs, can learn a microstate alphabet that's more stable across
-					sessions and more behaviourally predictive than classical clustering. Target: a representation
-					reliable enough to anchor detection of disorder-relevant brain states.
+					The research: <strong>EEG microstates</strong> are quasi-stable scalp topographies that segment
+					ongoing brain activity into a discrete temporal alphabet. Find the recurrent patterns and you
+					have a candidate indicator. My doctorate asks whether deep generative models &mdash; variational
+					autoencoders with a Gaussian-mixture prior &mdash; can learn a microstate alphabet that is more
+					stable across sessions and more predictive of behaviour than classical clustering. The aim is
+					a representation reliable enough to support the detection of disorder-relevant brain states.
 				</p>
 				<p>
-					Production work spans fintech (Curnance), HR (Etihuku), healthcare data (HIS Core,
-					Predict-Dx), advisory tooling (Gatsheni Advisory, CFI Eswatini), AI-assisted proposal
-					generation (Cleva, built for Gijima), and learning systems (Skills Hub, Moodle).
-					Infrastructure for under-served users needs the same engineering rigour as infrastructure
-					for everyone else. It tends to need more.
+					On the engineering side, I have delivered production systems across fintech (Curnance), HR
+					technology (Etihuku), healthcare data (HIS Core, Predict-Dx), advisory tooling (Gatsheni
+					Advisory, CFI Eswatini), AI-assisted proposal generation (Cleva, built for Gijima), and
+					learning platforms (Skills Hub, Moodle). Infrastructure for under-served users demands the
+					same rigour as infrastructure for everyone else; in practice, it usually demands more.
 				</p>
 				<p>
 					In 2022 I represented Eswatini at the
@@ -148,10 +149,10 @@
 						href="https://medium.com/@sonirudrakshi99/unesco-india-africa-hackathon-2022-2ec88cea6eb9"
 						variant="inline">UNESCO India-Africa Hackathon</Link
 					>
-					at Gautam Buddha University in Uttar Pradesh. Team
-					<em>Geeks_on_Fire</em> (five countries, five people) won problem statement AGRI12: an AI-assisted
-					voice contact centre that lets farmers without smartphones report issues by phone and receive
-					guidance back in their language. Gold medals and a ₹3 lakh team prize.
+					at Gautam Buddha University, Uttar Pradesh. Team <em>Geeks_on_Fire</em> &mdash; five people,
+					five countries &mdash; won problem statement AGRI12 with an AI-assisted voice contact centre
+					that lets farmers without smartphones report issues by phone and receive guidance in their own
+					language. The win earned gold medals and a &#8377;3 lakh team prize.
 				</p>
 				<p class="text-fg-soft text-base">
 					Based in Dublin, Ireland. Travel for research. <Tag>open to collaboration</Tag>
