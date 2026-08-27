@@ -124,13 +124,15 @@
 			     `text-fg` / `text-fg-soft` tokens and rebalance correctly with the theme. -->
 			<div class="max-w-none space-y-5 text-lg leading-relaxed text-fg">
 				<p>
-					I am a PhD researcher at University College Cork, supervised by Luca Longo, working on
-					unsupervised deep learning for EEG signal analysis. Before that I completed an MSc in
-					Computer Science (machine-learning concentration) at Technological University Dublin with
-					a 4.0/4.0 GPA, and a BSc in Information Technology at the University of Eswatini.
-					Alongside the doctorate, I work as a data scientist and engineer, shipping the production
-					systems that under-served users (geographically, economically, or computationally) depend
-					on.
+					I am a PhD researcher at University College Cork, supervised by Luca Longo at the
+					<Link href="https://lucalongo.eu/LongoLab.php" variant="inline"
+						>Artificial Intelligence and Cognitive Load Lab</Link
+					>, working on unsupervised deep learning for EEG signal analysis. Before that I completed
+					an MSc in Computer Science (machine-learning concentration) at Technological University
+					Dublin with a 4.0/4.0 GPA, and a BSc in Information Technology at the University of
+					Eswatini. Alongside the doctorate, I work as a data scientist and engineer, shipping the
+					production systems that under-served users (geographically, economically, or
+					computationally) depend on.
 				</p>
 				<p>
 					The research: <strong>EEG microstates</strong> are quasi-stable scalp topographies that segment
@@ -266,9 +268,16 @@
 					<p class="text-fg mt-2">
 						<Link href="https://lucalongo.eu" variant="inline">Luca Longo</Link>, UCC
 					</p>
+				</Card>
+				<Card variant="outlined">
+					<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Research group</p>
+					<p class="text-fg mt-2">
+						<Link href="https://lucalongo.eu/LongoLab.php" variant="inline"
+							>Artificial Intelligence and Cognitive Load Lab (AICL)</Link
+						>
+					</p>
 					<p class="text-fg-soft mt-2 text-sm">
-						Part of the
-						<Link href="https://lucalongo.eu/LongoLab.php" variant="inline">Longo Lab</Link>.
+						Member. School of Computer Science and Information Technology, University College Cork.
 					</p>
 				</Card>
 				<Card variant="outlined">
