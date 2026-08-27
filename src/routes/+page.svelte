@@ -19,10 +19,10 @@
 
 	// Hero proof strip. Every figure is the verified number used on the CV.
 	const heroStats = [
-		{ value: '7', label: 'production services shipped' },
-		{ value: '4,832', label: 'models trained (XAI 2026 sweep)' },
-		{ value: '85%', label: 'manual document work cut (Etihuku)' },
-		{ value: '8', label: 'African markets served (Curnance)' }
+		{ value: '7', label: 'production services' },
+		{ value: '4,832', label: 'models trained' },
+		{ value: '85%', label: 'manual work cut' },
+		{ value: '8', label: 'African markets' }
 	];
 
 	// Recent publications surfaced on the Research section. Sort newest-first;
@@ -81,10 +81,9 @@
 		<!-- Top-of-hero credential. Carries the strongest external proof above the
 		     fold instead of a decorative version stamp. Not a <header> element: the
 		     layout's SiteNav is the page's banner landmark (one per page). -->
-		<div class="flex flex-wrap items-center gap-3">
+		<div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
 			<p class="font-mono text-fg-soft text-xs tracking-[0.2em] uppercase">
-				<span class="text-accent" aria-hidden="true">●</span> UNESCO India-Africa 2022 · Gold medal ·
-				PhD-track, University College Cork
+				<span class="text-accent" aria-hidden="true">●</span> UNESCO 2022 Gold · PhD-track, UCC
 			</p>
 			<p
 				class="font-mono text-fg-soft rounded-pill border-border bg-bg-soft/60 inline-flex
@@ -108,7 +107,7 @@
 				Saheed
 				<span class="text-accent block italic">Faremi.</span>
 			</h1>
-			<p class="text-fg mt-8 max-w-xl text-lg leading-relaxed sm:text-xl">
+			<p class="text-fg mt-8 max-w-xl text-lg leading-relaxed text-balance sm:text-xl">
 				{tagline}
 			</p>
 			<!-- One primary conversion (the CV) plus two audience-specific shortcuts:
@@ -132,7 +131,7 @@
 		     same verified figures used on the CV; the trace is the thesis in one glyph. -->
 		<div>
 			<dl
-				class="border-border grid grid-cols-2 gap-x-6 gap-y-4 border-t pt-6 sm:grid-cols-4"
+				class="border-border grid grid-cols-2 gap-x-6 gap-y-5 border-t pt-6 sm:grid-cols-4"
 				aria-label="Key numbers"
 			>
 				{#each heroStats as stat (stat.label)}
@@ -147,37 +146,31 @@
 				{/each}
 			</dl>
 
-			<div class="relative mt-6" aria-hidden="true">
-				<svg
-					viewBox="0 0 1200 64"
-					preserveAspectRatio="none"
-					class="text-accent/70 block h-12 w-full"
-					fill="none"
-				>
-					<g class="hero-eeg">
-						<path
-							d="M0,32 L40,30 L72,36 L104,24 L128,32 L160,30 L192,34 L224,28 L240,10 L256,54 L272,32 L304,30 L336,36 L368,26 L400,32 L432,30 L464,34 L496,28 L512,12 L528,52 L544,32 L576,30 L608,36 L640,24 L672,32 L704,30 L736,34 L768,28 L784,10 L800,54 L816,32 L848,30 L880,36 L912,26 L944,32 L976,30 L1008,34 L1040,28 L1056,12 L1072,52 L1088,32 L1120,30 L1152,36 L1184,26 L1200,32"
-							stroke="currentColor"
-							stroke-width="1.25"
-							stroke-linejoin="round"
-							stroke-linecap="round"
-						/>
-						<path
-							d="M0,32 L40,30 L72,36 L104,24 L128,32 L160,30 L192,34 L224,28 L240,10 L256,54 L272,32 L304,30 L336,36 L368,26 L400,32 L432,30 L464,34 L496,28 L512,12 L528,52 L544,32 L576,30 L608,36 L640,24 L672,32 L704,30 L736,34 L768,28 L784,10 L800,54 L816,32 L848,30 L880,36 L912,26 L944,32 L976,30 L1008,34 L1040,28 L1056,12 L1072,52 L1088,32 L1120,30 L1152,36 L1184,26 L1200,32"
-							stroke="currentColor"
-							stroke-width="1.25"
-							stroke-linejoin="round"
-							stroke-linecap="round"
-							transform="translate(1200,0)"
-						/>
-					</g>
-				</svg>
-				<p
-					class="font-mono text-fg-muted absolute -top-1 right-0 text-[10px] tracking-[0.25em] uppercase"
-				>
-					raw EEG · eyes-closed
-				</p>
-			</div>
+			<svg
+				viewBox="0 0 1200 64"
+				preserveAspectRatio="none"
+				class="text-accent/50 mt-10 block h-10 w-full"
+				fill="none"
+				aria-hidden="true"
+			>
+				<g class="hero-eeg">
+					<path
+						d="M0,32 L40,30 L72,36 L104,24 L128,32 L160,30 L192,34 L224,28 L240,10 L256,54 L272,32 L304,30 L336,36 L368,26 L400,32 L432,30 L464,34 L496,28 L512,12 L528,52 L544,32 L576,30 L608,36 L640,24 L672,32 L704,30 L736,34 L768,28 L784,10 L800,54 L816,32 L848,30 L880,36 L912,26 L944,32 L976,30 L1008,34 L1040,28 L1056,12 L1072,52 L1088,32 L1120,30 L1152,36 L1184,26 L1200,32"
+						stroke="currentColor"
+						stroke-width="1.25"
+						stroke-linejoin="round"
+						stroke-linecap="round"
+					/>
+					<path
+						d="M0,32 L40,30 L72,36 L104,24 L128,32 L160,30 L192,34 L224,28 L240,10 L256,54 L272,32 L304,30 L336,36 L368,26 L400,32 L432,30 L464,34 L496,28 L512,12 L528,52 L544,32 L576,30 L608,36 L640,24 L672,32 L704,30 L736,34 L768,28 L784,10 L800,54 L816,32 L848,30 L880,36 L912,26 L944,32 L976,30 L1008,34 L1040,28 L1056,12 L1072,52 L1088,32 L1120,30 L1152,36 L1184,26 L1200,32"
+						stroke="currentColor"
+						stroke-width="1.25"
+						stroke-linejoin="round"
+						stroke-linecap="round"
+						transform="translate(1200,0)"
+					/>
+				</g>
+			</svg>
 		</div>
 	</Container>
 </div>
