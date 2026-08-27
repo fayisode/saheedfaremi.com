@@ -17,12 +17,13 @@
 
 	const tagline = 'Researcher of the brain. Engineer of the systems people rely on.';
 
-	// Hero proof strip. Every figure is the verified number used on the CV.
-	const heroStats = [
-		{ value: '7', label: 'production services' },
-		{ value: '4,832', label: 'models trained' },
-		{ value: '85%', label: 'manual work cut' },
-		{ value: '8', label: 'African markets' }
+	// Hero credential strip. Named institutions and outcomes, not abstract
+	// counts: each name carries its own context for the reader.
+	const heroCredentials = [
+		{ label: 'Published', names: 'Brain Informatics · IEEE ICTAS' },
+		{ label: 'Built', names: 'Curnance · Etihuku · Gijima' },
+		{ label: 'Research', names: 'UCC · AICL Lab' },
+		{ label: 'Recognition', names: 'UNESCO Gold · Google NLP Hack' }
 	];
 
 	// Recent publications surfaced on the Research section. Sort newest-first;
@@ -127,21 +128,19 @@
 		<!-- Bottom band: proof stats above a drifting EEG trace. The numbers are the
 		     same verified figures used on the CV; the trace is the thesis in one glyph. -->
 		<div>
-			<dl
+			<div
 				class="border-border grid grid-cols-2 gap-x-6 gap-y-5 border-t pt-6 sm:grid-cols-4"
-				aria-label="Key numbers"
+				aria-label="Credentials"
 			>
-				{#each heroStats as stat (stat.label)}
+				{#each heroCredentials as group (group.label)}
 					<div>
-						<dd class="font-display text-fg text-2xl tracking-tight sm:text-3xl">
-							{stat.value}
-						</dd>
-						<dt class="font-mono text-fg-muted mt-1 text-[11px] tracking-[0.15em] uppercase">
-							{stat.label}
-						</dt>
+						<p class="font-mono text-fg-muted text-[11px] tracking-[0.15em] uppercase">
+							{group.label}
+						</p>
+						<p class="text-fg mt-2 text-sm leading-relaxed">{group.names}</p>
 					</div>
 				{/each}
-			</dl>
+			</div>
 
 			<svg
 				viewBox="0 0 1200 64"
