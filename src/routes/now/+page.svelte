@@ -29,7 +29,9 @@
 			<p>
 				Recent: the Conv-VaDE paper was presented at
 				<Link href="https://xai2026.ufc.br" variant="inline">XAI 2026 in Fortaleza, Brazil</Link> (July
-				2026). A Brain Informatics paper is under review.
+				2026), and the full Conv-VaDE study is now published in
+				<Link href="https://doi.org/10.1186/s40708-026-00327-9" variant="inline">Brain Informatics</Link>
+				(August 2026).
 			</p>
 
 			<p>Based in Dublin, Ireland. I travel for research.</p>

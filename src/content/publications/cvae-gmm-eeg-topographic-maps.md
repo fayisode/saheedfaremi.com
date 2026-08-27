@@ -5,8 +5,10 @@ authors:
   - Saheed Faremi
   - Luca Longo
 year: 2026
-kind: preprint
-venue: Brain Informatics (under review)
+kind: journal
+venue: Brain Informatics
+doi: 10.1186/s40708-026-00327-9
+url: https://doi.org/10.1186/s40708-026-00327-9
 summary: A Convolutional Variational Deep Embedding (Conv-VaDE) for EEG microstate analysis, with polarity-invariance preserved through sign-flip augmentation and evaluated against ModKMeans on the LEMON dataset.
 abstract: |
   EEG microstate analysis segments continuous brain activity into brief, quasi-stable

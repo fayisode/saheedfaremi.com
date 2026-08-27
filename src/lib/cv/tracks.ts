@@ -47,7 +47,7 @@ const RAW_TRACKS: Track[] = [
 		key: 'research',
 		label: 'Research',
 		summary:
-			'PhD researcher at University College Cork (supervised by Luca Longo) working on unsupervised deep learning for EEG signal analysis: variational autoencoders and Gaussian-mixture models for interpretable EEG microstate discovery. MSc in Computer Science (machine-learning concentration), 4.0/4.0 GPA. IEEE-published, with work under review at Brain Informatics.',
+			'PhD researcher at University College Cork (supervised by Luca Longo) working on unsupervised deep learning for EEG signal analysis: variational autoencoders and Gaussian-mixture models for interpretable EEG microstate discovery. MSc in Computer Science (machine-learning concentration), 4.0/4.0 GPA. published in IEEE and Brain Informatics.',
 		skillGroups: [
 			{ group: 'Core', items: ['Python', 'PyTorch', 'TensorFlow', 'scikit-learn', 'MATLAB'] },
 			{
@@ -71,7 +71,7 @@ const RAW_TRACKS: Track[] = [
 		],
 		featuredProjects: [
 			'Interpretable EEG Microstate Discovery via Variational Deep Embedding (XAI-2026, late-breaking work)',
-			'Integrating Convolutional VAE and GMM for clustering of EEG topographic maps (Brain Informatics, under review)',
+			'Integrating Convolutional VAE and GMM for clustering of EEG topographic maps (Brain Informatics, 2026)',
 			'MSc thesis: optimising EEG signal clustering with an unsupervised CNN-VAE and GMM',
 			'Machine Learning Models for Predicting Malaria Among Children Under Five in Nigeria (IEEE ICTAS 2024)'
 		],
