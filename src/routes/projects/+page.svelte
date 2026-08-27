@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Container, Section, ProjectCard, Seo } from '$lib/components';
+	import { Container, Section, IndexRow, Tag, Link, Seo } from '$lib/components';
 	import type { Project } from '$lib/content/schemas';
 
 	let { data }: { data: { projects: Project[] } } = $props();
@@ -45,6 +45,13 @@
 			return a.title.localeCompare(b.title);
 		})
 	);
+
+	// Continuous descending numbering across the filtered list.
+	const numbers = $derived(new Map(sorted.map((p, i) => [p.slug, sorted.length - i])));
+
+	function hasLinks(p: Project): boolean {
+		return Boolean(p.links.live || p.links.repo || p.links.caseStudy);
+	}
 </script>
 
 <Seo
@@ -92,11 +99,44 @@
 			{/each}
 		</div>
 
-		<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+		<ol class="divide-border border-border mt-12 divide-y border-t">
 			{#each sorted as project (project.slug)}
-				<ProjectCard {project} />
+				<IndexRow
+					number={numbers.get(project.slug) ?? 0}
+					href={`/projects/${project.slug}`}
+					title={project.title}
+					draft={project.status === 'draft'}
+				>
+					{#snippet overline()}{project.role ?? ''}{/snippet}
+					{#snippet subline()}{project.summary ?? ''}{/snippet}
+					<div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+						<Tag>{project.domain}</Tag>
+						{#if project.featured}
+							<Tag variant="accent">featured</Tag>
+						{/if}
+						{#if hasLinks(project)}
+							<span class="font-mono text-fg-muted text-[10px] tracking-[0.2em] uppercase"
+								>Links</span
+							>
+						{/if}
+						{#if project.links.live}
+							<Link href={project.links.live} variant="inline">Live site</Link>
+						{/if}
+						{#if project.links.repo}
+							<Link href={project.links.repo} variant="inline">Code</Link>
+						{/if}
+						{#if project.links.caseStudy}
+							<Link href={project.links.caseStudy} variant="inline">Case study</Link>
+						{/if}
+					</div>
+					{#if project.tech.length}
+						<p class="font-mono text-fg-muted mt-3 text-xs leading-relaxed">
+							{project.tech.join(' · ')}
+						</p>
+					{/if}
+				</IndexRow>
 			{/each}
-		</div>
+		</ol>
 
 		{#if sorted.length === 0}
 			<p class="text-fg-muted mt-12 text-center text-sm">No projects match the current filter.</p>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { Container, Section, Tag, Link, Button, Seo } from '$lib/components';
+	import { Container, Section, IndexRow, Tag, Link, Button, Seo } from '$lib/components';
 	import { toBibtex } from '$lib/content/loader';
 	import type { Publication } from '$lib/content/schemas';
 
@@ -156,92 +156,71 @@
 						</h2>
 						<ol class="divide-border divide-y">
 							{#each items as publication (publication.slug)}
-								{@const isDraft = publication.status === 'draft'}
-								<li class="flex gap-4 py-6 sm:gap-8">
-									<span
-										class="font-mono text-fg-muted w-8 shrink-0 pt-1 text-right text-sm select-none"
-										aria-hidden="true">{numbers.get(publication.slug)}</span
-									>
-									<div class="min-w-0 flex-1">
-										<p class="font-mono text-fg-muted text-xs tracking-[0.05em]">
-											{publication.authors.join(', ')}
-										</p>
-										<h3 class="mt-1.5">
-											<a
-												href={`/publications/${publication.slug}`}
-												class="font-display text-fg hover:text-accent text-lg leading-snug tracking-tight
-													transition-colors duration-[var(--duration-fast)] focus-visible:outline-2
-													focus-visible:outline-offset-2 focus-visible:outline-accent sm:text-xl"
+								<IndexRow
+									number={numbers.get(publication.slug) ?? 0}
+									href={`/publications/${publication.slug}`}
+									title={publication.title}
+									draft={publication.status === 'draft'}
+								>
+									{#snippet overline()}{publication.authors.join(', ')}{/snippet}
+									{#snippet subline()}
+										{#if publication.venue}<em>{publication.venue}</em>,{/if}
+										{publication.year}
+									{/snippet}
+									<div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+										<Tag>{publication.kind}</Tag>
+										{#if hasLinks(publication)}
+											<span class="font-mono text-fg-muted text-[10px] tracking-[0.2em] uppercase"
+												>Available</span
 											>
-												{publication.title}
-											</a>
-											{#if isDraft}
-												<span
-													class="font-mono text-fg-muted bg-bg-soft rounded-pill border-border ml-2 inline-block
-														border px-2 py-0.5 align-middle text-[10px] tracking-[0.2em] uppercase">Draft</span
-												>
-											{/if}
-										</h3>
-										<p class="text-fg-soft mt-1 text-sm">
-											{#if publication.venue}<em>{publication.venue}</em>,{/if}
-											{publication.year}
-										</p>
-										<div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
-											<Tag>{publication.kind}</Tag>
-											{#if hasLinks(publication)}
-												<span class="font-mono text-fg-muted text-[10px] tracking-[0.2em] uppercase"
-													>Available</span
-												>
-											{/if}
-											{#if publication.doi}
-												<Link href={`https://doi.org/${publication.doi}`} variant="inline">DOI</Link
-												>
-											{/if}
-											{#if publication.url}
-												<Link href={publication.url} variant="inline"
-													>{linkLabel(publication.url)}</Link
-												>
-											{/if}
-											{#if publication.pdf}
-												<Link href={publication.pdf} variant="inline">PDF</Link>
-											{/if}
-											{#if publication.code}
-												<Link href={publication.code} variant="inline">Code</Link>
-											{/if}
-										</div>
-										{#if publication.tags.length}
-											<p class="font-mono text-fg-muted mt-3 text-xs leading-relaxed">
-												{publication.tags.join(' · ')}
-											</p>
 										{/if}
-										<details class="group/bib mt-3">
-											<summary
-												class="font-mono text-fg-muted hover:text-fg inline-flex cursor-pointer items-center
+										{#if publication.doi}
+											<Link href={`https://doi.org/${publication.doi}`} variant="inline">DOI</Link>
+										{/if}
+										{#if publication.url}
+											<Link href={publication.url} variant="inline"
+												>{linkLabel(publication.url)}</Link
+											>
+										{/if}
+										{#if publication.pdf}
+											<Link href={publication.pdf} variant="inline">PDF</Link>
+										{/if}
+										{#if publication.code}
+											<Link href={publication.code} variant="inline">Code</Link>
+										{/if}
+									</div>
+									{#if publication.tags.length}
+										<p class="font-mono text-fg-muted mt-3 text-xs leading-relaxed">
+											{publication.tags.join(' · ')}
+										</p>
+									{/if}
+									<details class="group/bib mt-3">
+										<summary
+											class="font-mono text-fg-muted hover:text-fg inline-flex cursor-pointer items-center
 													gap-1 text-xs tracking-[0.15em] uppercase transition-colors
 													duration-[var(--duration-fast)] focus-visible:outline-2
 													focus-visible:outline-offset-2 focus-visible:outline-accent"
+										>
+											<span class="group-open/bib:hidden">BibTeX ↓</span>
+											<span class="hidden group-open/bib:inline">BibTeX ↑</span>
+										</summary>
+										<div class="rounded-card border-border bg-bg-soft relative mt-2 border p-4">
+											<Button
+												variant="ghost"
+												size="sm"
+												onclick={() => copyBibtex(publication.slug, bibtexOf(publication))}
+												class="absolute top-3 right-3"
+												aria-live="polite"
 											>
-												<span class="group-open/bib:hidden">BibTeX ↓</span>
-												<span class="hidden group-open/bib:inline">BibTeX ↑</span>
-											</summary>
-											<div class="rounded-card border-border bg-bg-soft relative mt-2 border p-4">
-												<Button
-													variant="ghost"
-													size="sm"
-													onclick={() => copyBibtex(publication.slug, bibtexOf(publication))}
-													class="absolute top-3 right-3"
-													aria-live="polite"
-												>
-													{copiedSlug === publication.slug ? 'Copied ✓' : 'Copy'}
-												</Button>
-												<pre
-													class="text-fg-soft overflow-x-auto font-mono text-xs leading-relaxed">{bibtexOf(
-														publication
-													)}</pre>
-											</div>
-										</details>
-									</div>
-								</li>
+												{copiedSlug === publication.slug ? 'Copied ✓' : 'Copy'}
+											</Button>
+											<pre
+												class="text-fg-soft overflow-x-auto font-mono text-xs leading-relaxed">{bibtexOf(
+													publication
+												)}</pre>
+										</div>
+									</details>
+								</IndexRow>
 							{/each}
 						</ol>
 					</section>

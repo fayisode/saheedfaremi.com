@@ -1,8 +1,11 @@
 <script lang="ts">
-	import { Container, Section, TalkCard, Seo } from '$lib/components';
+	import { Container, Section, IndexRow, Link, Seo } from '$lib/components';
 	import type { Talk } from '$lib/content/schemas';
 
 	let { data }: { data: { talks: Talk[] } } = $props();
+
+	// Continuous descending numbering, newest first.
+	const numbers = $derived(new Map(data.talks.map((t, i) => [t.slug, data.talks.length - i])));
 </script>
 
 <Seo
@@ -23,11 +26,31 @@
 				will appear here when given.
 			</p>
 		{:else}
-			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+			<ol class="divide-border border-border mt-12 divide-y border-t">
 				{#each data.talks as talk (talk.slug)}
-					<TalkCard {talk} />
+					<IndexRow
+						number={numbers.get(talk.slug) ?? 0}
+						href={`/talks/${talk.slug}`}
+						title={talk.title}
+					>
+						{#snippet overline()}{talk.year}{/snippet}
+						{#snippet subline()}{talk.event}{talk.location ? ` · ${talk.location}` : ''}{/snippet}
+						{#if talk.url || talk.recording || talk.slides}
+							<div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+								{#if talk.url}
+									<Link href={talk.url} variant="inline">Event</Link>
+								{/if}
+								{#if talk.slides}
+									<Link href={talk.slides} variant="inline">Slides</Link>
+								{/if}
+								{#if talk.recording}
+									<Link href={talk.recording} variant="inline">Recording</Link>
+								{/if}
+							</div>
+						{/if}
+					</IndexRow>
 				{/each}
-			</div>
+			</ol>
 		{/if}
 	</Section>
 </Container>

@@ -1,8 +1,11 @@
 <script lang="ts">
-	import { Container, Section, BlogCard, Seo } from '$lib/components';
+	import { Container, Section, IndexRow, Link, Seo } from '$lib/components';
 	import type { BlogPost } from '$lib/content/schemas';
 
 	let { data }: { data: { blog: BlogPost[] } } = $props();
+
+	// Continuous descending numbering, newest post first.
+	const numbers = $derived(new Map(data.blog.map((p, i) => [p.slug, data.blog.length - i])));
 </script>
 
 <Seo
@@ -24,11 +27,31 @@
 		{#if data.blog.length === 0}
 			<p class="text-fg-muted mt-12 text-sm">No posts yet.</p>
 		{:else}
-			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+			<ol class="divide-border border-border mt-12 divide-y border-t">
 				{#each data.blog as post (post.slug)}
-					<BlogCard {post} />
+					<IndexRow
+						number={numbers.get(post.slug) ?? 0}
+						href={`/blog/${post.slug}`}
+						title={post.title}
+					>
+						{#snippet overline()}{post.publishedAt}{/snippet}
+						{#snippet subline()}{post.summary ?? ''}{/snippet}
+						<div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+							{#if post.readingTime}
+								<span class="font-mono text-fg-muted text-xs">{post.readingTime} min read</span>
+							{/if}
+							{#if post.repo}
+								<Link href={post.repo} variant="inline">Code</Link>
+							{/if}
+						</div>
+						{#if post.tags.length}
+							<p class="font-mono text-fg-muted mt-3 text-xs leading-relaxed">
+								{post.tags.join(' · ')}
+							</p>
+						{/if}
+					</IndexRow>
 				{/each}
-			</div>
+			</ol>
 		{/if}
 	</Section>
 </Container>
