@@ -14,9 +14,10 @@ tech:
   - scikit-learn
 summary: Source segmentation of EEG signals via variational autoencoders, including a GMM-VAE for soft clustering.
 highlights:
-  - Vanilla VAE and Gaussian-mixture VAE architectures for EEG topography embeddings
-  - Microstate sequence analysis on resting-state and task data
-  - Architecture-search experiments to compare latent geometries
+  - 'Conv-VaDE: a convolutional VAE with a learnable GMM latent prior and four polarity-invariance mechanisms (sign-flip augmentation, min-MSE reconstruction, absolute-correlation separation, encoder polarity loss)'
+  - '4,832-model architecture search: 486 configurations per participant (K = 3-20 x latent dim x depth x width), 110 metrics per model, cross-subject ICC consistency analysis'
+  - Trained on a SLURM GPU cluster and an IBM Power9 server with fully seeded, deterministic pipelines; open-source (MIT) with the public sweep dataset
+  - Published in Brain Informatics (2026) and presented at XAI 2026 (late-breaking work + Doctoral Consortium)
 tags:
   - eeg
   - variational-autoencoder
