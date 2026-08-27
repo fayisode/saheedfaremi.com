@@ -78,6 +78,7 @@ export const PublicationSchema = z.object({
 	doi: z.string().optional(),
 	url: z.url().optional(),
 	pdf: z.string().optional(),
+	code: z.url().optional(),
 	abstract: z.string().optional(),
 	bibtex: z.string().optional()
 });

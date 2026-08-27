@@ -8,7 +8,9 @@ authors:
 year: 2026
 kind: conference
 venue: 'XAI 2026 (Late-breaking work + Doctoral Consortium track), Fortaleza, Brazil. arXiv preprint.'
+doi: 10.48550/arXiv.2605.10947
 url: https://arxiv.org/abs/2605.10947
+code: https://github.com/fayisode/microstate-architecture-search
 abstract: |
   A Convolutional Variational Deep Embedding (Conv-VaDE) model for analysing brain
   electrical activity. The approach jointly learns topographic reconstruction and

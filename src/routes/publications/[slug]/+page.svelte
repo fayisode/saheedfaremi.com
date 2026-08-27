@@ -111,6 +111,9 @@
 			{#if meta.pdf}
 				<Link href={meta.pdf} variant="arrow">PDF</Link>
 			{/if}
+			{#if meta.code}
+				<Link href={meta.code} variant="arrow">Code</Link>
+			{/if}
 		</div>
 
 		<details class="rounded-card border-border bg-bg-soft mt-10 max-w-3xl border p-6">

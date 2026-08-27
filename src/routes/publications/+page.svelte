@@ -58,6 +58,26 @@
 		return p.bibtex ?? toBibtex(p);
 	}
 
+	// Human label for an external link, derived from the host so the
+	// availability row reads like a bibliography (arXiv, OSF, Springer, ...).
+	function linkLabel(url: string): string {
+		try {
+			const host = new URL(url).hostname.replace(/^www\./, '');
+			if (host.includes('arxiv.org')) return 'arXiv';
+			if (host.includes('osf.io')) return 'OSF';
+			if (host.includes('springer.com')) return 'Springer';
+			if (host.includes('researchgate.net')) return 'ResearchGate';
+			if (host.includes('doi.org')) return 'Publisher';
+			return 'Read online';
+		} catch {
+			return 'Read online';
+		}
+	}
+
+	function hasLinks(p: Publication): boolean {
+		return Boolean(p.doi || p.url || p.pdf || p.code);
+	}
+
 	// Per-entry copy feedback: tracks which slug was last copied.
 	let copiedSlug = $state<string | null>(null);
 	let timer: ReturnType<typeof setTimeout> | null = null;
@@ -168,16 +188,25 @@
 										</p>
 										<div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
 											<Tag>{publication.kind}</Tag>
-											{#if publication.doi}
-												<Link href={`https://doi.org/${publication.doi}`} variant="inline"
-													>doi:{publication.doi}</Link
+											{#if hasLinks(publication)}
+												<span class="font-mono text-fg-muted text-[10px] tracking-[0.2em] uppercase"
+													>Available</span
 												>
 											{/if}
-											{#if publication.url && !publication.doi}
-												<Link href={publication.url} variant="inline">Read online</Link>
+											{#if publication.doi}
+												<Link href={`https://doi.org/${publication.doi}`} variant="inline">DOI</Link
+												>
+											{/if}
+											{#if publication.url}
+												<Link href={publication.url} variant="inline"
+													>{linkLabel(publication.url)}</Link
+												>
 											{/if}
 											{#if publication.pdf}
 												<Link href={publication.pdf} variant="inline">PDF</Link>
+											{/if}
+											{#if publication.code}
+												<Link href={publication.code} variant="inline">Code</Link>
 											{/if}
 										</div>
 										{#if publication.tags.length}
