@@ -1,9 +1,8 @@
 (function () {
 	try {
 		var stored = localStorage.getItem('theme');
-		var prefersDark =
-			window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-		var theme = stored === 'light' || stored === 'dark' ? stored : prefersDark ? 'dark' : 'light';
+		// Default matches the prerendered HTML/CSS (dark) so first paint never flashes.
+		var theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
 		document.documentElement.setAttribute('data-theme', theme);
 	} catch {
 		document.documentElement.setAttribute('data-theme', 'dark');

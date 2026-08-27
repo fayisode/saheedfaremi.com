@@ -149,7 +149,7 @@
 		<nav
 			bind:this={mobileNav}
 			id="mobile-nav"
-			aria-label="Primary"
+			aria-label="Mobile"
 			class="bg-bg border-border flex flex-col border-t px-4 pb-4 md:hidden"
 			transition:slide={{ duration: reducedMotion ? 0 : 150 }}
 		>

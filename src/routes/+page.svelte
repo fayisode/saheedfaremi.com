@@ -6,6 +6,7 @@
 		Portrait,
 		PulledQuote,
 		DiagramFigure,
+		Card,
 		Tag,
 		Link,
 		SocialLinks,
@@ -251,7 +252,7 @@
 			</div>
 
 			<aside class="space-y-6">
-				<div class="rounded-card border-border bg-bg-soft border p-6">
+				<Card>
 					<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Status</p>
 					<p class="font-display text-fg mt-2 text-2xl">In progress</p>
 					<p class="text-fg-soft mt-3 text-sm">
@@ -259,8 +260,8 @@
 						{recentPublications.length === 1 ? 'publication' : 'publications'} so far across microstate
 						analysis and adjacent ML/health work.
 					</p>
-				</div>
-				<div class="rounded-card border-border border p-6">
+				</Card>
+				<Card variant="outlined">
 					<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Supervisor</p>
 					<p class="text-fg mt-2">
 						<Link href="https://lucalongo.eu" variant="inline">Luca Longo</Link>, UCC
@@ -269,8 +270,8 @@
 						Part of the
 						<Link href="https://lucalongo.eu/LongoLab.php" variant="inline">Longo Lab</Link>.
 					</p>
-				</div>
-				<div class="rounded-card border-border border p-6">
+				</Card>
+				<Card variant="outlined">
 					<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Stack</p>
 					<div class="mt-3 flex flex-wrap gap-2">
 						<Tag>Python</Tag>
@@ -279,9 +280,9 @@
 						<Tag>NumPy</Tag>
 						<Tag>scikit-learn</Tag>
 					</div>
-				</div>
+				</Card>
 
-				<div class="rounded-card border-border bg-bg-soft border p-6">
+				<Card>
 					<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
 						<span class="text-accent" aria-hidden="true">●</span> Support this work
 					</p>
@@ -292,7 +293,7 @@
 					<p class="mt-3">
 						<Link href="mailto:saheedfaremi@gmail.com" variant="arrow">saheedfaremi@gmail.com</Link>
 					</p>
-				</div>
+				</Card>
 			</aside>
 		</div>
 

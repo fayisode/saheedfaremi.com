@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Container, Section, Tag, Link } from '$lib/components';
+	import { Container, Section, Tag, Link, Seo } from '$lib/components';
 	import type { Component } from 'svelte';
 	import type { Award } from '$lib/content/schemas';
 
@@ -9,12 +9,10 @@
 	const Body = $derived(data.Component);
 </script>
 
-<svelte:head>
-	<title>{meta.title} · Awards · Saheed Faremi</title>
-	{#if meta.summary}
-		<meta name="description" content={meta.summary} />
-	{/if}
-</svelte:head>
+<Seo
+	title={`${meta.title} · Awards · Saheed Faremi`}
+	description={meta.summary ?? `${meta.title}. ${meta.organization}, ${meta.year}.`}
+/>
 
 <Container width="default">
 	<Section spacing="loose" labelledById="award-heading">

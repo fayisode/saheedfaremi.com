@@ -5,6 +5,7 @@
 
 <svelte:head>
 	<title>{page.status} · Saheed Faremi</title>
+	<meta name="description" content={`Page not found (${page.status}) on saheedfaremi.com.`} />
 </svelte:head>
 
 <Container width="default">

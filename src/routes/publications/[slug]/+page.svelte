@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { Container, Section, Link, Seo } from '$lib/components';
+	import { Container, Section, Link, Card, Button, Seo } from '$lib/components';
 	import { toBibtex } from '$lib/content/loader';
 	import type { Component } from 'svelte';
 	import type { Publication } from '$lib/content/schemas';
@@ -85,17 +85,19 @@
 		{/if}
 
 		{#if meta.abstract}
-			<div class="rounded-card border-border bg-bg-soft mt-10 max-w-3xl border p-6">
+			<Card class="mt-10 max-w-3xl">
 				<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Abstract</p>
 				{#each meta.abstract.split(/\n{2,}/) as paragraph, i (i)}
 					<p class="text-fg mt-3 leading-relaxed">{paragraph}</p>
 				{/each}
-			</div>
+			</Card>
 		{/if}
 
 		<article class="mt-8 max-w-2xl space-y-5 text-lg leading-relaxed text-fg">
 			{#if Body}
 				<Body />
+			{:else}
+				<p class="text-fg-muted italic">No body content yet for this entry.</p>
 			{/if}
 		</article>
 
@@ -116,17 +118,9 @@
 				Cite (BibTeX)
 			</summary>
 			<div class="mt-4 flex justify-end">
-				<button
-					type="button"
-					onclick={copyBibtex}
-					class="font-mono text-fg-soft hover:text-fg hover:bg-bg rounded-soft border-border
-						inline-flex h-8 items-center gap-2 border px-3 text-xs tracking-[0.15em] uppercase
-						transition-colors duration-[var(--duration-fast)] focus-visible:outline-2
-						focus-visible:outline-offset-2 focus-visible:outline-accent"
-					aria-live="polite"
-				>
+				<Button variant="ghost" size="sm" onclick={copyBibtex} aria-live="polite">
 					{copied ? 'Copied ✓' : 'Copy'}
-				</button>
+				</Button>
 			</div>
 			<pre
 				class="text-fg-soft mt-2 overflow-x-auto font-mono text-xs leading-relaxed">{bibtex}</pre>

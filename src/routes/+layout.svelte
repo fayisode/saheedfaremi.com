@@ -3,6 +3,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import frauncesLatin from '@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url';
 	import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+	import geistMonoLatin from '@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2?url';
 	import { SiteNav, Footer } from '$lib/components';
 
 	let { children } = $props();
@@ -41,16 +42,17 @@
 	<link rel="icon" href={favicon} />
 	<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={frauncesLatin} />
 	<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={interLatin} />
+	<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={geistMonoLatin} />
 	<!-- Open Graph + Twitter · global defaults; individual routes can override
 	     via their own <svelte:head> if richer cards are needed later. -->
 	<meta property="og:type" content="website" />
 	<meta property="og:site_name" content="Saheed Faremi" />
-	<meta property="og:image" content="/og-image.png" />
+	<meta property="og:image" content="https://saheedfaremi.com/og-image.png" />
 	<meta property="og:image:type" content="image/png" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:image" content="/og-image.png" />
+	<meta name="twitter:image" content="https://saheedfaremi.com/og-image.png" />
 	<link rel="alternate" type="application/atom+xml" title="Saheed Faremi" href="/rss.xml" />
 </svelte:head>
 

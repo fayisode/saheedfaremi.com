@@ -34,7 +34,9 @@
 		{/if}
 
 		<article class="mt-10 max-w-2xl space-y-5 text-lg leading-relaxed text-fg">
-			{#if Body}<Body />{/if}
+			{#if Body}<Body />{:else}<p class="text-fg-muted italic">
+					No body content yet for this entry.
+				</p>{/if}
 		</article>
 
 		{#if meta.url}

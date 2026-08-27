@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { SvelteURLSearchParams } from 'svelte/reactivity';
-	import { Container, Section, Tag, Link, Button, SocialLinks, Seo } from '$lib/components';
+	import { Container, Section, Tag, Link, Button, Card, SocialLinks, Seo } from '$lib/components';
 
 	// Replace with whichever address Saheed wants surfaced publicly.
 	const EMAIL = 'saheedfaremi@gmail.com';
@@ -68,21 +68,13 @@
 				<span aria-hidden="true">→</span>
 				Email me directly
 			</a>
-			<button
-				type="button"
-				onclick={copyEmail}
-				class="font-mono text-fg-soft hover:text-fg hover:bg-bg-soft rounded-soft border-border
-					inline-flex h-10 items-center gap-2 border px-4 text-sm tracking-wide
-					transition-colors duration-[var(--duration-fast)] focus-visible:outline-2
-					focus-visible:outline-offset-2 focus-visible:outline-accent"
-				aria-live="polite"
-			>
+			<Button variant="ghost" size="md" onclick={copyEmail} aria-live="polite">
 				{#if copied}
 					Copied ✓
 				{:else}
 					Copy <code class="text-fg">{EMAIL}</code>
 				{/if}
-			</button>
+			</Button>
 		</div>
 
 		<!-- Slow path: a structured note. Static for now (no Function endpoint). -->
@@ -133,7 +125,7 @@
 		</form>
 
 		<div class="mt-14 grid gap-4 sm:grid-cols-2">
-			<div class="rounded-card border-border border p-6">
+			<Card variant="outlined">
 				<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Find me</p>
 				<SocialLinks class="mt-3" />
 				<p class="mt-4 text-sm">
@@ -142,8 +134,8 @@
 						variant="arrow">UNESCO 2022 piece</Link
 					>
 				</p>
-			</div>
-			<div class="rounded-card border-border bg-bg-soft border p-6">
+			</Card>
+			<Card>
 				<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Based in</p>
 				<p class="text-fg mt-2">Dublin, Ireland. Travel for research.</p>
 				<div class="mt-3 flex flex-wrap gap-2">
@@ -151,7 +143,7 @@
 					<Tag>Africa</Tag>
 					<Tag>open to collaboration</Tag>
 				</div>
-			</div>
+			</Card>
 		</div>
 	</Section>
 </Container>

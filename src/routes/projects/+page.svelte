@@ -59,7 +59,7 @@
 		heading="Production work across many verticals."
 		labelledById="projects-heading"
 	>
-		<p class="text-fg-soft mt-4 max-w-3xl text-lg leading-relaxed">
+		<p class="text-fg-soft mt-4 max-w-2xl text-lg leading-relaxed">
 			Each entry below summarises a project shipped or in-progress. Entries marked
 			<span
 				class="font-mono text-fg-muted bg-bg-soft rounded-pill border-border mx-1 inline-block

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Container, Section, Link } from '$lib/components';
+	import { Container, Section, Link, Seo } from '$lib/components';
 	import type { Component } from 'svelte';
 	import type { Talk } from '$lib/content/schemas';
 
@@ -9,12 +9,10 @@
 	const Body = $derived(data.Component);
 </script>
 
-<svelte:head>
-	<title>{meta.title} · Talks · Saheed Faremi</title>
-	{#if meta.summary}
-		<meta name="description" content={meta.summary} />
-	{/if}
-</svelte:head>
+<Seo
+	title={`${meta.title} · Talks · Saheed Faremi`}
+	description={meta.summary ?? `${meta.title}. ${meta.event}, ${meta.year}.`}
+/>
 
 <Container width="default">
 	<Section spacing="loose" labelledById="talk-heading">
@@ -35,6 +33,8 @@
 		<article class="mt-10 max-w-2xl space-y-5 text-lg leading-relaxed text-fg">
 			{#if Body}
 				<Body />
+			{:else}
+				<p class="text-fg-muted italic">No body content yet for this entry.</p>
 			{/if}
 		</article>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Container, Section, SocialLinks, Seo } from '$lib/components';
+	import { Container, Section, SocialLinks, Button, Seo } from '$lib/components';
 	import type { Track } from '$lib/cv/tracks';
 	import type {
 		Award,
@@ -56,25 +56,23 @@
 			<a
 				href={`/${active.pdfFile}`}
 				download
-				class="cv-print-btn font-mono text-fg-soft hover:text-fg hover:bg-bg-soft rounded-soft
-					border-border inline-flex h-9 items-center gap-2 border px-3 text-xs
-					tracking-[0.15em] uppercase transition-colors duration-[var(--duration-fast)]"
+				class="cv-print-btn font-mono text-fg-soft hover:border-accent hover:text-accent rounded-soft
+					border-border inline-flex h-8 items-center gap-2 border px-3 text-xs tracking-wide
+					transition-[background-color,color,border-color] duration-[var(--duration-fast)]
+					focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
 			>
 				Download PDF
 			</a>
-			<button
-				type="button"
-				class="cv-print-btn font-mono text-fg-soft hover:text-fg hover:bg-bg-soft rounded-soft
-					border-border inline-flex h-9 items-center gap-2 border px-3 text-xs
-					tracking-[0.15em] uppercase transition-colors duration-[var(--duration-fast)]"
-				onclick={() => window.print()}
-			>
+			<Button variant="ghost" size="sm" class="cv-print-btn" onclick={() => window.print()}>
 				Print
-			</button>
+			</Button>
 		</div>
 	</header>
 
-	<Section spacing="tight" eyebrow="Experience" labelledById="cv-exp">
+	<Section spacing="tight" labelledById="cv-exp">
+		<h2 id="cv-exp" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
+			Experience
+		</h2>
 		<ol class="mt-6 space-y-6 border-l border-border pl-6">
 			{#each data.experience as item (item.slug)}
 				<li>
@@ -101,7 +99,10 @@
 		</ol>
 	</Section>
 
-	<Section spacing="tight" eyebrow="Education" labelledById="cv-edu">
+	<Section spacing="tight" labelledById="cv-edu">
+		<h2 id="cv-edu" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
+			Education
+		</h2>
 		<ol class="mt-6 space-y-6 border-l border-border pl-6">
 			{#each data.education as item (item.slug)}
 				<li>
@@ -128,7 +129,10 @@
 		</ol>
 	</Section>
 
-	<Section spacing="tight" eyebrow="Technical skills" labelledById="cv-skills">
+	<Section spacing="tight" labelledById="cv-skills">
+		<h2 id="cv-skills" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
+			Technical skills
+		</h2>
 		<dl class="mt-6 space-y-4">
 			{#each active.skillGroups as group (group.group)}
 				<div class="grid gap-1 sm:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] sm:gap-4">
@@ -141,7 +145,10 @@
 		</dl>
 	</Section>
 
-	<Section spacing="tight" eyebrow="Selected work" labelledById="cv-focus">
+	<Section spacing="tight" labelledById="cv-focus">
+		<h2 id="cv-focus" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
+			Selected work
+		</h2>
 		<ul class="text-fg-soft mt-6 list-disc space-y-2 pl-5 text-sm">
 			{#each active.highlightFocus as item (item)}<li>{item}</li>{/each}
 		</ul>
@@ -155,7 +162,10 @@
 	</Section>
 
 	{#if data.awards.length}
-		<Section spacing="tight" eyebrow="Recognition" labelledById="cv-awards">
+		<Section spacing="tight" labelledById="cv-awards">
+			<h2 id="cv-awards" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
+				Recognition
+			</h2>
 			<ol class="mt-6 space-y-4">
 				{#each data.awards as a (a.slug)}
 					<li>
@@ -173,7 +183,10 @@
 	{/if}
 
 	{#if data.projects.length}
-		<Section spacing="tight" eyebrow="Selected projects" labelledById="cv-projects">
+		<Section spacing="tight" labelledById="cv-projects">
+			<h2 id="cv-projects" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
+				Selected projects
+			</h2>
 			<ol class="mt-6 space-y-4">
 				{#each data.projects as p (p.slug)}
 					<li>
@@ -191,7 +204,10 @@
 	{/if}
 
 	{#if data.publications.length}
-		<Section spacing="tight" eyebrow="Publications" labelledById="cv-pubs">
+		<Section spacing="tight" labelledById="cv-pubs">
+			<h2 id="cv-pubs" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
+				Publications
+			</h2>
 			<ol class="mt-6 space-y-3">
 				{#each data.publications as p (p.slug)}
 					<li class="text-sm">
@@ -207,7 +223,10 @@
 	{/if}
 
 	{#if data.talks.length}
-		<Section spacing="tight" eyebrow="Talks" labelledById="cv-talks">
+		<Section spacing="tight" labelledById="cv-talks">
+			<h2 id="cv-talks" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
+				Talks
+			</h2>
 			<ol class="mt-6 space-y-3">
 				{#each data.talks as t (t.slug)}
 					<li class="text-sm">

@@ -1,6 +1,27 @@
 import adapter from '@sveltejs/adapter-static';
 import { mdsvex } from 'mdsvex';
 
+/*
+ * Tiny rehype plugin: markdown images render lazy + async-decoded so blog posts
+ * with multi-hundred-KB figures don't block first paint. (Markdown syntax can't
+ * carry width/height, so layout stability comes from CSS instead.)
+ */
+function rehypeLazyImages() {
+	return (tree) => {
+		const visit = (node) => {
+			if (node.type === 'element' && node.tagName === 'img') {
+				node.properties = {
+					loading: 'lazy',
+					decoding: 'async',
+					...node.properties
+				};
+			}
+			for (const child of node.children ?? []) visit(child);
+		};
+		visit(tree);
+	};
+}
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', '.md'],
@@ -9,7 +30,8 @@ const config = {
 	},
 	preprocess: [
 		mdsvex({
-			extensions: ['.md']
+			extensions: ['.md'],
+			rehypePlugins: [rehypeLazyImages]
 		})
 	],
 	kit: {

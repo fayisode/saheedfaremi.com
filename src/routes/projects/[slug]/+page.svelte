@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Container, Section, Tag, Link, Seo } from '$lib/components';
+	import { Container, Section, Tag, Link, Card, Seo } from '$lib/components';
 	import type { Component } from 'svelte';
 	import type { Project } from '$lib/content/schemas';
 
@@ -55,36 +55,36 @@
 
 			<aside class="space-y-6">
 				{#if meta.role}
-					<div class="rounded-card border-border bg-bg-soft border p-6">
+					<Card>
 						<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Role</p>
 						<p class="text-fg mt-2">{meta.role}</p>
-					</div>
+					</Card>
 				{/if}
 
 				{#if meta.tech.length}
-					<div class="rounded-card border-border border p-6">
+					<Card variant="outlined">
 						<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Stack</p>
 						<div class="mt-3 flex flex-wrap gap-2">
 							{#each meta.tech as t (t)}
 								<Tag>{t}</Tag>
 							{/each}
 						</div>
-					</div>
+					</Card>
 				{/if}
 
 				{#if meta.highlights.length}
-					<div class="rounded-card border-border border p-6">
+					<Card variant="outlined">
 						<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Highlights</p>
 						<ul class="text-fg-soft mt-3 list-disc space-y-2 pl-5 text-sm">
 							{#each meta.highlights as h (h)}
 								<li>{h}</li>
 							{/each}
 						</ul>
-					</div>
+					</Card>
 				{/if}
 
 				{#if meta.links.live || meta.links.repo || meta.links.caseStudy}
-					<div class="rounded-card border-border border p-6">
+					<Card variant="outlined">
 						<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Links</p>
 						<ul class="mt-3 space-y-2 text-sm">
 							{#if meta.links.live}
@@ -97,7 +97,7 @@
 								<li><Link href={meta.links.caseStudy} variant="arrow">Case study</Link></li>
 							{/if}
 						</ul>
-					</div>
+					</Card>
 				{/if}
 			</aside>
 		</div>

@@ -194,4 +194,15 @@
 			   affordances snap into place instantly without an animated transition. */
 		}
 	}
+
+	/* Minimal global print rule: every page prints without the fixed chrome.
+	   /cv layers its own stricter print stylesheet on top of this. */
+	@media print {
+		header[class*='fixed'],
+		footer,
+		.hero-canvas-frame,
+		.skip-link {
+			display: none !important;
+		}
+	}
 }
