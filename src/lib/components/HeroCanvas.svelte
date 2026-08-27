@@ -26,7 +26,7 @@
 				if (!mounted || !canvas) return;
 				stop = mod.startMicrostateField(canvas);
 				// fade-in: avoid first-frame pop
-				canvas.style.opacity = '0.35';
+				canvas.style.opacity = '0.5';
 			} catch (err) {
 				// Log but do not throw. The gradient fallback is already visible.
 				if (typeof console !== 'undefined') {

@@ -17,6 +17,14 @@
 
 	const tagline = 'Researcher of the brain. Engineer of the systems people rely on.';
 
+	// Hero proof strip. Every figure is the verified number used on the CV.
+	const heroStats = [
+		{ value: '7', label: 'production services shipped' },
+		{ value: '4,832', label: 'models trained (XAI 2026 sweep)' },
+		{ value: '85%', label: 'manual document work cut (Etihuku)' },
+		{ value: '8', label: 'African markets served (Curnance)' }
+	];
+
 	// Recent publications surfaced on the Research section. Sort newest-first;
 	// /publications carries the full archive.
 	const recentPublications = sortByYearDesc([...publications]);
@@ -73,9 +81,19 @@
 		<!-- Top-of-hero credential. Carries the strongest external proof above the
 		     fold instead of a decorative version stamp. Not a <header> element: the
 		     layout's SiteNav is the page's banner landmark (one per page). -->
-		<div class="font-mono text-fg-soft text-xs tracking-[0.2em] uppercase">
-			<span class="text-accent" aria-hidden="true">●</span> UNESCO India-Africa 2022 · Gold medal · PhD-track,
-			University College Cork
+		<div class="flex flex-wrap items-center gap-3">
+			<p class="font-mono text-fg-soft text-xs tracking-[0.2em] uppercase">
+				<span class="text-accent" aria-hidden="true">●</span> UNESCO India-Africa 2022 · Gold medal ·
+				PhD-track, University College Cork
+			</p>
+			<p
+				class="font-mono text-fg-soft rounded-pill border-border bg-bg-soft/60 inline-flex
+					items-center gap-2 border px-3 py-1 text-[11px] tracking-[0.15em] uppercase"
+			>
+				<span class="hero-pulse bg-accent inline-block h-1.5 w-1.5 rounded-full" aria-hidden="true"
+				></span>
+				Open to collaboration
+			</p>
 		</div>
 
 		<section class="my-auto" aria-labelledby="hero-heading">
@@ -96,11 +114,71 @@
 			<!-- One primary conversion (the CV) plus two audience-specific shortcuts:
 			     publications for academics, research write-up for everyone. -->
 			<div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-				<Link href="/cv" variant="arrow">View CV</Link>
+				<a
+					href="/cv"
+					class="bg-accent text-bg hover:bg-accent-hover rounded-soft font-mono inline-flex h-10
+						items-center gap-2 px-4 text-sm tracking-wide transition-colors
+						duration-[var(--duration-fast)] focus-visible:outline-2 focus-visible:outline-offset-2
+						focus-visible:outline-accent"
+				>
+					View CV <span aria-hidden="true">→</span>
+				</a>
 				<Link href="/publications" variant="plain">Publications</Link>
 				<Link href="#research" variant="plain">The research</Link>
 			</div>
 		</section>
+
+		<!-- Bottom band: proof stats above a drifting EEG trace. The numbers are the
+		     same verified figures used on the CV; the trace is the thesis in one glyph. -->
+		<div>
+			<dl
+				class="border-border grid grid-cols-2 gap-x-6 gap-y-4 border-t pt-6 sm:grid-cols-4"
+				aria-label="Key numbers"
+			>
+				{#each heroStats as stat (stat.label)}
+					<div>
+						<dd class="font-display text-fg text-2xl tracking-tight sm:text-3xl">
+							{stat.value}
+						</dd>
+						<dt class="font-mono text-fg-muted mt-1 text-[11px] tracking-[0.15em] uppercase">
+							{stat.label}
+						</dt>
+					</div>
+				{/each}
+			</dl>
+
+			<div class="relative mt-6" aria-hidden="true">
+				<svg
+					viewBox="0 0 1200 64"
+					preserveAspectRatio="none"
+					class="text-accent/70 block h-12 w-full"
+					fill="none"
+				>
+					<g class="hero-eeg">
+						<path
+							d="M0,32 L40,30 L72,36 L104,24 L128,32 L160,30 L192,34 L224,28 L240,10 L256,54 L272,32 L304,30 L336,36 L368,26 L400,32 L432,30 L464,34 L496,28 L512,12 L528,52 L544,32 L576,30 L608,36 L640,24 L672,32 L704,30 L736,34 L768,28 L784,10 L800,54 L816,32 L848,30 L880,36 L912,26 L944,32 L976,30 L1008,34 L1040,28 L1056,12 L1072,52 L1088,32 L1120,30 L1152,36 L1184,26 L1200,32"
+							stroke="currentColor"
+							stroke-width="1.25"
+							stroke-linejoin="round"
+							stroke-linecap="round"
+						/>
+						<path
+							d="M0,32 L40,30 L72,36 L104,24 L128,32 L160,30 L192,34 L224,28 L240,10 L256,54 L272,32 L304,30 L336,36 L368,26 L400,32 L432,30 L464,34 L496,28 L512,12 L528,52 L544,32 L576,30 L608,36 L640,24 L672,32 L704,30 L736,34 L768,28 L784,10 L800,54 L816,32 L848,30 L880,36 L912,26 L944,32 L976,30 L1008,34 L1040,28 L1056,12 L1072,52 L1088,32 L1120,30 L1152,36 L1184,26 L1200,32"
+							stroke="currentColor"
+							stroke-width="1.25"
+							stroke-linejoin="round"
+							stroke-linecap="round"
+							transform="translate(1200,0)"
+						/>
+					</g>
+				</svg>
+				<p
+					class="font-mono text-fg-muted absolute -top-1 right-0 text-[10px] tracking-[0.25em] uppercase"
+				>
+					raw EEG · eyes-closed
+				</p>
+			</div>
+		</div>
 	</Container>
 </div>
 
@@ -328,3 +406,37 @@
 		</div>
 	</Section>
 </Container>
+
+<style>
+	/* EEG trace drift: the duplicated path sits 1200px to the right, so sliding
+	   the group one full width loops seamlessly. Reduced-motion users get a
+	   static trace via the global animation cap in app.css. */
+	.hero-eeg {
+		animation: hero-eeg-drift 14s linear infinite;
+	}
+
+	@keyframes hero-eeg-drift {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-1200px);
+		}
+	}
+
+	.hero-pulse {
+		animation: hero-pulse 2.4s ease-in-out infinite;
+	}
+
+	@keyframes hero-pulse {
+		0%,
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
+		50% {
+			opacity: 0.45;
+			transform: scale(0.8);
+		}
+	}
+</style>
