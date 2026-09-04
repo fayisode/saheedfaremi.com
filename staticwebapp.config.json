@@ -12,7 +12,8 @@
 		"exclude": [
 			"/_app/*",
 			"/images/*",
-			"/*.{css,js,svg,png,jpg,jpeg,webp,avif,woff,woff2,ico,xml,txt,json}"
+			"/*.{css,js,svg,png,jpg,jpeg,webp,avif,woff,woff2,ico,xml,txt,json}",
+			"/*.pdf"
 		]
 	},
 	"globalHeaders": {
