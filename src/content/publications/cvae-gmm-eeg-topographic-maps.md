@@ -9,7 +9,7 @@ kind: journal
 venue: Brain Informatics
 doi: 10.1186/s40708-026-00327-9
 url: https://link.springer.com/article/10.1186/s40708-026-00327-9
-pdf: https://link.springer.com/content/pdf/10.1186/s40708-026-00327-9.pdf
+pdf: /publications/cvae-gmm-eeg-topographic-maps.pdf
 summary: A Convolutional Variational Deep Embedding (Conv-VaDE) for EEG microstate analysis, with polarity-invariance preserved through sign-flip augmentation and evaluated against ModKMeans on the LEMON dataset.
 abstract: |
   EEG microstate analysis segments continuous brain activity into brief, quasi-stable
