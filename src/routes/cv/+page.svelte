@@ -108,7 +108,7 @@
 						<p class="font-mono text-fg-muted text-xs tracking-[0.15em]">
 							{#if item.startedAt}{item.startedAt}{item.endedAt
 									? ` → ${item.endedAt}`
-									: ''}{:else if item.endedAt}{item.endedAt}{:else}Present{/if}
+									: ' → present'}{:else if item.endedAt}{item.endedAt}{:else}Present{/if}
 						</p>
 					</div>
 					{#if item.summary}<p class="text-fg-soft mt-2 text-sm">{item.summary}</p>{/if}
