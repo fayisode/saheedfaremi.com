@@ -2,7 +2,7 @@
 title: Multilingual sentiment analysis for Swahili
 domain: research
 status: published
-featured: false
+featured: true
 role: Author
 tech:
   - Python

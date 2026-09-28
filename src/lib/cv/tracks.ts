@@ -27,8 +27,6 @@ const TrackSchema = z.object({
 	label: z.string().min(1),
 	summary: z.string().min(1),
 	skillGroups: z.array(SkillGroupSchema).min(1),
-	highlightFocus: z.array(z.string().min(1)).min(1),
-	featuredProjects: z.array(z.string().min(1)),
 	pdfFile: z.string().min(1)
 });
 
@@ -38,85 +36,52 @@ const RAW_TRACKS: Track[] = [
 	{
 		key: 'data-science',
 		label: 'Data Science',
+		// Hybrid positioning statement: research identity + production impact, every
+		// claim quantified and traceable. No stack list here (the skills section
+		// carries it); no adjectives (recruiter-scan evidence: buzzwords substitute
+		// for evidence and read as template-thinking).
 		summary:
-			'Data scientist and founding engineer with production systems in fintech, legal, and agriculture. Built the fraud/AML intelligence layer for a payments platform operating in eight African markets; shipped LLM document automation that cut manual work by 85%; published deep-learning research in Brain Informatics and IEEE. Core stack: Python, SQL, PyTorch, scikit-learn, Azure ML / AI Studio, AWS, Go, TypeScript. PhD researcher in deep learning for EEG at University College Cork. UNESCO India-Africa Hackathon 2022 gold medalist.',
+			'Data scientist and founding engineer shipping production ML systems in fintech and agriculture since 2021, and a PhD researcher in deep learning for EEG at University College Cork (Artificial Intelligence and Cognitive Load Research Lab, supervised by Luca Longo). Built the fraud/AML intelligence layer for a payments platform operating in eight African markets, and shipped LLM document automation that cut manual work by 85%. First-author research published in Brain Informatics and IEEE, with code released open-source. UNESCO India-Africa Hackathon 2022 gold medallist.',
+		// Grouped, interview-defensible skills; every item is traceable to the content
+		// corpus (experience, publications, projects, talks). Unevidenced tools are
+		// omitted by design: one unsupported keyword poisons the real claims around it.
 		skillGroups: [
 			{
 				group: 'AI & machine learning',
 				items: [
-					'LLMs and generative AI (Azure OpenAI, OpenAI, Anthropic, DeepSeek, Llama)',
-					'Retrieval-augmented generation (RAG), LangChain, FAISS',
-					'Transformers and NLP',
 					'PyTorch',
 					'TensorFlow',
 					'scikit-learn',
-					'XGBoost / LightGBM / CatBoost',
-					'Anomaly and fraud detection',
-					'LLM fine-tuning (LoRA)',
+					'CatBoost',
+					'LLMs (Azure OpenAI, OpenAI, Anthropic)',
+					'RAG',
+					'Fraud and anomaly detection',
+					'Transformer fine-tuning (BERT, RoBERTa)',
 					'Explainable AI'
 				]
 			},
-			{ group: 'Programming', items: ['Python', 'SQL', 'Go', 'TypeScript', 'R', 'Bash'] },
+			{ group: 'Programming', items: ['Python', 'SQL', 'Go', 'TypeScript', 'Bash'] },
 			{
 				group: 'Cloud & MLOps',
 				items: [
 					'Azure (ML Studio, AI Studio, Functions, DevOps, Bicep)',
-					'AWS (SageMaker, Lambda, EC2, S3, Glue)',
-					'Docker',
-					'CI/CD (GitHub Actions, Azure DevOps, Jenkins)',
-					'Databricks'
+					'CI/CD (GitHub Actions, Azure DevOps)',
+					'SLURM cluster computing'
 				]
 			},
 			{
-				group: 'Data engineering',
+				group: 'Data & systems',
 				items: [
 					'ETL/ELT pipelines',
-					'Apache Spark',
-					'Apache Kafka',
-					'Airflow',
-					'Feature engineering',
-					'Vector databases'
-				]
-			},
-			{
-				group: 'Systems & APIs',
-				items: [
-					'RESTful API design',
-					'Microservices and serverless',
 					'MySQL',
-					'PostgreSQL',
-					'Redis',
-					'Domain-driven design'
+					'Double-entry ledger systems',
+					'RESTful APIs and microservices'
 				]
 			},
 			{
-				group: 'Analytics & statistics',
-				items: [
-					'Statistical hypothesis testing (Wilcoxon, ICC, multiple-comparison correction)',
-					'Power BI',
-					'Tableau',
-					'Matplotlib',
-					'Seaborn'
-				]
+				group: 'Statistics & analytics',
+				items: ['Statistical hypothesis testing (Wilcoxon, ICC, multiple-comparison correction)']
 			}
-		],
-		highlightFocus: [
-			'Founding engineer at Curnance. Seven production services on Azure Functions and MySQL: wallet and double-entry ledger, auth, tiered KYC/KYB, a Go jobs handler, a Flutter app, and an admin console. Payments through VFD, Flutterwave, and Paystack across eight African markets.',
-			'Built the fraud/AML intelligence layer as rules first, LLM last. 38 deterministic detectors flag risk; the LLM only narrates anonymised aggregates, drafting suspicious-activity reports and answering compliance questions under k-anonymity floors and PII redaction.',
-			'After a live withdrawal-fraud incident, rebuilt every external payout path to debit before paying, with row-level locking and deterministic idempotency keys. That race-condition class is gone.',
-			'LLM document-generation pipeline on Azure ML Studio (Etihuku), cutting manual document work by 85% across three compliance regions.',
-			'For Gijima, an Azure OpenAI (GPT-4) proposal-generation API with structured prompting, a deterministic pricing guardrail, SharePoint/Graph as the system of record, and a LangChain + FAISS contract-analysis module.',
-			'Peer-reviewed research: Conv-VaDE for EEG microstate discovery (Brain Informatics 2026; N = 203, Wilcoxon signed-rank, BH correction) and a 4,832-model architecture search on SLURM GPU and IBM Power9 HPC (XAI 2026), released open-source under MIT.',
-			'Now building an in-app banking assistant that turns natural-language requests (balance, exchange rate, recent transactions) into app actions.'
-		],
-		featuredProjects: [
-			'Curnance, founding engineer: seven-service Azure fintech with a double-entry ledger and fraud/AML AI across eight African markets',
-			'Etihuku: LLM document automation on Azure ML Studio, 85% less manual work across three compliance regions',
-			'Gijima: GPT-4 proposal-generation API with deterministic pricing and RAG contract analysis',
-			'Conv-VaDE for EEG microstate discovery, Brain Informatics 2026 (doi:10.1186/s40708-026-00327-9)',
-			'4,832-model VAE architecture search, XAI 2026, open-source (MIT)',
-			'AI-assisted Farmer Call Center, UNESCO India-Africa Hackathon 2022 gold (AGRI12)',
-			'Swahili sentiment analysis (RoBERTa/BERT ensemble), 4th of 29, Google NLP Hack Series 2023'
 		],
 		pdfFile: 'saheed-faremi-cv.pdf'
 	}

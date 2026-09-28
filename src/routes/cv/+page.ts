@@ -8,7 +8,7 @@ import {
 	sortByYearDesc,
 	talks
 } from '$lib/content/loader';
-import type { Education } from '$lib/content/schemas';
+import type { Award, Education, Publication } from '$lib/content/schemas';
 import { TRACKS } from '$lib/cv/tracks';
 
 export const prerender = true;
@@ -38,16 +38,51 @@ function orderEducation(items: readonly Education[]): Education[] {
 	});
 }
 
+// Peer-reviewed venues are listed separately from preprints, registered
+// protocols, and doctoral-track work. Folding non-peer-reviewed items into one
+// "Publications" list is the most-documented academic-CV integrity failure, so
+// the split is enforced here rather than left to formatting.
+function isPeerReviewed(p: Publication): boolean {
+	if (p.kind === 'journal') return true;
+	// Conference papers count unless the venue itself declares a preprint
+	// (e.g. the XAI 2026 entry, whose venue notes the arXiv preprint status).
+	return p.kind === 'conference' && !/preprint/i.test(p.venue ?? '');
+}
+
+function awardRank(a: Award): number {
+	const s = `${a.title} ${a.prize ?? ''}`.toLowerCase();
+	if (/gold|winner/.test(s)) return 0;
+	if (/3rd/.test(s)) return 1;
+	if (/4th/.test(s)) return 2;
+	return 3;
+}
+
 export function load() {
+	const pubs = sortByYearDesc([...publications]);
 	return {
 		tracks: TRACKS,
 		experience: sortByStartedAtDesc([...experience]),
 		education: orderEducation(education),
-		awards: sortByYearDesc([...awards]),
-		publications: sortByYearDesc([...publications]),
+		// Recognition is capped at differentiator-grade results: medals and podium
+		// finishes. Sub-podium placements (e.g. top-14% hackathon finishes) stay on
+		// /awards but dilute a skimmed CV, so they are excluded here. Ordered by
+		// placement strength (a win outranks a podium, which outranks a top-%),
+		// so the strongest signal leads the section.
+		awards: sortByYearDesc([...awards])
+			.filter((a) => /gold|winner|3rd|4th|top 11%/i.test(`${a.title} ${a.prize ?? ''}`))
+			.sort((a, b) => awardRank(a) - awardRank(b)),
+		peerReviewed: pubs.filter(isPeerReviewed),
+		otherResearch: pubs.filter((p) => !isPeerReviewed(p)),
 		talks: sortByYearDesc([...talks]),
-		// "Selected projects" on the CV = featured AND published. Drafts are first-pass
-		// placeholders; surfacing them on a printable CV would present unverified copy as fact.
-		projects: [...projects].filter((p) => p.featured && p.status === 'published')
+		// "Selected projects" on the CV = featured AND published, minus projects whose
+		// work an Experience entry already covers (Curnance, Etihuku document
+		// automation) — restating them would duplicate signal, not add it. Drafts stay
+		// off the printable CV: they would present unverified copy as fact.
+		projects: [...projects].filter(
+			(p) =>
+				p.featured &&
+				p.status === 'published' &&
+				!['curnance', 'etihuku-document-automation'].includes(p.slug)
+		)
 	};
 }

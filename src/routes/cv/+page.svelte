@@ -18,7 +18,8 @@
 			experience: Experience[];
 			education: Education[];
 			awards: Award[];
-			publications: Publication[];
+			peerReviewed: Publication[];
+			otherResearch: Publication[];
 			talks: Talk[];
 			projects: Project[];
 		};
@@ -32,8 +33,31 @@
 
 <Seo
 	title="CV · Saheed Faremi"
-	description="Curriculum vitae for Saheed Faremi: data scientist shipping production machine-learning and LLM systems, with the software-engineering depth to own them end to end."
+	description="Curriculum vitae for Saheed Faremi: data scientist and founding engineer shipping production ML and LLM systems, and PhD researcher in deep learning for EEG at University College Cork."
 />
+
+{#snippet publicationList(items: Publication[])}
+	<ol class="mt-4 space-y-3">
+		{#each items as p (p.slug)}
+			<li class="text-sm">
+				<!-- Full author list in published order, candidate's name in bold
+					(academic CV convention). Match on "Saheed", not the surname:
+					a co-author on the malaria paper is also a Faremi. -->
+				{#each p.authors as author, i (author)}
+					{@const own = /saheed/i.test(author)}
+					{#if own}<strong class="text-fg font-semibold">{author}</strong>{:else}<span
+							class="text-fg-soft">{author}</span
+						>{/if}{i < p.authors.length - 1 ? ', ' : ''}
+				{/each}
+				<span class="text-fg-soft">"{p.title}".</span>
+				{#if p.venue}<em class="text-fg-soft">{p.venue},</em>{/if}
+				<span class="text-fg-muted">{p.year}.</span>
+				{#if p.doi}<a class="text-accent" href={`https://doi.org/${p.doi}`}>doi:{p.doi}</a>{/if}
+				{#if p.code}<a class="text-accent ml-2" href={p.code}>code</a>{/if}
+			</li>
+		{/each}
+	</ol>
+{/snippet}
 
 <Container width="default" class="cv-page">
 	<header class="cv-header py-12">
@@ -42,8 +66,9 @@
 			Saheed Faremi
 		</h1>
 		<p class="text-fg-soft mt-3 text-lg">
-			Data scientist · production ML & LLM systems, owned end to end
+			Data scientist & founding engineer · PhD researcher, deep learning for EEG
 		</p>
+		<p class="text-fg-muted mt-1 text-sm">Production ML & LLM systems, owned end to end</p>
 		<p class="text-fg-soft mt-4 font-mono text-sm">
 			<a class="text-accent" href={`mailto:${EMAIL}`}>{EMAIL}</a>
 			· Based in Dublin, Ireland
@@ -75,7 +100,7 @@
 		</h2>
 		<ol class="mt-6 space-y-6 border-l border-border pl-6">
 			{#each data.experience as item (item.slug)}
-				<li>
+				<li class="cv-exp-item">
 					<div class="flex flex-wrap items-baseline justify-between gap-2">
 						<h3 class="font-display text-fg text-xl">
 							{item.role} · <span class="text-fg-soft">{item.organization}</span>
@@ -83,7 +108,7 @@
 						<p class="font-mono text-fg-muted text-xs tracking-[0.15em]">
 							{#if item.startedAt}{item.startedAt}{item.endedAt
 									? ` → ${item.endedAt}`
-									: ' → present'}{:else if item.endedAt}{item.endedAt}{:else}Present{/if}
+									: ''}{:else if item.endedAt}{item.endedAt}{:else}Present{/if}
 						</p>
 					</div>
 					{#if item.summary}<p class="text-fg-soft mt-2 text-sm">{item.summary}</p>{/if}
@@ -98,6 +123,24 @@
 			{/each}
 		</ol>
 	</Section>
+
+	{#if data.peerReviewed.length || data.otherResearch.length}
+		<Section spacing="tight" labelledById="cv-pubs">
+			<h2 id="cv-pubs" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
+				Publications
+			</h2>
+			{#if data.peerReviewed.length}
+				<h3 class="text-fg mt-6 text-sm font-semibold">Peer-reviewed</h3>
+				{@render publicationList(data.peerReviewed)}
+			{/if}
+			{#if data.otherResearch.length}
+				<h3 class="text-fg mt-6 text-sm font-semibold">
+					Preprints, registered protocols & doctoral work
+				</h3>
+				{@render publicationList(data.otherResearch)}
+			{/if}
+		</Section>
+	{/if}
 
 	<Section spacing="tight" labelledById="cv-edu">
 		<h2 id="cv-edu" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
@@ -121,6 +164,11 @@
 						</p>
 					</div>
 					{#if item.field}<p class="text-fg-soft mt-2 text-sm">{item.field}</p>{/if}
+					{#if item.advisor}
+						<p class="font-mono text-fg-muted mt-1 text-xs tracking-[0.1em]">
+							Supervisor: {item.advisor}
+						</p>
+					{/if}
 					{#if item.summary}<p class="text-fg-soft mt-2 text-sm">{item.summary}</p>{/if}
 				</li>
 			{:else}
@@ -143,22 +191,6 @@
 				</div>
 			{/each}
 		</dl>
-	</Section>
-
-	<Section spacing="tight" labelledById="cv-focus">
-		<h2 id="cv-focus" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
-			Selected work
-		</h2>
-		<ul class="text-fg-soft mt-6 list-disc space-y-2 pl-5 text-sm">
-			{#each active.highlightFocus as item (item)}<li>{item}</li>{/each}
-		</ul>
-		{#if active.featuredProjects.length}
-			<ul class="mt-6 space-y-2">
-				{#each active.featuredProjects as project (project)}
-					<li class="text-fg text-sm">{project}</li>
-				{/each}
-			</ul>
-		{/if}
 	</Section>
 
 	{#if data.awards.length}
@@ -197,25 +229,6 @@
 						{#if p.tech.length}
 							<p class="font-mono text-fg-muted mt-1 text-xs">{p.tech.join(' · ')}</p>
 						{/if}
-					</li>
-				{/each}
-			</ol>
-		</Section>
-	{/if}
-
-	{#if data.publications.length}
-		<Section spacing="tight" labelledById="cv-pubs">
-			<h2 id="cv-pubs" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
-				Publications
-			</h2>
-			<ol class="mt-6 space-y-3">
-				{#each data.publications as p (p.slug)}
-					<li class="text-sm">
-						<span class="text-fg">{p.authors.join(', ')}</span>
-						<span class="text-fg-soft">"{p.title}".</span>
-						{#if p.venue}<em class="text-fg-soft">{p.venue},</em>{/if}
-						<span class="text-fg-muted">{p.year}.</span>
-						{#if p.doi}<a class="text-accent" href={`https://doi.org/${p.doi}`}>doi:{p.doi}</a>{/if}
 					</li>
 				{/each}
 			</ol>
@@ -274,13 +287,29 @@
 			background: white !important;
 			border-color: #ccc !important;
 		}
-		:global(section[class*='py-']) {
-			padding-top: 1rem !important;
+		:global(.cv-header) {
+			padding-top: 0.5rem !important;
 			padding-bottom: 1rem !important;
-			break-inside: avoid;
+		}
+		:global(section[class*='py-']) {
+			padding-top: 0.75rem !important;
+			padding-bottom: 0.75rem !important;
+		}
+		/* Sections may flow across pages (avoiding them forces each long section
+			to a fresh page and strands page 1 with the header alone); headings and
+			list items stay glued to their content instead. */
+		:global(h2),
+		:global(h3) {
+			break-after: avoid;
 		}
 		:global(li) {
 			break-inside: avoid;
+		}
+		/* Job entries run longer than the space left on a page; keeping them
+			unsplittable strands most of page 1 blank. Split between bullets
+			instead (individual bullets still avoid breaking via the rule above). */
+		:global(.cv-exp-item) {
+			break-inside: auto;
 		}
 	}
 </style>

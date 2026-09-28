@@ -7,7 +7,6 @@ field: Neural engineering and machine learning
 progressionStatus: in-progress
 location: Cork, Ireland
 advisor: Luca Longo
-summary: Doctoral research on segmenting EEG into microstate sequences using variational autoencoders, supervised by Luca Longo at the Artificial Intelligence and Cognitive Load Lab (AICL), University College Cork.
 tags:
   - phd
   - eeg
