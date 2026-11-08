@@ -13,12 +13,14 @@
 	const navLinks = [
 		{ href: '/#about', label: 'About' },
 		{ href: '/#research', label: 'Research' },
-		{ href: '/publications', label: 'Publications' },
-		{ href: '/projects', label: 'Projects' },
+		{ href: '/#publications', label: 'Publications' },
+		{ href: '/#projects', label: 'Projects' },
+		{ href: '/#talks', label: 'Talks' },
+		{ href: '/#experience', label: 'Experience' },
+		{ href: '/#education', label: 'Education' },
+		{ href: '/data', label: 'Data' },
 		{ href: '/blog', label: 'Blog' },
-		{ href: '/awards', label: 'Recognition' },
-		{ href: '/cv', label: 'CV' },
-		{ href: '/contact', label: 'Contact' }
+		{ href: '/cv', label: 'CV' }
 	];
 
 	// Footer site map. Splits the nav into "the work" vs "everything else", and adds
@@ -33,7 +35,6 @@
 		{ href: '/#about', label: 'About' },
 		{ href: '/now', label: 'Now' },
 		{ href: '/#research', label: 'Research' },
-		{ href: '/awards', label: 'Recognition' },
 		{ href: '/contact', label: 'Contact' }
 	];
 </script>

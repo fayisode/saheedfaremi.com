@@ -40,6 +40,15 @@
 		return () => mq.removeEventListener('change', onChange);
 	});
 
+	$effect(() => {
+		const mq = window.matchMedia('(min-width: 1536px)');
+		const onChange = (e: MediaQueryListEvent) => {
+			if (e.matches) open = false;
+		};
+		mq.addEventListener('change', onChange);
+		return () => mq.removeEventListener('change', onChange);
+	});
+
 	// While the mobile menu is open: close on Escape, lock body scroll so the page
 	// behind the overlay can't drift, and move focus into the menu (restoring it to
 	// the toggle on close) so keyboard users aren't stranded behind the panel.
@@ -93,19 +102,20 @@
 	class:scrolled={scrolled || open}
 >
 	<div
-		class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-3 sm:px-10 sm:py-4"
+		class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-3 sm:px-10 sm:py-4
+			2xl:max-w-[1600px]"
 	>
 		<a
 			href="/"
-			class="font-mono text-fg hover:text-accent rounded-soft text-sm tracking-[0.15em]
-				uppercase transition-colors duration-[var(--duration-fast)]
+			class="font-mono text-fg hover:text-accent rounded-soft shrink-0 text-sm tracking-[0.15em]
+				whitespace-nowrap uppercase transition-colors duration-[var(--duration-fast)]
 				focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
 		>
 			<span class="text-accent" aria-hidden="true">●</span>
 			<span class="ml-1">Saheed Faremi</span>
 		</a>
 
-		<nav aria-label="Primary" class="hidden items-center gap-1 md:flex">
+		<nav aria-label="Primary" class="hidden shrink-0 items-center gap-1 2xl:flex">
 			{#each links as link (link.href)}
 				<a
 					href={link.href}
@@ -122,18 +132,17 @@
 			{/each}
 		</nav>
 
-		<div class="flex items-center gap-2">
+		<div class="flex shrink-0 items-center gap-2">
 			<ThemeToggle />
-			<!-- Mobile menu toggle. Desktop uses the inline <nav> above; below the
-			     `sm` breakpoint that nav is display:none, so this disclosure is the
-			     only way to reach the links on a phone. -->
+			<!-- Below the 2xl breakpoint the inline nav is display:none, so this
+			     disclosure is the only way to reach the links. -->
 			<button
 				bind:this={toggleButton}
 				type="button"
 				class="text-fg-soft hover:text-fg hover:bg-bg-soft rounded-soft inline-flex h-9 w-9
 					items-center justify-center transition-colors duration-[var(--duration-fast)]
 					focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent
-					md:hidden"
+					2xl:hidden"
 				aria-label={open ? 'Close menu' : 'Open menu'}
 				aria-expanded={open}
 				aria-controls="mobile-nav"
@@ -167,7 +176,8 @@
 			bind:this={mobileNav}
 			id="mobile-nav"
 			aria-label="Mobile"
-			class="bg-bg border-border flex flex-col border-t px-4 pb-4 md:hidden"
+			class="bg-bg border-border flex max-h-[calc(100dvh-3.75rem)] flex-col overflow-y-auto
+				overscroll-contain border-t px-4 pb-4 sm:max-h-[calc(100dvh-4.25rem)] 2xl:hidden"
 			transition:slide={{ duration: reducedMotion ? 0 : 150 }}
 		>
 			{#each links as link (link.href)}

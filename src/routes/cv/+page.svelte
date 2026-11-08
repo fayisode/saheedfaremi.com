@@ -1,14 +1,8 @@
 <script lang="ts">
-	import { Container, Section, SocialLinks, Button, Seo } from '$lib/components';
+	import { AcademicPublicationList, Container, SocialLinks, Button, Seo } from '$lib/components';
+	import { cvHighlights } from '$lib/cv/experience';
 	import type { Track } from '$lib/cv/tracks';
-	import type {
-		Award,
-		Education,
-		Experience,
-		Project,
-		Publication,
-		Talk
-	} from '$lib/content/schemas';
+	import type { Education, Experience, Publication, Talk } from '$lib/content/schemas';
 
 	let {
 		data
@@ -17,67 +11,69 @@
 			tracks: readonly Track[];
 			experience: Experience[];
 			education: Education[];
-			awards: Award[];
 			peerReviewed: Publication[];
 			otherResearch: Publication[];
+			underReview: Publication[];
 			talks: Talk[];
-			projects: Project[];
 		};
 	} = $props();
 
 	const EMAIL = 'saheedfaremi@gmail.com';
-
-	// Single Data Scientist profile: one track, no selector.
+	const CV_PROFILES = ['GitHub', 'LinkedIn', 'Google Scholar', 'ORCID'];
 	const active = $derived(data.tracks[0]);
+
+	function educationDegree(item: Education): string {
+		if (item.slug === 'msc-cs-tu-dublin') return 'MSc Computer Science';
+		if (item.slug === 'bsc-it-uneswa') return 'BSc Information Technology';
+		return item.degree;
+	}
+
+	function educationDate(item: Education): string {
+		if (item.progressionStatus === 'in-progress') return 'In progress';
+		if (item.slug === 'msc-cs-tu-dublin') return 'Completed 2025';
+		return item.endedAt ?? '';
+	}
+
+	function educationDetails(item: Education): string {
+		if (item.slug === 'phd-eeg-microstates') {
+			return `${item.field}. Supervisor: ${item.advisor}.`;
+		}
+		if (item.slug === 'msc-cs-tu-dublin') {
+			return 'Machine learning, deep learning, data mining, visualisation and statistics. 4.0/4.0 GPA (80/100).';
+		}
+		if (item.slug === 'bsc-it-uneswa') {
+			return 'Second Class Honours, Upper Division (2.1).';
+		}
+		return [item.field, item.summary].filter(Boolean).join('. ');
+	}
+
+	function experienceRole(item: Experience): string {
+		return item.role.replace(' → ', ' to ');
+	}
+
+	function experienceDate(item: Experience): string {
+		if (item.slug === 'aicl-lab-phd-researcher') return 'In progress';
+		if (item.slug === 'etihuku-curnance') return 'May 2021 to present';
+		if (item.startedAt)
+			return `${item.startedAt}${item.endedAt ? ` to ${item.endedAt}` : ' to present'}`;
+		return item.endedAt ?? '';
+	}
 </script>
 
-<Seo
-	title="CV · Saheed Faremi"
-	description="Curriculum vitae for Saheed Faremi: data scientist and founding engineer shipping production ML and LLM systems, and PhD researcher in deep learning for EEG at University College Cork."
-/>
-
-{#snippet publicationList(items: Publication[])}
-	<ol class="mt-4 space-y-3">
-		{#each items as p (p.slug)}
-			<li class="text-sm">
-				<!-- Full author list in published order, candidate's name in bold
-					(academic CV convention). Match on "Saheed", not the surname:
-					a co-author on the malaria paper is also a Faremi. -->
-				{#each p.authors as author, i (author)}
-					{@const own = /saheed/i.test(author)}
-					{#if own}<strong class="text-fg font-semibold">{author}</strong>{:else}<span
-							class="text-fg-soft">{author}</span
-						>{/if}{i < p.authors.length - 1 ? ', ' : ''}
-				{/each}
-				<span class="text-fg-soft">"{p.title}".</span>
-				{#if p.venue}<em class="text-fg-soft">{p.venue},</em>{/if}
-				<span class="text-fg-muted">{p.year}.</span>
-				{#if p.doi}<a class="text-accent" href={`https://doi.org/${p.doi}`}>doi:{p.doi}</a>{/if}
-				{#if p.code}<a class="text-accent ml-2" href={p.code}>code</a>{/if}
-			</li>
-		{/each}
-	</ol>
-{/snippet}
+<Seo title="CV · Saheed Faremi" description={active.summary} />
 
 <Container width="default" class="cv-page">
-	<header class="cv-header py-12">
-		<p class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">Curriculum Vitae</p>
-		<h1 class="font-display text-fg mt-4 text-4xl leading-tight tracking-tight sm:text-5xl">
-			Saheed Faremi
-		</h1>
-		<p class="text-fg-soft mt-3 text-lg">
-			Data scientist & founding engineer · PhD researcher, deep learning for EEG
+	<header class="cv-header">
+		<h1 class="cv-name text-fg">Saheed Faremi</h1>
+		<p class="cv-role text-fg-soft">
+			PhD researcher, deep generative models for EEG · Data scientist
 		</p>
-		<p class="text-fg-muted mt-1 text-sm">Production ML & LLM systems, owned end to end</p>
-		<p class="text-fg-soft mt-4 font-mono text-sm">
-			<a class="text-accent" href={`mailto:${EMAIL}`}>{EMAIL}</a>
-			· Based in Dublin, Ireland
+		<p class="cv-contact text-fg-soft">
+			<a class="text-accent" href={`mailto:${EMAIL}`}>{EMAIL}</a> · Dublin, Ireland
 		</p>
-		<SocialLinks class="mt-4" />
-
-		<p class="text-fg-soft mt-6 max-w-2xl text-sm leading-relaxed">{active.summary}</p>
-
-		<div class="mt-6 flex flex-wrap gap-2">
+		<SocialLinks class="cv-social-links" only={CV_PROFILES} />
+		<p class="cv-summary text-fg-soft">{active.summary}</p>
+		<div class="cv-actions">
 			<a
 				href={`/${active.pdfFile}`}
 				download
@@ -92,224 +88,490 @@
 				Print
 			</Button>
 		</div>
+		<p class="cv-updated text-fg-muted">Last updated {active.lastUpdated}</p>
 	</header>
 
-	<Section spacing="tight" labelledById="cv-exp">
-		<h2 id="cv-exp" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
-			Experience
-		</h2>
-		<ol class="mt-6 space-y-6 border-l border-border pl-6">
-			{#each data.experience as item (item.slug)}
-				<li class="cv-exp-item">
-					<div class="flex flex-wrap items-baseline justify-between gap-2">
-						<h3 class="font-display text-fg text-xl">
-							{item.role} · <span class="text-fg-soft">{item.organization}</span>
-						</h3>
-						<p class="font-mono text-fg-muted text-xs tracking-[0.15em]">
-							{#if item.startedAt}{item.startedAt}{item.endedAt
-									? ` → ${item.endedAt}`
-									: ' → present'}{:else if item.endedAt}{item.endedAt}{:else}Present{/if}
-						</p>
-					</div>
-					{#if item.summary}<p class="text-fg-soft mt-2 text-sm">{item.summary}</p>{/if}
-					{#if item.highlights.length}
-						<ul class="text-fg-soft mt-2 list-disc space-y-1 pl-5 text-sm">
-							{#each item.highlights as h (h)}<li>{h}</li>{/each}
-						</ul>
-					{/if}
-				</li>
-			{:else}
-				<li class="text-fg-muted text-sm italic">No experience listed yet.</li>
-			{/each}
-		</ol>
-	</Section>
-
-	{#if data.peerReviewed.length || data.otherResearch.length}
-		<Section spacing="tight" labelledById="cv-pubs">
-			<h2 id="cv-pubs" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
-				Publications
-			</h2>
-			{#if data.peerReviewed.length}
-				<h3 class="text-fg mt-6 text-sm font-semibold">Peer-reviewed</h3>
-				{@render publicationList(data.peerReviewed)}
-			{/if}
-			{#if data.otherResearch.length}
-				<h3 class="text-fg mt-6 text-sm font-semibold">
-					Preprints, registered protocols & doctoral work
-				</h3>
-				{@render publicationList(data.otherResearch)}
-			{/if}
-		</Section>
-	{/if}
-
-	<Section spacing="tight" labelledById="cv-edu">
-		<h2 id="cv-edu" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
-			Education
-		</h2>
-		<ol class="mt-6 space-y-6 border-l border-border pl-6">
-			{#each data.education as item (item.slug)}
-				<li>
-					<div class="flex flex-wrap items-baseline justify-between gap-2">
-						<h3 class="font-display text-fg text-xl">
-							{item.degree} · <span class="text-fg-soft">{item.institution}</span>
-						</h3>
-						<p class="font-mono text-fg-muted text-xs tracking-[0.15em]">
-							{#if item.endedAt}
-								{item.startedAt ? `${item.startedAt} → ` : ''}{item.endedAt}
-							{:else if item.progressionStatus === 'in-progress'}
-								{item.startedAt ? `${item.startedAt} → present` : 'In progress'}
-							{:else if item.startedAt}
-								{item.startedAt}
-							{/if}
-						</p>
-					</div>
-					{#if item.field}<p class="text-fg-soft mt-2 text-sm">{item.field}</p>{/if}
-					{#if item.advisor}
-						<p class="font-mono text-fg-muted mt-1 text-xs tracking-[0.1em]">
-							Supervisor: {item.advisor}
-						</p>
-					{/if}
-					{#if item.summary}<p class="text-fg-soft mt-2 text-sm">{item.summary}</p>{/if}
-				</li>
-			{:else}
-				<li class="text-fg-muted text-sm italic">No education listed yet.</li>
-			{/each}
-		</ol>
-	</Section>
-
-	<Section spacing="tight" labelledById="cv-skills">
-		<h2 id="cv-skills" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
-			Technical skills
-		</h2>
-		<dl class="mt-6 space-y-4">
-			{#each active.skillGroups as group (group.group)}
-				<div class="grid gap-1 sm:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] sm:gap-4">
-					<dt class="font-mono text-fg-soft text-xs tracking-[0.15em] uppercase sm:pt-0.5">
-						{group.group}
-					</dt>
-					<dd class="text-fg-soft text-sm">{group.items.join(' · ')}</dd>
+	<section class="cv-section" aria-labelledby="cv-research">
+		<h2 id="cv-research" class="cv-section-heading text-fg">Research areas</h2>
+		<dl class="cv-research-groups">
+			{#each active.researchAreaGroups as group (group.group)}
+				<div class="research-group">
+					<dt class="text-fg">{group.group}</dt>
+					<dd class="text-fg-soft">{group.items.join('; ')}</dd>
 				</div>
 			{/each}
 		</dl>
-	</Section>
+	</section>
 
-	{#if data.awards.length}
-		<Section spacing="tight" labelledById="cv-awards">
-			<h2 id="cv-awards" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
-				Recognition
-			</h2>
-			<ol class="mt-6 space-y-4">
-				{#each data.awards as a (a.slug)}
-					<li>
-						<p class="text-fg">
-							<span class="font-display text-fg">{a.title}</span>
-							<span class="text-fg-muted font-mono ml-2 text-xs">{a.year}</span>
-						</p>
-						<p class="text-fg-soft mt-1 text-sm">
-							{a.organization}{a.prize ? ` · ${a.prize}` : ''}
-						</p>
-					</li>
-				{/each}
-			</ol>
-		</Section>
-	{/if}
+	<section class="cv-section" aria-labelledby="cv-skills">
+		<h2 id="cv-skills" class="cv-section-heading text-fg">Technical skills</h2>
+		<dl class="cv-skills-list">
+			{#each active.skillGroups as group (group.group)}
+				<div class="cv-skill-row">
+					<dt class="text-fg">{group.group}:</dt>
+					<dd class="text-fg-soft">{group.items.join('; ')}</dd>
+				</div>
+			{/each}
+		</dl>
+	</section>
 
-	{#if data.projects.length}
-		<Section spacing="tight" labelledById="cv-projects">
-			<h2 id="cv-projects" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
-				Selected projects
-			</h2>
-			<ol class="mt-6 space-y-4">
-				{#each data.projects as p (p.slug)}
-					<li>
-						<p class="font-display text-fg">{p.title}</p>
-						<p class="text-fg-soft mt-1 text-sm">
-							{p.summary ?? ''}{p.role ? ` · ${p.role}` : ''}
-						</p>
-						{#if p.tech.length}
-							<p class="font-mono text-fg-muted mt-1 text-xs">{p.tech.join(' · ')}</p>
-						{/if}
-					</li>
-				{/each}
-			</ol>
-		</Section>
+	<section class="cv-section" aria-labelledby="cv-education">
+		<h2 id="cv-education" class="cv-section-heading text-fg">Education</h2>
+		<ol class="cv-entry-list">
+			{#each data.education as item (item.slug)}
+				<li class="cv-entry cv-education-item">
+					<div class="cv-entry-header">
+						<h3 class="text-fg">
+							{educationDegree(item)} · <span class="text-fg-soft">{item.institution}</span>
+						</h3>
+						<p class="cv-date text-fg-muted">{educationDate(item)}</p>
+					</div>
+					<p class="cv-detail text-fg-soft">{educationDetails(item)}</p>
+				</li>
+			{/each}
+		</ol>
+	</section>
+
+	<section class="cv-section" aria-labelledby="cv-experience">
+		<h2 id="cv-experience" class="cv-section-heading text-fg">Experience</h2>
+		<ol class="cv-entry-list">
+			{#each data.experience as item (item.slug)}
+				<li class="cv-entry cv-exp-item">
+					<div class="cv-entry-header">
+						<h3 class="text-fg">
+							{experienceRole(item)} · <span class="text-fg-soft">{item.organization}</span>
+						</h3>
+						<p class="cv-date text-fg-muted">{experienceDate(item)}</p>
+					</div>
+					<ul class="cv-highlights text-fg-soft">
+						{#each cvHighlights(item) as highlight (highlight)}
+							<li>{highlight}</li>
+						{/each}
+					</ul>
+				</li>
+			{/each}
+		</ol>
+	</section>
+
+	{#if data.peerReviewed.length || data.otherResearch.length || data.underReview.length}
+		<section id="cv-publications" class="cv-section" aria-labelledby="cv-pubs">
+			<h2 id="cv-pubs" class="cv-section-heading text-fg">Publications</h2>
+			{#if data.peerReviewed.length}
+				<section id="cv-peer-reviewed" aria-labelledby="cv-peer-reviewed-heading">
+					<h3 id="cv-peer-reviewed-heading" class="cv-subheading text-fg">Peer-reviewed</h3>
+					<AcademicPublicationList
+						items={data.peerReviewed}
+						start={1}
+						showBibtex={false}
+						linkOrigin="https://saheedfaremi.com"
+					/>
+				</section>
+			{/if}
+			{#if data.otherResearch.length}
+				<section
+					id="cv-other-research"
+					aria-labelledby="cv-other-research-heading"
+					class="cv-other-research"
+				>
+					<h3 id="cv-other-research-heading" class="cv-subheading text-fg">
+						Preprints, registered protocols &amp; doctoral work
+					</h3>
+					<AcademicPublicationList
+						items={data.otherResearch}
+						start={data.peerReviewed.length + 1}
+						showBibtex={false}
+						linkOrigin="https://saheedfaremi.com"
+					/>
+				</section>
+			{/if}
+			{#if data.underReview.length}
+				<section
+					id="cv-under-review"
+					aria-labelledby="cv-under-review-heading"
+					class="cv-other-research"
+				>
+					<h3 id="cv-under-review-heading" class="cv-subheading text-fg">
+						Under review and manuscripts
+					</h3>
+					<AcademicPublicationList
+						items={data.underReview}
+						start={data.peerReviewed.length + data.otherResearch.length + 1}
+						showBibtex={false}
+						linkOrigin="https://saheedfaremi.com"
+					/>
+				</section>
+			{/if}
+		</section>
 	{/if}
 
 	{#if data.talks.length}
-		<Section spacing="tight" labelledById="cv-talks">
-			<h2 id="cv-talks" class="font-mono text-fg-muted text-xs tracking-[0.2em] uppercase">
-				Talks
-			</h2>
-			<ol class="mt-6 space-y-3">
-				{#each data.talks as t (t.slug)}
-					<li class="text-sm">
-						<span class="text-fg">{t.title}</span>
-						<span class="text-fg-soft">· {t.event},</span>
-						<span class="text-fg-muted">{t.year}</span>
+		<section class="cv-section" aria-labelledby="cv-talks">
+			<h2 id="cv-talks" class="cv-section-heading text-fg">Talks</h2>
+			<ol class="cv-compact-list">
+				{#each data.talks as talk (talk.slug)}
+					<li>
+						<a class="text-fg hover:text-accent" href={talk.url}>{talk.title}</a>.
+						<p class="text-fg-soft">
+							{talk.event}{talk.location ? `, ${talk.location}` : ''}, {talk.year}
+						</p>
 					</li>
 				{/each}
 			</ol>
-		</Section>
+		</section>
 	{/if}
 </Container>
 
 <style>
+	:global(.cv-page) {
+		max-width: 54rem;
+		padding-bottom: 3rem;
+		font-family: var(--font-display);
+		line-height: 1.55;
+		overflow-wrap: break-word;
+	}
+
+	.cv-header {
+		padding-block: 2.5rem 1.5rem;
+		text-align: center;
+	}
+
+	.cv-name {
+		font-size: clamp(2rem, 5vw, 2.75rem);
+		font-weight: 700;
+		line-height: 1.15;
+		letter-spacing: -0.02em;
+	}
+
+	.cv-role {
+		margin-top: 0.5rem;
+		font-size: 1.125rem;
+	}
+
+	.cv-contact {
+		margin-top: 0.375rem;
+		font-size: 0.9375rem;
+	}
+
+	:global(.cv-social-links) {
+		justify-content: center;
+		gap: 0.5rem 1rem;
+		margin-top: 0.75rem;
+	}
+
+	:global(.cv-social-links .profile-pill) {
+		min-height: 0;
+		padding: 0.25rem 0;
+		border: 0;
+		border-radius: 0;
+		font-family: inherit;
+		letter-spacing: normal;
+	}
+
+	:global(.cv-social-links .profile-icon) {
+		display: none;
+	}
+
+	.cv-summary {
+		max-width: 46rem;
+		margin: 1rem auto 0;
+	}
+
+	.cv-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.5rem;
+		margin-top: 1.25rem;
+	}
+
+	.cv-updated {
+		margin-top: 0.75rem;
+		font-size: 0.875rem;
+	}
+
+	.cv-section {
+		padding-block: 1.5rem;
+	}
+
+	.cv-section-heading {
+		padding-bottom: 0.375rem;
+		border-bottom: 1px solid var(--color-border);
+		font-size: 0.875rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.cv-research-groups,
+	.cv-skills-list,
+	.cv-entry-list,
+	.cv-compact-list {
+		margin-top: 1rem;
+	}
+
+	.cv-skill-row {
+		display: block;
+	}
+
+	.cv-skill-row dt {
+		display: inline;
+		font-weight: 700;
+	}
+
+	.cv-skill-row dd {
+		display: inline;
+		margin: 0;
+	}
+
+	.cv-skill-row + .cv-skill-row {
+		margin-top: 0.625rem;
+	}
+
+	.research-group dt {
+		display: inline;
+		font-weight: 700;
+	}
+
+	.research-group dd {
+		display: inline;
+		margin: 0;
+	}
+
+	.research-group + .research-group {
+		margin-top: 0.625rem;
+	}
+
+	.cv-entry-list {
+		display: block;
+		padding: 0;
+		border: 0;
+		list-style: none;
+	}
+
+	.cv-entry + .cv-entry,
+	.cv-compact-list > li + li {
+		margin-top: 1.25rem;
+	}
+
+	.cv-entry-header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 0.125rem 1rem;
+	}
+
+	.cv-entry-header h3 {
+		min-width: 0;
+		font-size: 1.0625rem;
+		font-weight: 700;
+	}
+
+	.cv-date {
+		flex-shrink: 0;
+		font-size: 0.9375rem;
+		white-space: nowrap;
+	}
+
+	.cv-date:empty {
+		display: none;
+	}
+
+	.cv-detail {
+		margin-top: 0.25rem;
+	}
+
+	.cv-highlights {
+		margin-top: 0.5rem;
+		padding-left: 1.35rem;
+		list-style: disc;
+	}
+
+	.cv-highlights > li + li {
+		margin-top: 0.375rem;
+	}
+
+	.cv-subheading {
+		margin-top: 1rem;
+		font-weight: 700;
+	}
+
+	.cv-other-research {
+		margin-top: 1.5rem;
+	}
+
+	:global(.cv-page .publication-badge),
+	:global(.cv-page .publication-bibtex) {
+		display: none;
+	}
+
+	:global(.cv-page .publication-links) {
+		font-family: inherit;
+	}
+
+	@page {
+		size: A4;
+		margin: 0.75in;
+	}
+
 	@media print {
-		/* Force a printable, ink-friendly layout regardless of theme */
-		:global(html) {
+		:global(html),
+		:global(body) {
 			background: white !important;
 			color: black !important;
 		}
-		:global(.hero-canvas-frame),
+
+		:global(body) {
+			font-size: 11pt !important;
+			line-height: 1.3 !important;
+		}
+
 		:global(header[class*='fixed']),
-		:global(.cv-print-btn),
-		:global(.skip-link),
 		:global(footer),
-		:global(nav[aria-label='Primary']) {
+		:global(nav[aria-label='Primary']),
+		:global(.hero-canvas-frame),
+		:global(.skip-link),
+		.cv-actions,
+		:global(.cv-page .publication-bibtex),
+		:global(.cv-page .publication-badge) {
 			display: none !important;
 		}
-		:global(a) {
+
+		:global(.cv-page) {
+			max-width: none !important;
+			padding: 0 !important;
+			font-family: Charter, 'Bitstream Charter', Palatino, Georgia, serif;
+			font-size: 11pt;
+		}
+
+		:global(.cv-page h1),
+		:global(.cv-page h2),
+		:global(.cv-page h3),
+		:global(.cv-page h4),
+		:global(.cv-page p),
+		:global(.cv-page li),
+		:global(.cv-page dt),
+		:global(.cv-page dd),
+		:global(.cv-page span),
+		:global(.cv-page a),
+		:global(.cv-page em),
+		:global(.cv-page strong) {
 			color: black !important;
-			text-decoration: underline;
 		}
-		:global(.font-display),
-		:global(.font-mono) {
-			color: black !important;
+
+		:global(.cv-page a) {
+			text-decoration: none;
 		}
-		:global(.text-fg),
-		:global(.text-fg-soft),
-		:global(.text-fg-muted),
-		:global(.text-accent) {
-			color: black !important;
+
+		.cv-header {
+			padding: 0 0 8pt !important;
 		}
-		:global(.bg-bg-soft),
-		:global(.border-border) {
-			background: white !important;
-			border-color: #ccc !important;
+
+		.cv-name {
+			font-size: 20pt !important;
 		}
-		:global(.cv-header) {
-			padding-top: 0.5rem !important;
-			padding-bottom: 1rem !important;
+
+		.cv-role {
+			margin-top: 2pt;
+			font-size: 11pt;
 		}
-		:global(section[class*='py-']) {
-			padding-top: 0.75rem !important;
-			padding-bottom: 0.75rem !important;
+
+		.cv-contact,
+		.cv-summary,
+		.cv-updated {
+			margin-top: 3pt;
 		}
-		/* Sections may flow across pages (avoiding them forces each long section
-			to a fresh page and strands page 1 with the header alone); headings and
-			list items stay glued to their content instead. */
-		:global(h2),
-		:global(h3) {
+
+		.cv-summary {
+			max-width: none;
+		}
+
+		:global(.cv-social-links) {
+			margin-top: 3pt;
+		}
+
+		.cv-section {
+			padding-block: 7pt !important;
+		}
+
+		.cv-section-heading {
+			padding-bottom: 2pt;
+			border-color: black !important;
+			font-size: 11.5pt;
 			break-after: avoid;
 		}
-		:global(li) {
+
+		.cv-research-groups,
+		.cv-skills-list,
+		.cv-entry-list,
+		.cv-compact-list {
+			margin-top: 4pt !important;
+		}
+
+		.cv-entry-list,
+		.cv-skill-row {
+			display: block !important;
+			grid-template-columns: none !important;
+		}
+
+		.cv-entry + .cv-entry,
+		.cv-skill-row + .cv-skill-row,
+		.cv-compact-list > li + li {
+			margin-top: 6pt !important;
+		}
+
+		.cv-entry-header h3,
+		.cv-subheading,
+		:global(.cv-page h4) {
+			font-size: 11pt !important;
+			break-after: avoid;
+		}
+
+		.cv-detail,
+		.cv-highlights {
+			margin-top: 2pt !important;
+		}
+
+		.cv-highlights {
+			padding-left: 14pt;
+		}
+
+		.cv-highlights > li + li {
+			margin-top: 2pt;
+		}
+
+		.cv-education-item,
+		.cv-skill-row,
+		.cv-compact-list > li,
+		.cv-highlights > li,
+		:global(.cv-page .publication-entry) {
 			break-inside: avoid;
 		}
-		/* Job entries run longer than the space left on a page; keeping them
-			unsplittable strands most of page 1 blank. Split between bullets
-			instead (individual bullets still avoid breaking via the rule above). */
-		:global(.cv-exp-item) {
+
+		.cv-exp-item {
 			break-inside: auto;
+		}
+
+		:global(.cv-page .academic-publication-list) {
+			margin-top: 4pt !important;
+		}
+
+		:global(.cv-page .publication-entry) {
+			padding-block: 4pt !important;
+		}
+
+		:global(.cv-page .publication-entry > div) {
+			display: block !important;
+		}
+
+		:global(.cv-page .publication-authors),
+		:global(.cv-page .publication-venue),
+		:global(.cv-page .publication-links) {
+			margin-top: 2pt !important;
+		}
+
+		.cv-other-research {
+			margin-top: 8pt !important;
 		}
 	}
 </style>

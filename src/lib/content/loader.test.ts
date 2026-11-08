@@ -20,6 +20,7 @@ import {
 	talks,
 	toBibtex
 } from './loader';
+import { PublicationSchema, TalkSchema } from './schemas';
 
 describe('publishedOnly', () => {
 	it('keeps only published entries', () => {
@@ -28,7 +29,7 @@ describe('publishedOnly', () => {
 			{ status: 'draft' as const, id: 2 },
 			{ status: 'archived' as const, id: 3 }
 		];
-		expect(publishedOnly(items).map((i) => i.id)).toEqual([1]);
+		expect(publishedOnly(items).map((item) => item.id)).toEqual([1]);
 	});
 });
 
@@ -43,20 +44,72 @@ describe('bySlug', () => {
 describe('sortByYearDesc', () => {
 	it('sorts newest-first and floats undated items to the top', () => {
 		const sorted = sortByYearDesc([{ year: 2024 }, { year: 2026 }, {}, { year: 2025 }]);
-		expect(sorted.map((i) => i.year)).toEqual([undefined, 2026, 2025, 2024]);
+		expect(sorted.map((item) => item.year)).toEqual([undefined, 2026, 2025, 2024]);
+	});
+
+	it('uses exact updatedAt dates before year-only fallback values', () => {
+		const sorted = sortByYearDesc([
+			{ slug: 'year-only-2026', year: 2026 },
+			{ slug: 'iclr', year: 2026, updatedAt: '2026-09-25' },
+			{ slug: 'year-only-2025', year: 2025 },
+			{ slug: 'cognitive', year: 2026, updatedAt: '2026-11-01' },
+			{ slug: 'fashoto', year: 2026, updatedAt: '2026-09-07' },
+			{ slug: 'undated' }
+		]);
+		expect(sorted.map((item) => item.slug)).toEqual([
+			'undated',
+			'cognitive',
+			'iclr',
+			'fashoto',
+			'year-only-2026',
+			'year-only-2025'
+		]);
 	});
 
 	it('does not mutate the input array', () => {
-		const input = [{ year: 2024 }, { year: 2026 }];
+		const input = [{ year: 2024 }, { year: 2026, updatedAt: '2026-10-16' }];
 		sortByYearDesc(input);
-		expect(input.map((i) => i.year)).toEqual([2024, 2026]);
+		expect(input.map((item) => item.year)).toEqual([2024, 2026]);
 	});
 });
 
 describe('sortByStartedAtDesc', () => {
 	it('sorts newest-first and floats undated items to the top', () => {
 		const sorted = sortByStartedAtDesc([{ startedAt: '2021-05' }, {}, { startedAt: '2024-01' }]);
-		expect(sorted.map((i) => i.startedAt)).toEqual([undefined, '2024-01', '2021-05']);
+		expect(sorted.map((item) => item.startedAt)).toEqual([undefined, '2024-01', '2021-05']);
+	});
+});
+
+describe('updatedAt schema fields', () => {
+	it('accepts optional ISO dates on publications and talks', () => {
+		const publication = PublicationSchema.parse({
+			title: 'Publication',
+			slug: 'publication',
+			authors: ['Saheed Faremi'],
+			year: 2026,
+			updatedAt: '2026-11-01'
+		});
+		const talk = TalkSchema.parse({
+			title: 'Talk',
+			slug: 'talk',
+			event: 'Conference',
+			year: 2026,
+			updatedAt: '2026-10-16'
+		});
+		expect(publication.updatedAt).toBe('2026-11-01');
+		expect(talk.updatedAt).toBe('2026-10-16');
+	});
+
+	it('rejects non-ISO update dates', () => {
+		expect(
+			PublicationSchema.safeParse({
+				title: 'Publication',
+				slug: 'publication',
+				authors: ['Saheed Faremi'],
+				year: 2026,
+				updatedAt: '1 November 2026'
+			}).success
+		).toBe(false);
 	});
 });
 
@@ -110,16 +163,47 @@ describe('content integrity', () => {
 
 	it('every collection has unique slugs', () => {
 		for (const [name, items] of Object.entries(collections)) {
-			const slugs = items.map((i) => i.slug);
+			const slugs = items.map((item) => item.slug);
 			expect(new Set(slugs).size, `duplicate slug in ${name}`).toBe(slugs.length);
 		}
 	});
 
 	it('every publication has at least one author and a four-digit year', () => {
-		for (const pub of publications) {
-			expect(pub.authors.length, pub.slug).toBeGreaterThan(0);
-			expect(String(pub.year), pub.slug).toMatch(/^\d{4}$/);
+		for (const publication of publications) {
+			expect(publication.authors.length, publication.slug).toBeGreaterThan(0);
+			expect(String(publication.year), publication.slug).toMatch(/^\d{4}$/);
 		}
+	});
+
+	it('records only the evidenced publication and talk update dates', () => {
+		expect(
+			Object.fromEntries(
+				publications
+					.filter((publication) => publication.updatedAt)
+					.map((publication) => [publication.slug, publication.updatedAt])
+			)
+		).toEqual({
+			'aics-2026-temporal-dynamics': '2026-10-16',
+			'cognitive-computation-conv-vade-dynamics': '2026-11-01',
+			'cvae-gmm-eeg-topographic-maps': '2026-08-24',
+			'fashoto-2026-autism-xai': '2026-09-07',
+			'iclr-2027-spatial-encoding-geometry': '2026-09-25',
+			'vade-eeg-microstate-discovery': '2026-07-01'
+		});
+		expect(
+			Object.fromEntries(
+				talks.filter((talk) => talk.updatedAt).map((talk) => [talk.slug, talk.updatedAt])
+			)
+		).toEqual({
+			'aics-2026-temporal-dynamics': '2026-10-16',
+			'xai-2026-brazil': '2026-07-01'
+		});
+	});
+
+	it('keeps the legacy EEG project archived and unfeatured without invented dates', () => {
+		const project = bySlug(projects, 'microstate-eeg');
+		expect(project).toMatchObject({ status: 'archived', featured: false });
+		expect(project?.startedAt).toBeUndefined();
 	});
 
 	it('featured projects are published (drafts must not top the listing)', () => {
@@ -135,8 +219,8 @@ describe('content integrity', () => {
 	});
 
 	it('every publication detail page can auto-generate a BibTeX entry', () => {
-		for (const pub of publishedOnly(publications)) {
-			expect(toBibtex(pub), pub.slug).toMatch(/^@\w+\{\S+,\n/);
+		for (const publication of publishedOnly(publications)) {
+			expect(toBibtex(publication), publication.slug).toMatch(/^@\w+\{\S+,\n/);
 		}
 	});
 });

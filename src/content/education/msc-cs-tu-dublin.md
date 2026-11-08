@@ -6,7 +6,7 @@ degree: MSc
 field: Machine learning, deep learning, data mining, visualisation, statistics
 location: Dublin, Ireland
 progressionStatus: complete
-summary: Taught master's in computer science with a machine-learning concentration; coursework in deep learning, data mining, statistical modelling, and visualisation. Completed 2025 with a 4.0/4.0 GPA (80/100).
+summary: Completed 2025 with a 4.0/4.0 GPA (80/100).
 tags:
   - msc
   - machine-learning

@@ -6,6 +6,7 @@ authors:
   - Andrea Visentin
   - Luca Longo
 year: 2026
+updatedAt: '2026-07-01'
 kind: conference
 venue: 'XAI 2026 (Late-breaking work + Doctoral Consortium track), Fortaleza, Brazil (arXiv preprint)'
 doi: 10.48550/arXiv.2605.10947

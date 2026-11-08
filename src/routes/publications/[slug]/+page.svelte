@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment';
 	import { Container, Section, Link, Card, Button, Seo } from '$lib/components';
 	import { toBibtex } from '$lib/content/loader';
+	import { isUnderReview } from '$lib/cv/publications';
 	import type { Component } from 'svelte';
 	import type { Publication } from '$lib/content/schemas';
 
@@ -24,8 +25,11 @@
 			'@type': 'ScholarlyArticle',
 			headline: meta.title,
 			name: meta.title,
-			author: meta.authors.map((a) => ({ '@type': 'Person', name: a })),
-			datePublished: String(meta.year),
+			author: meta.authors.map((a) => ({
+				'@type': 'Person',
+				name: a.replace(/\s+et al\.$/i, '')
+			})),
+			...(isUnderReview(meta) ? {} : { datePublished: String(meta.year) }),
 			inLanguage: 'en',
 			// Only journals are schema.org Periodicals; tagging a conference/workshop
 			// venue as Periodical fails validation, so the venue stays in page text.

@@ -14,7 +14,7 @@ import { z } from 'zod';
  * industry (production ownership, scale, outcomes) and academia (peer review,
  * reproducibility, statistical rigour).
  *
- * pdfFile: points to the single already-scrubbed CV PDF rendered from this page.
+ * pdfFile: points to the single already-scrubbed CV PDF generated from LaTeX.
  */
 
 const SkillGroupSchema = z.object({
@@ -22,65 +22,98 @@ const SkillGroupSchema = z.object({
 	items: z.array(z.string().min(1)).min(1)
 });
 
-const TrackSchema = z.object({
-	key: z.literal('data-science'),
-	label: z.string().min(1),
-	summary: z.string().min(1),
-	skillGroups: z.array(SkillGroupSchema).min(1),
-	pdfFile: z.string().min(1)
-});
+const TrackSchema = z
+	.object({
+		key: z.literal('data-science'),
+		label: z.string().min(1),
+		summary: z.string().min(1),
+		researchAreaGroups: z.array(SkillGroupSchema).min(1),
+		researchAreas: z.array(z.string().min(1)).default([]),
+		lastUpdated: z.string().min(1),
+		skillGroups: z.array(SkillGroupSchema).min(1),
+		pdfFile: z.string().min(1)
+	})
+	.transform((track) => ({
+		...track,
+		researchAreas: track.researchAreaGroups.flatMap((group) => group.items)
+	}));
 
 export type Track = z.infer<typeof TrackSchema>;
 
-const RAW_TRACKS: Track[] = [
+const RAW_TRACKS = [
 	{
 		key: 'data-science',
 		label: 'Data Science',
-		// Hybrid positioning statement: research identity + production impact, every
-		// claim quantified and traceable. No stack list here (the skills section
-		// carries it); no adjectives (recruiter-scan evidence: buzzwords substitute
-		// for evidence and read as template-thinking).
 		summary:
-			'Data scientist and founding engineer shipping production ML systems in fintech and agriculture since 2021, and a PhD researcher in deep learning for EEG at University College Cork (Artificial Intelligence and Cognitive Load Research Lab, supervised by Luca Longo). Built the fraud/AML intelligence layer for a payments platform operating in eight African markets, and shipped LLM document automation that cut manual work by 85%. First-author research published in Brain Informatics and IEEE, with code released open-source. UNESCO India-Africa Hackathon 2022 gold medallist.',
-		// Grouped, interview-defensible skills; every item is traceable to the content
-		// corpus (experience, publications, projects, talks). Unevidenced tools are
-		// omitted by design: one unsupported keyword poisons the real claims around it.
+			'PhD researcher studying brain activity with deep learning, and a data scientist with five years of experience across software engineering and data science. Built AI systems that reduced manual document work by 85% and strengthened fraud detection across eight African markets.',
+		researchAreaGroups: [
+			{
+				group: 'Brain and behaviour',
+				items: [
+					'EEG microstates and brain-signal analysis',
+					'Neuroscientific knowledge discovery',
+					'Neuroimaging',
+					'Nonlinear time series analysis'
+				]
+			},
+			{
+				group: 'Explainable and reproducible AI',
+				items: [
+					'Explainable Artificial Intelligence',
+					'Mechanistic Interpretability',
+					'Interpretable, reproducible machine learning'
+				]
+			},
+			{
+				group: 'Applied AI and data systems',
+				items: ['Deep learning for health and behaviour', 'Production ML, LLM and data systems']
+			}
+		],
+		lastUpdated: 'November 2026',
 		skillGroups: [
 			{
-				group: 'AI & machine learning',
+				group: 'Brain-signal analysis',
 				items: [
 					'PyTorch',
-					'TensorFlow',
 					'scikit-learn',
-					'CatBoost',
-					'LLMs (Azure OpenAI, OpenAI, Anthropic)',
-					'RAG',
-					'Fraud and anomaly detection',
-					'Transformer fine-tuning (BERT, RoBERTa)',
-					'Explainable AI'
+					'MNE',
+					'deep generative models',
+					'large-scale model evaluation'
 				]
 			},
-			{ group: 'Programming', items: ['Python', 'SQL', 'Go', 'TypeScript', 'Bash'] },
 			{
-				group: 'Cloud & MLOps',
+				group: 'Production ML & LLMs',
 				items: [
-					'Azure (ML Studio, AI Studio, Functions, DevOps, Bicep)',
-					'CI/CD (GitHub Actions, Azure DevOps)',
-					'SLURM cluster computing'
+					'Azure OpenAI',
+					'retrieval-augmented generation (RAG)',
+					'fraud and anomaly detection',
+					'transformer fine-tuning',
+					'document generation and automation'
 				]
 			},
 			{
-				group: 'Data & systems',
+				group: 'Software & cloud engineering',
 				items: [
-					'ETL/ELT pipelines',
-					'MySQL',
-					'Double-entry ledger systems',
-					'RESTful APIs and microservices'
+					'Python',
+					'Go',
+					'TypeScript',
+					'SQL',
+					'FastAPI',
+					'Azure',
+					'CI/CD',
+					'SLURM',
+					'680+ automated tests'
 				]
 			},
 			{
-				group: 'Statistics & analytics',
-				items: ['Statistical hypothesis testing (Wilcoxon, ICC, multiple-comparison correction)']
+				group: 'Evaluation & statistics',
+				items: [
+					'Cross-subject validation',
+					'intraclass correlation (ICC)',
+					'Wilcoxon tests',
+					'multiple-comparison correction',
+					'nonlinear time-series and dwell-time analysis'
+				]
 			}
 		],
 		pdfFile: 'saheed-faremi-cv.pdf'

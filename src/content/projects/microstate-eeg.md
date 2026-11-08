@@ -1,8 +1,8 @@
 ---
 title: EEG microstate analysis with variational autoencoders
 domain: research
-status: published
-featured: true
+status: archived
+featured: false
 role: PhD researcher
 links:
   repo: https://github.com/fayisode/microstate-architecture-search

@@ -98,11 +98,14 @@ export function bySlug<T extends { slug: string }>(
 	return items.find((i) => i.slug === slug);
 }
 
-// Sort newest-first by `year`. Items missing a year float to the TOP
-// (treated as "current/ongoing"). Renderers that want strict chronological
-// ordering should pre-filter to items with a year.
-export function sortByYearDesc<T extends { year?: number }>(items: readonly T[]): T[] {
-	return [...items].sort((a, b) => (b.year ?? Infinity) - (a.year ?? Infinity));
+// Sort newest-first by `updatedAt`, falling back to the start of `year`.
+// Items with neither date float to the TOP (treated as "current/ongoing").
+export function sortByYearDesc<T extends { year?: number; updatedAt?: string }>(
+	items: readonly T[]
+): T[] {
+	const dateKey = (item: T) =>
+		item.updatedAt ?? (item.year === undefined ? '9999-99-99' : `${item.year}-01-01`);
+	return [...items].sort((a, b) => dateKey(b).localeCompare(dateKey(a)));
 }
 
 // Sort newest-first by `startedAt` (YYYY-MM). Items missing the date float

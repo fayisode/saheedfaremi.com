@@ -1,8 +1,8 @@
 # saheedfaremi.com
 
 Personal website, CV, and blog of **Saheed Faremi** — PhD researcher (EEG microstates
-with variational autoencoders, University College Cork) and founding engineer at
-Curnance. Live at <https://saheedfaremi.com>.
+with variational autoencoders, University College Cork) and data scientist. Live at
+<https://saheedfaremi.com>.
 
 ## Stack
 
@@ -46,5 +46,8 @@ pnpm preview        # preview the production build
 
 ## CV PDF
 
-`scripts/generate-cv-pdf.sh` builds the site, previews it, and prints `/cv` to
-`static/saheed-faremi-cv.pdf` with headless Chrome.
+`scripts/generate-cv-pdf.sh` builds the site and compiles the static LaTeX source at
+`src/lib/cv/saheed-faremi-cv.tex` twice with pdfLaTeX. It requires `pdflatex` and
+`pdfinfo`, asserts a two-page result, and copies only the finished PDF to
+`static/saheed-faremi-cv.pdf`. Keep the static source consistent with the web CV and
+content collections, and inspect the rendered PDF after changing either version.

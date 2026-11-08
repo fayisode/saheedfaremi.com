@@ -22,8 +22,19 @@
 					<span class="text-accent" aria-hidden="true">●</span>
 					<span class="ml-1">Saheed Faremi</span>
 				</a>
-				<p class="text-fg-soft mt-4 max-w-xs text-sm leading-relaxed">
-					Researcher of the brain. Engineer of the systems people rely on.
+				<p class="text-fg-soft mt-4 text-sm leading-relaxed">Dublin, Ireland</p>
+				<p class="mt-2">
+					<a
+						href="mailto:saheedfaremi@gmail.com"
+						class="text-fg-soft hover:text-accent inline-flex min-h-6 items-center text-sm
+							transition-colors duration-[var(--duration-fast)]"
+					>
+						saheedfaremi@gmail.com
+					</a>
+				</p>
+				<p class="text-fg-soft mt-3 max-w-xs text-sm leading-relaxed">
+					I am seeking collaboration, funding, and computing resources for this doctoral research,
+					and welcome sponsorship and research partnerships.
 				</p>
 				<SocialLinks class="mt-6" />
 			</div>
@@ -59,7 +70,7 @@
 			class="border-border mt-12 flex flex-wrap items-center justify-between gap-3 border-t pt-6"
 		>
 			<p class="font-mono text-fg-muted text-xs tracking-[0.1em]">
-				© {year} Saheed Faremi · Dublin, Ireland
+				© {year} Saheed Faremi
 			</p>
 			<a
 				href="/cv"

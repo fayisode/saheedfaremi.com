@@ -6,7 +6,7 @@
 	// a 2022 legal request). Each pill carries a visible text label, so the icon
 	// is decorative (aria-hidden) and the link is fully accessible without it.
 
-	let { class: extraClass = '' }: { class?: string } = $props();
+	let { class: extraClass = '', only }: { class?: string; only?: string[] } = $props();
 
 	type Profile = { label: string; href: string; path: string };
 
@@ -49,10 +49,14 @@
 			path: 'M17.527 16.496c-.776 2.275-2.714 3.78-5.376 3.78-3.566 0-6.151-2.864-6.151-6.468 0-3.585 2.682-6.459 6.21-6.459 2.586 0 4.448 1.505 5.155 3.595l-2.548.872c-.388-1.193-1.378-1.86-2.684-1.86-1.764 0-3.213 1.546-3.213 3.86 0 2.353 1.43 3.899 3.293 3.899 1.363 0 2.285-.668 2.752-1.86l2.562.641zM12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z'
 		}
 	];
+
+	const visibleProfiles = $derived(
+		only ? profiles.filter((profile) => only.includes(profile.label)) : profiles
+	);
 </script>
 
 <ul class="flex flex-wrap gap-2 {extraClass}">
-	{#each profiles as p (p.href)}
+	{#each visibleProfiles as p (p.href)}
 		<li>
 			<a
 				href={p.href}

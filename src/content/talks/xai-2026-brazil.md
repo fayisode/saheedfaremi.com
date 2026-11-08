@@ -4,6 +4,7 @@ status: published
 event: 'XAI 2026 (Late-breaking work + Doctoral Consortium track)'
 location: 'Fortaleza, Brazil'
 year: 2026
+updatedAt: '2026-07-01'
 url: https://arxiv.org/abs/2605.10947
 summary: Conference presentation of the XAI 2026 paper on a Convolutional Variational Deep Embedding for EEG microstate discovery, evaluated via systematic architecture search on the LEMON dataset.
 tags:

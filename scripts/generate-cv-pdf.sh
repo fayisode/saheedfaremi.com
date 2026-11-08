@@ -1,28 +1,40 @@
 #!/usr/bin/env bash
-# Regenerate the downloadable CV PDF from the live /cv page so it never drifts
-# from the site's structured content. Renders the default (research) track with
-# the print stylesheet, which strips nav/footer/canvas/track-selector.
+# Build the site, then compile the static ATS-first LaTeX CV twice in a temporary
+# directory. Only the verified two-page PDF is copied into the repository.
 #
-# Usage: ./scripts/generate-cv-pdf.sh   (run from repo root; needs Google Chrome)
+# Usage: ./scripts/generate-cv-pdf.sh (requires pdflatex and pdfinfo)
 set -euo pipefail
 
-PORT="${PORT:-4178}"
+SOURCE="src/lib/cv/saheed-faremi-cv.tex"
 OUT="static/saheed-faremi-cv.pdf"
-CHROME="${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
+PDF="saheed-faremi-cv.pdf"
+
+for command in pdflatex pdfinfo; do
+	if ! command -v "$command" >/dev/null 2>&1; then
+		echo "Error: $command is required to generate the CV PDF." >&2
+		exit 1
+	fi
+done
 
 npm run build
 
-npm run preview -- --port "$PORT" >/tmp/cv-preview.log 2>&1 &
-PREVIEW_PID=$!
-trap 'kill "$PREVIEW_PID" 2>/dev/null || true' EXIT
+TEMP_DIR="$(mktemp -d "${TMPDIR:-/tmp}/saheed-cv.XXXXXX")"
+trap 'rm -rf "$TEMP_DIR"' EXIT
 
-# Wait for the preview server to answer on /cv
-for _ in $(seq 1 30); do
-	if curl -fs -o /dev/null "http://localhost:${PORT}/cv"; then break; fi
-	sleep 0.5
+for _ in 1 2; do
+	pdflatex \
+		-interaction=nonstopmode \
+		-halt-on-error \
+		-file-line-error \
+		-output-directory="$TEMP_DIR" \
+		"$SOURCE"
 done
 
-"$CHROME" --headless --disable-gpu --no-pdf-header-footer \
-	--print-to-pdf="$OUT" "http://localhost:${PORT}/cv"
+PAGES="$(pdfinfo "$TEMP_DIR/$PDF" | awk '/^Pages:/ {print $2}')"
+if [[ "$PAGES" != "2" ]]; then
+	echo "Error: expected a two-page CV, but pdfinfo reported ${PAGES:-unknown} pages." >&2
+	exit 1
+fi
 
-echo "Wrote $OUT"
+cp "$TEMP_DIR/$PDF" "$OUT"
+echo "Wrote $OUT (2 pages)"

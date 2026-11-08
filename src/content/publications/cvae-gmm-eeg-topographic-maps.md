@@ -5,6 +5,7 @@ authors:
   - Saheed Faremi
   - Luca Longo
 year: 2026
+updatedAt: '2026-08-24'
 kind: journal
 venue: Brain Informatics
 doi: 10.1186/s40708-026-00327-9

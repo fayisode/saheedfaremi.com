@@ -14,3 +14,5 @@ export { default as Portrait } from './Portrait.svelte';
 export { default as DiagramFigure } from './DiagramFigure.svelte';
 export { default as PulledQuote } from './PulledQuote.svelte';
 export { default as IndexRow } from './IndexRow.svelte';
+export { default as AcademicSection } from './AcademicSection.svelte';
+export { default as AcademicPublicationList } from './AcademicPublicationList.svelte';

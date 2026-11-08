@@ -1,0 +1,177 @@
+% Keep this static CV consistent with the web CV and content collections.
+% After editing either version, run the content tests and inspect the generated PDF.
+\documentclass[11pt]{article}
+\usepackage{cmap}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{charter}
+\usepackage{microtype}
+\DisableLigatures{encoding=*, family=*}
+\usepackage[margin=0.75in]{geometry}
+\geometry{a4paper}
+\usepackage[hidelinks,
+  pdftitle={Saheed Faremi - Curriculum Vitae},
+  pdfauthor={Saheed Faremi},
+  pdfsubject={Research and engineering curriculum vitae},
+  pdfkeywords={EEG microstates, generative models, machine learning, data science}
+]{hyperref}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{0.9}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\emergencystretch=1.5em
+
+% Standard LaTeX list lengths, adjusted without a list-formatting package.
+\setlength{\leftmargini}{1.35em}
+\setlength{\leftmarginii}{1.1em}
+\setlength{\labelwidth}{0.8em}
+\setlength{\labelsep}{0.45em}
+\setlength{\itemindent}{0pt}
+\setlength{\listparindent}{0pt}
+\setlength{\topsep}{1pt}
+\setlength{\partopsep}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\itemsep}{1pt}
+
+\newcommand{\cvsection}[1]{%
+  \par\vspace{5pt}%
+  {\fontsize{11.5pt}{13pt}\selectfont\bfseries\MakeUppercase{#1}\par}%
+  \nobreak\vspace{2pt}\hrule height 0.4pt\nobreak\vspace{2pt}%
+}
+\newcommand{\cventry}[2]{\noindent\textbf{#1}\hfill #2\par}
+\newcommand{\skill}[2]{\noindent\textbf{#1:} #2\par}
+
+\begin{document}
+
+\begin{center}
+  {\fontsize{20pt}{23pt}\selectfont\textbf{Saheed Faremi}\par}
+  \vspace{2pt}
+  PhD researcher, deep generative models for EEG · Data scientist\par
+  \vspace{2pt}
+  \href{mailto:saheedfaremi@gmail.com}{saheedfaremi@gmail.com} · Dublin, Ireland\par
+  \href{https://github.com/fayisode}{GitHub} ·
+  \href{https://www.linkedin.com/in/faremi-saheed}{LinkedIn} ·
+  \href{https://scholar.google.com/citations?user=tw1P0nsAAAAJ}{Google Scholar} ·
+  \href{https://orcid.org/0009-0007-8428-7019}{ORCID}\par
+\end{center}
+\vspace{2pt}
+PhD researcher studying brain activity with deep learning, and a data scientist with five years of experience across software engineering and data science. Built AI systems that reduced manual document work by 85\% and strengthened fraud detection across eight African markets.\par
+{\small Last updated November 2026\par}
+
+\cvsection{Research areas}
+\skill{Brain and behaviour}{EEG microstates and brain-signal analysis; Neuroscientific knowledge discovery; Neuroimaging; Nonlinear time series analysis}
+\vspace{1.5pt}
+\skill{Explainable and reproducible AI}{Explainable Artificial Intelligence; Mechanistic Interpretability; Interpretable, reproducible machine learning}
+\vspace{1.5pt}
+\skill{Applied AI and data systems}{Deep learning for health and behaviour; Production ML, LLM and data systems}
+
+\cvsection{Technical skills}
+\skill{Brain-signal analysis}{PyTorch; scikit-learn; MNE; deep generative models; large-scale model evaluation}
+\vspace{1.5pt}
+\skill{Production ML \& LLMs}{Azure OpenAI; retrieval-augmented generation (RAG); fraud and anomaly detection; transformer fine-tuning; document generation and automation}
+\vspace{1.5pt}
+\skill{Software \& cloud engineering}{Python; Go; TypeScript; SQL; FastAPI; Azure; CI/CD; SLURM; 680+ automated tests}
+\vspace{1.5pt}
+\skill{Evaluation \& statistics}{Cross-subject validation; intraclass correlation (ICC); Wilcoxon tests; multiple-comparison correction; nonlinear time-series and dwell-time analysis}
+
+\cvsection{Education}
+\cventry{PhD, University College Cork}{In progress}
+Neural engineering and machine learning. Supervisor: Luca Longo.\par
+\vspace{2pt}
+\cventry{MSc Computer Science, Technological University Dublin}{Completed 2025}
+Machine learning, deep learning, data mining, visualisation and statistics. 4.0/4.0 GPA (80/100).\par
+\vspace{2pt}
+\cventry{BSc Information Technology, University of Eswatini}{}
+Second Class Honours, Upper Division (2.1).\par
+
+\cvsection{Experience}
+\cventry{PhD researcher}{In progress}
+\textbf{Artificial Intelligence and Cognitive Load Research Lab (AICL), University College Cork}\par
+\begin{itemize}
+  \item Developed two deep-learning approaches for identifying recurring brain-activity patterns, one using image-based maps and another using the brain’s electrode network. In a synthetic benchmark, the electrode-network approach matched the known microstate maps exactly and explained 85\% of the variance in the test recordings.
+  \item Evaluated 4,832 model configurations using 110 measures of model fit, clustering quality, and consistency across participants, running the analysis on SLURM GPU and IBM Power9 clusters.
+  \item In a single-participant case study, the recurrence measure called determinism was 0.83 for recorded brain activity and 0.60 for phase-randomised controls. The brain-state label sequence showed no evidence of memory beyond the previous state.
+\end{itemize}
+\vspace{2pt}
+\cventry{Data scientist to Founding engineer}{May 2021 to present}
+\textbf{Etihuku (Curnance)}\par
+\begin{itemize}
+  \item Shipped seven production services covering payments, account security, identity checks, background processing, a 120-screen mobile app, an admin dashboard, and a public website.
+  \item Fixed a live withdrawal-fraud issue by ensuring accounts were charged before payouts, with safeguards against double spending and duplicate payments.
+  \item Built a fraud and anti-money-laundering system with 38 rule-based checks, AI-drafted suspicious-activity reports, and privacy controls that hide personal details.
+  \item Built an Azure-based AI document service that reduced manual document creation time by 85\% across three compliance regions.
+\end{itemize}
+
+\newpage
+{\small Saheed Faremi · Curriculum Vitae · Page 2 of 2\par}
+\vspace{3pt}\hrule height 0.4pt
+
+\cvsection{Publications}
+\noindent\textbf{Peer-reviewed}\par
+\vspace{2pt}
+\begin{enumerate}
+  \setlength{\itemsep}{2pt}
+  \item \href{https://aics2026.com/}{Temporal Dynamics and Latent-Space Interpretability of Generative EEG Microstate Segmentation}.\newline
+  \textbf{Saheed Faremi}, Andrea Visentin, Luca Longo.\newline
+  \emph{AICS 2026, University College Dublin (accepted; proceedings to appear)}, 2026.
+
+  \item \href{https://link.springer.com/article/10.1186/s40708-026-00327-9}{Integrating Convolutional Variational Autoencoders and the Gaussian Mixture Model for efficient manifold learning and clustering of spatially preserved EEG topographic maps}.\newline
+  \textbf{Saheed Faremi}, Luca Longo.\newline
+  \emph{Brain Informatics}, 2026. DOI: \href{https://doi.org/10.1186/s40708-026-00327-9}{10.1186/s40708-026-00327-9}.
+
+  \item \href{https://doi.org/10.1109/ICTAS59620.2024.10507142}{Machine Learning Models for Identifying Factors Influencing and Predicting Malaria Among Children Under Five Years in Nigeria}.\newline
+  \textbf{Akinpelumi Saheed Faremi}, Boluwaji Akinnuwesi, Elliot Mbunge, Petros M. Mashwama, Stephen Fashoto, Polite Zenzo Ncube, John Batani, Shamsudeen Ademola Sanni, Yinusa A. Faremi, Andile Metfula.\newline
+  \emph{IEEE ICTAS 2024}, 2024. DOI: \href{https://doi.org/10.1109/ICTAS59620.2024.10507142}{10.1109/ICTAS59620.2024.10507142}.
+\end{enumerate}
+\vspace{5pt}
+\noindent\textbf{Preprints, registered protocols \& doctoral work}\par
+\vspace{2pt}
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \setlength{\itemsep}{2pt}
+  \item \href{https://arxiv.org/abs/2605.10947}{Interpretable EEG Microstate Discovery via Variational Deep Embedding: A Systematic Architecture Search with Multi-Quadrant Evaluation}.\newline
+  \textbf{Saheed Faremi}, Andrea Visentin, Luca Longo.\newline
+  \emph{XAI 2026, Late-breaking work and Doctoral Consortium track, Fortaleza, Brazil (arXiv preprint)}, 2026. DOI: \href{https://doi.org/10.48550/arXiv.2605.10947}{10.48550/arXiv.2605.10947}.
+
+  \item \href{https://osf.io/v2w3z}{Autoencoder-Based Models for Scalp EEG: A Systematic Review of Architectures, Applications, Latent Representations, Interpretability, and Validation}.\newline
+  Morteza Akbari, \textbf{Saheed Akinpelumi Faremi}, Luca Longo.\newline
+  \emph{OSF Registries (registered systematic-review protocol)}, 2026. DOI: \href{https://doi.org/10.17605/osf.io/v2w3z}{10.17605/osf.io/v2w3z}.
+
+  \item Explainable Disentangled Representation Learning of Recurring Brain Activation Patterns via Variational Autoencoders.\newline
+  \textbf{Saheed Faremi}.\newline
+  \emph{XAI World Conference 2025, Doctoral Proposals track}, 2025.
+\end{enumerate}
+\vspace{5pt}
+\noindent\textbf{Under review and manuscripts}\par
+\vspace{2pt}
+\begin{enumerate}
+  \setcounter{enumi}{6}
+  \setlength{\itemsep}{2pt}
+  \item Convolutional Variational Deep Embedding Produces Canonical EEG Microstate Maps and Richer Transition Dynamics than Modified K-Means on Resting EEG.\newline
+  \textbf{Saheed Faremi}, Andrea Visentin, Luca Longo.\newline
+  \emph{Cognitive Computation (manuscript in preparation)}, 2026.
+
+  \item Spatial Encoding Geometry Determines the Maps and Transitions Recovered by Deep EEG Microstate Models.\newline
+  \textbf{Saheed Faremi et al.}\newline
+  \emph{ICLR 2027 (under review; OpenReview \#50003)}, 2026.
+
+  \item Prediction of Early Detection of Autism Spectrum Disorder in Toddlers Using Explainable Artificial Intelligence.\newline
+  \textbf{Stephen Fashoto et al.}\newline
+  \emph{Under review}, 2026.
+\end{enumerate}
+
+\cvsection{Talks}
+\begin{itemize}
+  \setlength{\itemsep}{3pt}
+  \item \href{https://aics2026.com/}{Temporal Dynamics and Latent-Space Interpretability of Generative EEG Microstate Segmentation}.\newline
+  34th Irish Conference on Artificial Intelligence and Cognitive Science (AICS 2026), University College Dublin, 2026.
+  \item \href{https://arxiv.org/abs/2605.10947}{Interpretable EEG Microstate Discovery via Variational Deep Embedding}.\newline
+  XAI 2026, Late-breaking work and Doctoral Consortium track, Fortaleza, Brazil, 2026.
+  \item \href{https://doi.org/10.1109/ICTAS59620.2024.10507142}{Machine Learning Models for Predicting Malaria in Nigerian Children Under Five}.\newline
+  IEEE ICTAS 2024, 2024.
+\end{itemize}
+
+\end{document}

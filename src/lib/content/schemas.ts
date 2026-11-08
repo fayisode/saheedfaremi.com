@@ -74,6 +74,7 @@ export const PublicationSchema = z.object({
 	authors: z.array(z.string()).min(1),
 	venue: z.string().optional(),
 	year: z.number().int().min(1990).max(2100),
+	updatedAt: z.iso.date().optional(),
 	kind: PublicationKind.default('preprint'),
 	doi: z.string().optional(),
 	url: z.url().optional(),
@@ -92,6 +93,7 @@ export const TalkSchema = z.object({
 	event: z.string().min(1),
 	location: z.string().optional(),
 	year: z.number().int().min(1990).max(2100),
+	updatedAt: z.iso.date().optional(),
 	url: z.url().optional(),
 	recording: z.url().optional(),
 	slides: z.url().optional()
