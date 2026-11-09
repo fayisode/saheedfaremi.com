@@ -8,17 +8,17 @@ const source = readFileSync(
 	'utf8'
 );
 const summary =
-	'PhD researcher studying brain activity with deep learning, and a data scientist with five years of experience across software engineering and data science. Built AI systems that reduced manual document work by 85% and strengthened fraud detection across eight African markets.';
+	'PhD researcher and data scientist with five years of experience building production software. I study what brief brain states represent and how they change over time. In industry, I apply machine learning to healthcare, finance and compliance.';
 const phdHighlights = [
-	'Developed two deep-learning approaches for identifying recurring brain-activity patterns, one using image-based maps and another using the brain’s electrode network. In a synthetic benchmark, the electrode-network approach matched the known microstate maps exactly and explained 85% of the variance in the test recordings.',
-	'Evaluated 4,832 model configurations using 110 measures of model fit, clustering quality, and consistency across participants, running the analysis on SLURM GPU and IBM Power9 clusters.',
-	'In a single-participant case study, the recurrence measure called determinism was 0.83 for recorded brain activity and 0.60 for phase-randomised controls. The brain-state label sequence showed no evidence of memory beyond the previous state.'
+	'Developed and compared image-based scalp maps with maps built from connections between recording electrodes. When both used the same processing step on 203 resting-state recordings, the electrode-based approach accounted for 61.8% of the signal versus 54.2% for the image-based approach. The image-based approach produced tighter groups of activity.',
+	'Tested whether including the duration of a brain state improves the model’s match to the recording. With nine states, including duration improved the match from 55.7% to 63.7%, compared with using only the current state. A separate comparison found that its state-switching patterns differed more from chance than those from standard clustering (35.6% versus 23.6%).',
+	'Showed that processing choices can change the reported duration of brain states. The gap between the two models narrowed from 70.2 versus 143.2 milliseconds to 70.2 versus 71.0 milliseconds when both used the same processing step. In a separate test, changing a duration setting moved the average from 402 to 24 milliseconds.'
 ];
 const etihukuHighlights = [
-	'Shipped seven production services covering payments, account security, identity checks, background processing, a 120-screen mobile app, an admin dashboard, and a public website.',
-	'Fixed a live withdrawal-fraud issue by ensuring accounts were charged before payouts, with safeguards against double spending and duplicate payments.',
+	'Delivered seven production services for payments, account security, identity checks and background processing, plus a 120-screen mobile app, an admin dashboard and a public website.',
+	'Fixed a live withdrawal-fraud issue by debiting the customer’s account before making an external payout and rejecting duplicate transfer requests.',
 	'Built a fraud and anti-money-laundering system with 38 rule-based checks, AI-drafted suspicious-activity reports, and privacy controls that hide personal details.',
-	'Built an Azure-based AI document service that reduced manual document creation time by 85% across three compliance regions.'
+	'Built an Azure AI document service that cut manual document work by 85% across three compliance regions.'
 ];
 
 describe('ATS-first LaTeX CV source', () => {
@@ -51,35 +51,42 @@ describe('ATS-first LaTeX CV source', () => {
 	it('uses the exact summary, grouped research areas and four plain-language skill groups', () => {
 		expect(TRACKS[0].summary).toBe(summary);
 		expect(source).toContain(summary.replace('85%', String.raw`85\%`));
+		expect(source).toContain('PhD researcher, University College Cork · Data scientist');
 		for (const area of TRACKS[0].researchAreas) {
 			expect(source).toContain(area);
 		}
 		for (const group of [
 			'Brain and behaviour',
 			'Explainable and reproducible AI',
-			'Applied AI and data systems',
+			'Applications',
 			'Brain-signal analysis',
-			String.raw`Production ML \& LLMs`,
+			'Applied AI and document automation',
 			String.raw`Software \& cloud engineering`,
-			String.raw`Evaluation \& statistics`
+			'Research evaluation'
 		]) {
 			expect(source).toContain(String.raw`\skill{${group}}`);
 		}
 		expect(source).toContain('large-scale model evaluation');
 		expect(source).toContain('document generation and automation');
-		expect(source).toContain('retrieval-augmented generation (RAG)');
-		expect(source).toContain('intraclass correlation (ICC)');
-		expect(source).toContain('nonlinear time-series and dwell-time analysis');
-		expect(source).not.toContain('4,832-model architecture search');
-		expect(source).not.toContain('110 metrics per model');
+		expect(source).toContain('document question answering');
+		expect(source).toContain('statistical significance tests');
+		expect(source).toContain('time-series and duration analysis');
+		const brainSkill = source.match(/\\skill\{Brain-signal analysis\}\{([^}]+)\}/)?.[1] ?? '';
+		expect(brainSkill).not.toContain('4,832');
+		expect(brainSkill).not.toContain('110 metrics');
 	});
 
 	it('uses the exact three PhD and four Etihuku bullets without model jargon', () => {
 		for (const highlight of [...phdHighlights, ...etihukuHighlights]) {
-			expect(source).toContain(highlight.replace('85%', String.raw`85\%`));
+			expect(source).toContain(highlight.replace(/%/g, String.raw`\%`));
 		}
 		expect(source).toContain(String.raw`\cventry{Data scientist to Founding engineer}`);
-		expect(source).not.toMatch(/Conv-VaDE|Graph-VaDE|VAE\/GMM|\bARI\b|\bGEV\b|PMLR/i);
+		expect(source).toContain(
+			String.raw`\cventry{BSc Information Technology, University of Eswatini}{Completed}`
+		);
+		expect(source).not.toMatch(
+			/Conv-VaDE|Graph-VaDE|VAE\/GMM|\bARI\b|\bGEV\b|HSMM|LEMON|Holm|PMLR/i
+		);
 	});
 
 	it('contains nine publications in three groups with continuous numbering', () => {

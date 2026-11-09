@@ -40,6 +40,9 @@ export const ProjectDomain = z.enum([
 
 export const ProjectSchema = z.object({
 	...BaseFields,
+	// Featured project summaries carry three-sentence evidence statements that
+	// exceed the shared 280-character guard.
+	summary: z.string().max(400).optional(),
 	domain: ProjectDomain,
 	role: z.string().optional(),
 	tech: z.array(z.string()).default([]),

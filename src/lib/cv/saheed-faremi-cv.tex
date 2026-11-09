@@ -49,7 +49,7 @@
 \begin{center}
   {\fontsize{20pt}{23pt}\selectfont\textbf{Saheed Faremi}\par}
   \vspace{2pt}
-  PhD researcher, deep generative models for EEG · Data scientist\par
+  PhD researcher, University College Cork · Data scientist\par
   \vspace{2pt}
   \href{mailto:saheedfaremi@gmail.com}{saheedfaremi@gmail.com} · Dublin, Ireland\par
   \href{https://github.com/fayisode}{GitHub} ·
@@ -58,24 +58,24 @@
   \href{https://orcid.org/0009-0007-8428-7019}{ORCID}\par
 \end{center}
 \vspace{2pt}
-PhD researcher studying brain activity with deep learning, and a data scientist with five years of experience across software engineering and data science. Built AI systems that reduced manual document work by 85\% and strengthened fraud detection across eight African markets.\par
+PhD researcher and data scientist with five years of experience building production software. I study what brief brain states represent and how they change over time. In industry, I apply machine learning to healthcare, finance and compliance.\par
 {\small Last updated November 2026\par}
 
 \cvsection{Research areas}
-\skill{Brain and behaviour}{EEG microstates and brain-signal analysis; Neuroscientific knowledge discovery; Neuroimaging; Nonlinear time series analysis}
+\skill{Brain and behaviour}{EEG microstates and brain-signal analysis; neuroscientific knowledge discovery; neuroimaging; nonlinear time-series analysis}
 \vspace{1.5pt}
-\skill{Explainable and reproducible AI}{Explainable Artificial Intelligence; Mechanistic Interpretability; Interpretable, reproducible machine learning}
+\skill{Explainable and reproducible AI}{Explainable Artificial Intelligence; mechanistic interpretability; reproducible machine learning}
 \vspace{1.5pt}
-\skill{Applied AI and data systems}{Deep learning for health and behaviour; Production ML, LLM and data systems}
+\skill{Applications}{Deep learning for health and behaviour; production AI and data systems}
 
 \cvsection{Technical skills}
-\skill{Brain-signal analysis}{PyTorch; scikit-learn; MNE; deep generative models; large-scale model evaluation}
+\skill{Brain-signal analysis}{PyTorch; scikit-learn; MNE; large-scale model evaluation}
 \vspace{1.5pt}
-\skill{Production ML \& LLMs}{Azure OpenAI; retrieval-augmented generation (RAG); fraud and anomaly detection; transformer fine-tuning; document generation and automation}
+\skill{Applied AI and document automation}{Azure OpenAI; document question answering; fraud and anomaly detection; model fine-tuning; document generation and automation}
 \vspace{1.5pt}
-\skill{Software \& cloud engineering}{Python; Go; TypeScript; SQL; FastAPI; Azure; CI/CD; SLURM; 680+ automated tests}
+\skill{Software \& cloud engineering}{Python; Go; TypeScript; SQL; FastAPI; Azure; CI/CD; SLURM; automated testing}
 \vspace{1.5pt}
-\skill{Evaluation \& statistics}{Cross-subject validation; intraclass correlation (ICC); Wilcoxon tests; multiple-comparison correction; nonlinear time-series and dwell-time analysis}
+\skill{Research evaluation}{Testing across participants; statistical significance tests; correction for multiple comparisons; time-series and duration analysis}
 
 \cvsection{Education}
 \cventry{PhD, University College Cork}{In progress}
@@ -84,25 +84,26 @@ Neural engineering and machine learning. Supervisor: Luca Longo.\par
 \cventry{MSc Computer Science, Technological University Dublin}{Completed 2025}
 Machine learning, deep learning, data mining, visualisation and statistics. 4.0/4.0 GPA (80/100).\par
 \vspace{2pt}
-\cventry{BSc Information Technology, University of Eswatini}{}
+\cventry{BSc Information Technology, University of Eswatini}{Completed}
 Second Class Honours, Upper Division (2.1).\par
 
+\enlargethispage{2\baselineskip}
 \cvsection{Experience}
 \cventry{PhD researcher}{In progress}
 \textbf{Artificial Intelligence and Cognitive Load Research Lab (AICL), University College Cork}\par
 \begin{itemize}
-  \item Developed two deep-learning approaches for identifying recurring brain-activity patterns, one using image-based maps and another using the brain’s electrode network. In a synthetic benchmark, the electrode-network approach matched the known microstate maps exactly and explained 85\% of the variance in the test recordings.
-  \item Evaluated 4,832 model configurations using 110 measures of model fit, clustering quality, and consistency across participants, running the analysis on SLURM GPU and IBM Power9 clusters.
-  \item In a single-participant case study, the recurrence measure called determinism was 0.83 for recorded brain activity and 0.60 for phase-randomised controls. The brain-state label sequence showed no evidence of memory beyond the previous state.
+  \item Developed and compared image-based scalp maps with maps built from connections between recording electrodes. When both used the same processing step on 203 resting-state recordings, the electrode-based approach accounted for 61.8\% of the signal versus 54.2\% for the image-based approach. The image-based approach produced tighter groups of activity.
+  \item Tested whether including the duration of a brain state improves the model’s match to the recording. With nine states, including duration improved the match from 55.7\% to 63.7\%, compared with using only the current state. A separate comparison found that its state-switching patterns differed more from chance than those from standard clustering (35.6\% versus 23.6\%).
+  \item Showed that processing choices can change the reported duration of brain states. The gap between the two models narrowed from 70.2 versus 143.2 milliseconds to 70.2 versus 71.0 milliseconds when both used the same processing step. In a separate test, changing a duration setting moved the average from 402 to 24 milliseconds.
 \end{itemize}
 \vspace{2pt}
 \cventry{Data scientist to Founding engineer}{May 2021 to present}
 \textbf{Etihuku (Curnance)}\par
 \begin{itemize}
-  \item Shipped seven production services covering payments, account security, identity checks, background processing, a 120-screen mobile app, an admin dashboard, and a public website.
-  \item Fixed a live withdrawal-fraud issue by ensuring accounts were charged before payouts, with safeguards against double spending and duplicate payments.
+  \item Delivered seven production services for payments, account security, identity checks and background processing, plus a 120-screen mobile app, an admin dashboard and a public website.
+  \item Fixed a live withdrawal-fraud issue by debiting the customer’s account before making an external payout and rejecting duplicate transfer requests.
   \item Built a fraud and anti-money-laundering system with 38 rule-based checks, AI-drafted suspicious-activity reports, and privacy controls that hide personal details.
-  \item Built an Azure-based AI document service that reduced manual document creation time by 85\% across three compliance regions.
+  \item Built an Azure AI document service that cut manual document work by 85\% across three compliance regions.
 \end{itemize}
 
 \newpage

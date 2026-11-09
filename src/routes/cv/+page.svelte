@@ -31,6 +31,7 @@
 	function educationDate(item: Education): string {
 		if (item.progressionStatus === 'in-progress') return 'In progress';
 		if (item.slug === 'msc-cs-tu-dublin') return 'Completed 2025';
+		if (item.progressionStatus === 'complete' && !item.endedAt) return 'Completed';
 		return item.endedAt ?? '';
 	}
 
@@ -65,9 +66,7 @@
 <Container width="default" class="cv-page">
 	<header class="cv-header">
 		<h1 class="cv-name text-fg">Saheed Faremi</h1>
-		<p class="cv-role text-fg-soft">
-			PhD researcher, deep generative models for EEG · Data scientist
-		</p>
+		<p class="cv-role text-fg-soft">PhD researcher, University College Cork · Data scientist</p>
 		<p class="cv-contact text-fg-soft">
 			<a class="text-accent" href={`mailto:${EMAIL}`}>{EMAIL}</a> · Dublin, Ireland
 		</p>

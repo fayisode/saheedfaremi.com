@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { load } from './+page';
 
 const summary =
-	'PhD researcher studying brain activity with deep learning, and a data scientist with five years of experience across software engineering and data science. Built AI systems that reduced manual document work by 85% and strengthened fraud detection across eight African markets.';
+	'PhD researcher and data scientist with five years of experience building production software. I study what brief brain states represent and how they change over time. In industry, I apply machine learning to healthcare, finance and compliance.';
 
 describe('CV selections', () => {
 	it('omits Recognition data and projects from the academic CV', () => {
@@ -38,37 +38,31 @@ describe('CV selections', () => {
 		expect(track.researchAreaGroups.map((group) => group.group)).toEqual([
 			'Brain and behaviour',
 			'Explainable and reproducible AI',
-			'Applied AI and data systems'
+			'Applications'
 		]);
 		expect(track.researchAreas).toEqual([
 			'EEG microstates and brain-signal analysis',
-			'Neuroscientific knowledge discovery',
-			'Neuroimaging',
-			'Nonlinear time series analysis',
+			'neuroscientific knowledge discovery',
+			'neuroimaging',
+			'nonlinear time-series analysis',
 			'Explainable Artificial Intelligence',
-			'Mechanistic Interpretability',
-			'Interpretable, reproducible machine learning',
+			'mechanistic interpretability',
+			'reproducible machine learning',
 			'Deep learning for health and behaviour',
-			'Production ML, LLM and data systems'
+			'production AI and data systems'
 		]);
 		expect(track.skillGroups).toEqual([
 			{
 				group: 'Brain-signal analysis',
-				items: [
-					'PyTorch',
-					'scikit-learn',
-					'MNE',
-					'deep generative models',
-					'large-scale model evaluation'
-				]
+				items: ['PyTorch', 'scikit-learn', 'MNE', 'large-scale model evaluation']
 			},
 			{
-				group: 'Production ML & LLMs',
+				group: 'Applied AI and document automation',
 				items: [
 					'Azure OpenAI',
-					'retrieval-augmented generation (RAG)',
+					'document question answering',
 					'fraud and anomaly detection',
-					'transformer fine-tuning',
+					'model fine-tuning',
 					'document generation and automation'
 				]
 			},
@@ -83,17 +77,16 @@ describe('CV selections', () => {
 					'Azure',
 					'CI/CD',
 					'SLURM',
-					'680+ automated tests'
+					'automated testing'
 				]
 			},
 			{
-				group: 'Evaluation & statistics',
+				group: 'Research evaluation',
 				items: [
-					'Cross-subject validation',
-					'intraclass correlation (ICC)',
-					'Wilcoxon tests',
-					'multiple-comparison correction',
-					'nonlinear time-series and dwell-time analysis'
+					'Testing across participants',
+					'statistical significance tests',
+					'correction for multiple comparisons',
+					'time-series and duration analysis'
 				]
 			}
 		]);

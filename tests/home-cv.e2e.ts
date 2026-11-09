@@ -373,19 +373,19 @@ test('homepage presents the doctoral questions and prioritised work without mobi
 		await page.goto('/');
 
 		await expect(page.locator('#about')).toContainText(
-			'I have five years of experience across software engineering and data science, applying AI and statistical methods to business and healthcare problems.'
+			'Over the past five years, I have built payment systems, fraud-detection tools, document-automation pipelines and machine-learning models for healthcare.'
 		);
 		const researchGroups = page.locator('#research .research-group');
 		await expect(researchGroups).toHaveCount(3);
 		await expect(researchGroups.locator('dt')).toHaveText([
 			'Brain and behaviour',
 			'Explainable and reproducible AI',
-			'Applied AI and data systems'
+			'Applications'
 		]);
 		await expect(researchGroups.locator('dd')).toHaveText([
-			'EEG microstates and brain-signal analysis; Neuroscientific knowledge discovery; Neuroimaging; Nonlinear time series analysis',
-			'Explainable Artificial Intelligence; Mechanistic Interpretability; Interpretable, reproducible machine learning',
-			'Deep learning for health and behaviour; Production ML, LLM and data systems'
+			'EEG microstates and brain-signal analysis; neuroscientific knowledge discovery; neuroimaging; nonlinear time-series analysis',
+			'Explainable Artificial Intelligence; mechanistic interpretability; reproducible machine learning',
+			'Deep learning for health and behaviour; production AI and data systems'
 		]);
 		await expect(
 			page.getByRole('heading', { level: 3, name: 'Doctoral research focus', exact: true })
@@ -394,13 +394,13 @@ test('homepage presents the doctoral questions and prioritised work without mobi
 			'My PhD uses deep learning to test what an EEG microstate actually is, rather than assuming that the classical definition is complete.'
 		);
 		await expect(page.locator('#research ol > li')).toHaveText([
-			'Do microstate sequences carry structure beyond Markov and semi-Markov dynamics?',
-			'Are microstates discrete brain states or fragments of a continuous flow, and how much information is lost when that flow becomes state labels?',
-			'How does the time remaining in a state shape the next state, and is the brain’s switching rule fixed or only appearing to drift?',
-			'Which parts of this syntax are stable enough to identify a person across sessions and predict cognition or clinical outcome better than classical statistics?'
+			'Do brain-state sequences have memory beyond the current state?',
+			'Are brain states truly separate, or are they parts of a continuous flow, and what information is lost when we divide that flow into labels?',
+			'Does the time spent in a state shape the next one, and does the brain’s switching rule stay fixed?',
+			'Which patterns are stable enough to identify a person across sessions and predict cognition or clinical outcomes better than standard statistics?'
 		]);
 		await expect(page.locator('#research')).toContainText(
-			'The aim is to show where microstate syntax is richer than the classical account and where the classical account remains sufficient.'
+			'The work asks which patterns are genuine properties of brain activity and which are created by the model or the way it processes the signal.'
 		);
 
 		const projectLinks = page.locator('#projects ol > li h3 a');
@@ -419,16 +419,16 @@ test('homepage presents the doctoral questions and prioritised work without mobi
 			'/projects/curnance'
 		]);
 		await expect(page.locator('#projects')).not.toContainText(
-			/Conv-VaDE|Graph-VaDE|\bARI\b|\bGEV\b/
+			/Conv-VaDE|Graph-VaDE|\bARI\b|\bGEV\b|HSMM|LEMON|Holm/i
 		);
 		await expect(page.locator('#projects')).toContainText(
-			'matched the known microstate maps exactly'
+			'When both use the same processing step on 203 resting-state recordings, the electrode-based approach accounts for 61.8% of the signal versus 54.2% for the image-based approach. The image-based approach produces tighter groups of activity.'
 		);
 		await expect(page.locator('#projects')).toContainText(
-			'Tests whether brain-state sequences have memory, how long states last, and whether their switching rules remain stable across sessions.'
+			'Tests whether including the duration of a brain state improves the model’s match to the recording. With nine states, including duration improves the match from 55.7% to 63.7%, compared with using only the current state. A separate comparison finds that its state-switching patterns differ more from chance than those from standard clustering (35.6% versus 23.6%).'
 		);
 		await expect(page.locator('#projects')).toContainText(
-			'Evaluation of 4,832 model configurations using 110 measures of model fit, clustering quality, and consistency across participants on two high-performance computing clusters.'
+			'A 4,832-model architecture search on two high-performance computing clusters, scoring 110 metrics per model and testing consistency across participants.'
 		);
 		await expect(page.locator('#experience')).toContainText(
 			'Uses deep learning to identify recurring patterns in brain activity and to test how long they last and how they change over time.'
@@ -478,10 +478,10 @@ test('CV matches the LaTeX profile and single-column academic content', async ({
 	]);
 	await expect(page.getByText('Last updated November 2026', { exact: true })).toBeVisible();
 	await expect(page.locator('.cv-role')).toHaveText(
-		'PhD researcher, deep generative models for EEG · Data scientist'
+		'PhD researcher, University College Cork · Data scientist'
 	);
 	await expect(page.locator('.cv-summary')).toHaveText(
-		'PhD researcher studying brain activity with deep learning, and a data scientist with five years of experience across software engineering and data science. Built AI systems that reduced manual document work by 85% and strengthened fraud detection across eight African markets.'
+		'PhD researcher and data scientist with five years of experience building production software. I study what brief brain states represent and how they change over time. In industry, I apply machine learning to healthcare, finance and compliance.'
 	);
 	await expect(page.locator('.cv-summary')).not.toContainText('founding engineer');
 	await expect(page.locator('.cv-header')).toHaveCSS('text-align', 'center');
@@ -501,27 +501,27 @@ test('CV matches the LaTeX profile and single-column academic content', async ({
 	await expect(researchGroups.locator('dt')).toHaveText([
 		'Brain and behaviour',
 		'Explainable and reproducible AI',
-		'Applied AI and data systems'
+		'Applications'
 	]);
 	await expect(researchGroups.locator('dd')).toHaveText([
-		'EEG microstates and brain-signal analysis; Neuroscientific knowledge discovery; Neuroimaging; Nonlinear time series analysis',
-		'Explainable Artificial Intelligence; Mechanistic Interpretability; Interpretable, reproducible machine learning',
-		'Deep learning for health and behaviour; Production ML, LLM and data systems'
+		'EEG microstates and brain-signal analysis; neuroscientific knowledge discovery; neuroimaging; nonlinear time-series analysis',
+		'Explainable Artificial Intelligence; mechanistic interpretability; reproducible machine learning',
+		'Deep learning for health and behaviour; production AI and data systems'
 	]);
 
 	const skillRows = page.locator('.cv-skill-row');
 	await expect(skillRows).toHaveCount(4);
 	await expect(skillRows.locator('dt')).toHaveText([
 		'Brain-signal analysis:',
-		'Production ML & LLMs:',
+		'Applied AI and document automation:',
 		'Software & cloud engineering:',
-		'Evaluation & statistics:'
+		'Research evaluation:'
 	]);
 	await expect(skillRows.locator('dd')).toHaveText([
-		'PyTorch; scikit-learn; MNE; deep generative models; large-scale model evaluation',
-		'Azure OpenAI; retrieval-augmented generation (RAG); fraud and anomaly detection; transformer fine-tuning; document generation and automation',
-		'Python; Go; TypeScript; SQL; FastAPI; Azure; CI/CD; SLURM; 680+ automated tests',
-		'Cross-subject validation; intraclass correlation (ICC); Wilcoxon tests; multiple-comparison correction; nonlinear time-series and dwell-time analysis'
+		'PyTorch; scikit-learn; MNE; large-scale model evaluation',
+		'Azure OpenAI; document question answering; fraud and anomaly detection; model fine-tuning; document generation and automation',
+		'Python; Go; TypeScript; SQL; FastAPI; Azure; CI/CD; SLURM; automated testing',
+		'Testing across participants; statistical significance tests; correction for multiple comparisons; time-series and duration analysis'
 	]);
 	for (let index = 0; index < 4; index += 1) {
 		await expect(skillRows.nth(index)).toHaveCSS('display', 'block');
@@ -540,7 +540,7 @@ test('CV matches the LaTeX profile and single-column academic content', async ({
 	await expect(educationItems.locator('.cv-date')).toHaveText([
 		'In progress',
 		'Completed 2025',
-		''
+		'Completed'
 	]);
 	await expect(educationItems.nth(0)).toContainText(
 		'Neural engineering and machine learning. Supervisor: Luca Longo.'
@@ -566,15 +566,15 @@ test('CV matches the LaTeX profile and single-column academic content', async ({
 	const experienceItems = page.locator('section[aria-labelledby="cv-experience"] > ol > li');
 	await expect(experienceItems).toHaveCount(2);
 	await expect(experienceItems.nth(0).locator('.cv-highlights li')).toHaveText([
-		'Developed two deep-learning approaches for identifying recurring brain-activity patterns, one using image-based maps and another using the brain’s electrode network. In a synthetic benchmark, the electrode-network approach matched the known microstate maps exactly and explained 85% of the variance in the test recordings.',
-		'Evaluated 4,832 model configurations using 110 measures of model fit, clustering quality, and consistency across participants, running the analysis on SLURM GPU and IBM Power9 clusters.',
-		'In a single-participant case study, the recurrence measure called determinism was 0.83 for recorded brain activity and 0.60 for phase-randomised controls. The brain-state label sequence showed no evidence of memory beyond the previous state.'
+		'Developed and compared image-based scalp maps with maps built from connections between recording electrodes. When both used the same processing step on 203 resting-state recordings, the electrode-based approach accounted for 61.8% of the signal versus 54.2% for the image-based approach. The image-based approach produced tighter groups of activity.',
+		'Tested whether including the duration of a brain state improves the model’s match to the recording. With nine states, including duration improved the match from 55.7% to 63.7%, compared with using only the current state. A separate comparison found that its state-switching patterns differed more from chance than those from standard clustering (35.6% versus 23.6%).',
+		'Showed that processing choices can change the reported duration of brain states. The gap between the two models narrowed from 70.2 versus 143.2 milliseconds to 70.2 versus 71.0 milliseconds when both used the same processing step. In a separate test, changing a duration setting moved the average from 402 to 24 milliseconds.'
 	]);
 	await expect(experienceItems.nth(1).locator('.cv-highlights li')).toHaveText([
-		'Shipped seven production services covering payments, account security, identity checks, background processing, a 120-screen mobile app, an admin dashboard, and a public website.',
-		'Fixed a live withdrawal-fraud issue by ensuring accounts were charged before payouts, with safeguards against double spending and duplicate payments.',
+		'Delivered seven production services for payments, account security, identity checks and background processing, plus a 120-screen mobile app, an admin dashboard and a public website.',
+		'Fixed a live withdrawal-fraud issue by debiting the customer’s account before making an external payout and rejecting duplicate transfer requests.',
 		'Built a fraud and anti-money-laundering system with 38 rule-based checks, AI-drafted suspicious-activity reports, and privacy controls that hide personal details.',
-		'Built an Azure-based AI document service that reduced manual document creation time by 85% across three compliance regions.'
+		'Built an Azure AI document service that cut manual document work by 85% across three compliance regions.'
 	]);
 	await expect(page.locator('.cv-page')).not.toContainText(/Conv-VaDE|Graph-VaDE|VAE\/GMM/);
 	await expect(page.getByText('Etihuku (Curnance), continued', { exact: true })).toHaveCount(0);

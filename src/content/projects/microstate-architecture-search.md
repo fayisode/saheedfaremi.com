@@ -13,7 +13,7 @@ tech:
   - scikit-learn
   - SLURM
   - IBM Power9
-summary: 'Evaluation of 4,832 model configurations using 110 measures of model fit, clustering quality, and consistency across participants on two high-performance computing clusters.'
+summary: 'A 4,832-model architecture search on two high-performance computing clusters, scoring 110 metrics per model and testing consistency across participants.'
 highlights:
   - 4,832 trained models with 110 metrics per model
   - Cross-subject ICC analysis on SLURM GPU and IBM Power9 systems

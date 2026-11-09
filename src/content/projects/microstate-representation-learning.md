@@ -12,7 +12,7 @@ tech:
   - MNE
   - NumPy
   - scikit-learn
-summary: 'Two deep-learning approaches for identifying recurring brain-activity patterns from scalp maps and electrode connections. In a synthetic benchmark, the graph approach matched the known microstate maps exactly and explained 85% of the variance in the test recordings.'
+summary: 'Compares image-based scalp maps with maps built from connections between recording electrodes. When both use the same processing step on 203 resting-state recordings, the electrode-based approach accounts for 61.8% of the signal versus 54.2% for the image-based approach. The image-based approach produces tighter groups of activity.'
 highlights:
   - Conv-VaDE and Graph-VaDE with learnable Gaussian-mixture priors
   - Synthetic ground-truth recovery with ARI 1.0 and GEV 0.85

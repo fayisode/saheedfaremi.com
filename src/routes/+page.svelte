@@ -69,13 +69,14 @@
 				at the
 				<Link href="https://lucalongo.eu/LongoLab.php" variant="inline"
 					>Artificial Intelligence and Cognitive Load Lab</Link
-				>. My doctoral work uses deep learning to study EEG signals. Alongside the doctorate, I work
-				as a data scientist, building production ML and LLM systems.
+				>. My doctoral work uses deep learning to study EEG signals. Alongside the doctorate, I
+				build data and AI systems for fintech and healthcare.
 			</p>
 			<p>
-				I have five years of experience across software engineering and data science, applying AI
-				and statistical methods to business and healthcare problems. I hold an MSc in Computer
-				Science from TU Dublin and a BSc in Information Technology from the University of Eswatini.
+				Over the past five years, I have built payment systems, fraud-detection tools,
+				document-automation pipelines and machine-learning models for healthcare. I hold an MSc in
+				Computer Science from TU Dublin and a BSc in Information Technology from the University of
+				Eswatini.
 			</p>
 		</div>
 	</AcademicSection>
@@ -99,25 +100,23 @@
 				that the classical definition is complete.
 			</p>
 			<ol class="text-fg-soft mt-4 list-decimal space-y-3 pl-5 text-sm leading-6">
+				<li class="pl-1">Do brain-state sequences have memory beyond the current state?</li>
 				<li class="pl-1">
-					Do microstate sequences carry structure beyond Markov and semi-Markov dynamics?
+					Are brain states truly separate, or are they parts of a continuous flow, and what
+					information is lost when we divide that flow into labels?
 				</li>
 				<li class="pl-1">
-					Are microstates discrete brain states or fragments of a continuous flow, and how much
-					information is lost when that flow becomes state labels?
+					Does the time spent in a state shape the next one, and does the brain’s switching rule
+					stay fixed?
 				</li>
 				<li class="pl-1">
-					How does the time remaining in a state shape the next state, and is the brain’s switching
-					rule fixed or only appearing to drift?
-				</li>
-				<li class="pl-1">
-					Which parts of this syntax are stable enough to identify a person across sessions and
-					predict cognition or clinical outcome better than classical statistics?
+					Which patterns are stable enough to identify a person across sessions and predict
+					cognition or clinical outcomes better than standard statistics?
 				</li>
 			</ol>
 			<p class="text-fg-soft mt-4 text-sm leading-6">
-				The aim is to show where microstate syntax is richer than the classical account and where
-				the classical account remains sufficient.
+				The work asks which patterns are genuine properties of brain activity and which are created
+				by the model or the way it processes the signal.
 			</p>
 		</div>
 	</AcademicSection>
