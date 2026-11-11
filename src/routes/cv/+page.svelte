@@ -30,8 +30,7 @@
 
 	function educationDate(item: Education): string {
 		if (item.progressionStatus === 'in-progress') return 'In progress';
-		if (item.slug === 'msc-cs-tu-dublin') return 'Completed 2025';
-		if (item.progressionStatus === 'complete' && !item.endedAt) return 'Completed';
+		if (item.progressionStatus === 'complete') return 'Completed';
 		return item.endedAt ?? '';
 	}
 
@@ -43,7 +42,7 @@
 			return 'Machine learning, deep learning, data mining, visualisation and statistics. 4.0/4.0 GPA (80/100).';
 		}
 		if (item.slug === 'bsc-it-uneswa') {
-			return 'Second Class Honours, Upper Division (2.1).';
+			return 'Machine learning, deep learning, data mining, visualisation and statistics. Second Class Honours, Upper Division (2.1).';
 		}
 		return [item.field, item.summary].filter(Boolean).join('. ');
 	}
@@ -68,7 +67,7 @@
 		<h1 class="cv-name text-fg">Saheed Faremi</h1>
 		<p class="cv-role text-fg-soft">PhD researcher, University College Cork · Data scientist</p>
 		<p class="cv-contact text-fg-soft">
-			<a class="text-accent" href={`mailto:${EMAIL}`}>{EMAIL}</a> · Dublin, Ireland
+			<a class="text-accent" href={`mailto:${EMAIL}`}>{EMAIL}</a> · Available to work anywhere in Ireland
 		</p>
 		<SocialLinks class="cv-social-links" only={CV_PROFILES} />
 		<p class="cv-summary text-fg-soft">{active.summary}</p>

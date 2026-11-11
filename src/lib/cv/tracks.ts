@@ -73,16 +73,17 @@ const RAW_TRACKS = [
 		skillGroups: [
 			{
 				group: 'Brain-signal analysis',
-				items: ['PyTorch', 'scikit-learn', 'MNE', 'large-scale model evaluation']
+				items: ['PyTorch', 'scikit-learn', 'MNE']
 			},
 			{
-				group: 'Applied AI and document automation',
+				group: 'Applied AI and agents',
 				items: [
 					'Azure OpenAI',
+					'AI agents and tool use',
+					'prompt engineering',
+					'retrieval-augmented generation (RAG)',
 					'document question answering',
-					'fraud and anomaly detection',
-					'model fine-tuning',
-					'document generation and automation'
+					'model fine-tuning'
 				]
 			},
 			{
@@ -96,6 +97,8 @@ const RAW_TRACKS = [
 					'Azure',
 					'CI/CD',
 					'SLURM',
+					'multi-GPU scheduling',
+					'memory-aware job allocation',
 					'automated testing'
 				]
 			},

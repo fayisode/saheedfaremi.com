@@ -51,7 +51,7 @@
   \vspace{2pt}
   PhD researcher, University College Cork · Data scientist\par
   \vspace{2pt}
-  \href{mailto:saheedfaremi@gmail.com}{saheedfaremi@gmail.com} · Dublin, Ireland\par
+  \href{mailto:saheedfaremi@gmail.com}{saheedfaremi@gmail.com} · Available to work anywhere in Ireland\par
   \href{https://github.com/fayisode}{GitHub} ·
   \href{https://www.linkedin.com/in/faremi-saheed}{LinkedIn} ·
   \href{https://scholar.google.com/citations?user=tw1P0nsAAAAJ}{Google Scholar} ·
@@ -69,11 +69,11 @@ PhD researcher and data scientist with five years of experience building product
 \skill{Applications}{Deep learning for health and behaviour; production AI and data systems}
 
 \cvsection{Technical skills}
-\skill{Brain-signal analysis}{PyTorch; scikit-learn; MNE; large-scale model evaluation}
+\skill{Brain-signal analysis}{PyTorch; scikit-learn; MNE}
 \vspace{1.5pt}
-\skill{Applied AI and document automation}{Azure OpenAI; document question answering; fraud and anomaly detection; model fine-tuning; document generation and automation}
+\skill{Applied AI and agents}{Azure OpenAI; AI agents and tool use; prompt engineering; retrieval-augmented generation (RAG); document question answering; model fine-tuning}
 \vspace{1.5pt}
-\skill{Software \& cloud engineering}{Python; Go; TypeScript; SQL; FastAPI; Azure; CI/CD; SLURM; automated testing}
+\skill{Software \& cloud engineering}{Python; Go; TypeScript; SQL; FastAPI; Azure; CI/CD; SLURM; multi-GPU scheduling; memory-aware job allocation; automated testing}
 \vspace{1.5pt}
 \skill{Research evaluation}{Testing across participants; statistical significance tests; correction for multiple comparisons; time-series and duration analysis}
 
@@ -81,29 +81,29 @@ PhD researcher and data scientist with five years of experience building product
 \cventry{PhD, University College Cork}{In progress}
 Neural engineering and machine learning. Supervisor: Luca Longo.\par
 \vspace{2pt}
-\cventry{MSc Computer Science, Technological University Dublin}{Completed 2025}
+\cventry{MSc Computer Science, Technological University Dublin}{Completed}
 Machine learning, deep learning, data mining, visualisation and statistics. 4.0/4.0 GPA (80/100).\par
 \vspace{2pt}
 \cventry{BSc Information Technology, University of Eswatini}{Completed}
-Second Class Honours, Upper Division (2.1).\par
+Machine learning, deep learning, data mining, visualisation and statistics. Second Class Honours, Upper Division (2.1).\par
 
 \enlargethispage{2\baselineskip}
 \cvsection{Experience}
 \cventry{PhD researcher}{In progress}
 \textbf{Artificial Intelligence and Cognitive Load Research Lab (AICL), University College Cork}\par
 \begin{itemize}
-  \item Developed and compared image-based scalp maps with maps built from connections between recording electrodes. When both used the same processing step on 203 resting-state recordings, the electrode-based approach accounted for 61.8\% of the signal versus 54.2\% for the image-based approach. The image-based approach produced tighter groups of activity.
-  \item Tested whether including the duration of a brain state improves the model’s match to the recording. With nine states, including duration improved the match from 55.7\% to 63.7\%, compared with using only the current state. A separate comparison found that its state-switching patterns differed more from chance than those from standard clustering (35.6\% versus 23.6\%).
-  \item Showed that processing choices can change the reported duration of brain states. The gap between the two models narrowed from 70.2 versus 143.2 milliseconds to 70.2 versus 71.0 milliseconds when both used the same processing step. In a separate test, changing a duration setting moved the average from 402 to 24 milliseconds.
+  \item Compared image-based and electrode-based representations of brain activity on 203 recordings. The electrode-based approach explained 61.8\% of the variation, versus 54.2\% for the image-based approach, which grouped similar activity better.
+  \item Analysed brain-activity recordings from 203 people to understand how activity changes from one state to another. Paired statistical tests showed that accounting for state duration represented these changes more accurately than the current state alone, improving the result from 55.7\% to 63.7\%.
+  \item Showed that analysis settings can change average reported brain-state durations from 402 to 24 milliseconds. Using the same processing method for both approaches changed the image-based result from 143.2 to 71.0 milliseconds, close to the electrode result of 70.2 milliseconds.
+  \item Evaluated 4,832 model configurations on SLURM-managed GPU and IBM Power9 systems, scoring 110 measures per model and testing consistency across participants.
 \end{itemize}
 \vspace{2pt}
 \cventry{Data scientist to Founding engineer}{May 2021 to present}
 \textbf{Etihuku (Curnance)}\par
 \begin{itemize}
-  \item Delivered seven production services for payments, account security, identity checks and background processing, plus a 120-screen mobile app, an admin dashboard and a public website.
-  \item Fixed a live withdrawal-fraud issue by debiting the customer’s account before making an external payout and rejecting duplicate transfer requests.
-  \item Built a fraud and anti-money-laundering system with 38 rule-based checks, AI-drafted suspicious-activity reports, and privacy controls that hide personal details.
-  \item Built an Azure AI document service that cut manual document work by 85\% across three compliance regions.
+  \item Led a four-person team to develop a compliance dashboard for tracking legal obligations, document submissions, compliance scores and risk levels, reducing manual handling by 60\%.
+  \item Built a facial-recognition system for Know Your Customer (KYC) checks, using identity documents and liveness verification to flag potentially fraudulent user profiles for review. Developed automated checks to identify suspicious financial transactions, improving fraud detection by up to 35\%.
+  \item Built an LLM proposal generator from scratch for business bids, using RAG to turn past proposals, contracts and client requirements into seven-section drafts and cut manual preparation time by 80\%.
 \end{itemize}
 
 \newpage

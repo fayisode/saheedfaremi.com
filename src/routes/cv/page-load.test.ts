@@ -54,16 +54,17 @@ describe('CV selections', () => {
 		expect(track.skillGroups).toEqual([
 			{
 				group: 'Brain-signal analysis',
-				items: ['PyTorch', 'scikit-learn', 'MNE', 'large-scale model evaluation']
+				items: ['PyTorch', 'scikit-learn', 'MNE']
 			},
 			{
-				group: 'Applied AI and document automation',
+				group: 'Applied AI and agents',
 				items: [
 					'Azure OpenAI',
+					'AI agents and tool use',
+					'prompt engineering',
+					'retrieval-augmented generation (RAG)',
 					'document question answering',
-					'fraud and anomaly detection',
-					'model fine-tuning',
-					'document generation and automation'
+					'model fine-tuning'
 				]
 			},
 			{
@@ -77,6 +78,8 @@ describe('CV selections', () => {
 					'Azure',
 					'CI/CD',
 					'SLURM',
+					'multi-GPU scheduling',
+					'memory-aware job allocation',
 					'automated testing'
 				]
 			},
@@ -94,5 +97,22 @@ describe('CV selections', () => {
 
 	it('keeps source experience detail intact while the CV uses concise highlights', () => {
 		expect(load().experience.map((item) => item.highlights.length)).toEqual([4, 5]);
+	});
+
+	it('keeps completion years out of the education collections', () => {
+		const education = load().education;
+		expect(education.map((item) => item.slug)).toEqual([
+			'phd-eeg-microstates',
+			'msc-cs-tu-dublin',
+			'bsc-it-uneswa'
+		]);
+		for (const item of education) {
+			expect(item.summary ?? '').not.toMatch(/\b(19|20)\d\d\b/);
+		}
+		const bsc = education.find((item) => item.slug === 'bsc-it-uneswa')?.summary ?? '';
+		expect(bsc.toLowerCase()).toContain(
+			'machine learning, deep learning, data mining, visualisation and statistics'
+		);
+		expect(bsc).toContain('Second Class Honours, Upper Division (2.1)');
 	});
 });

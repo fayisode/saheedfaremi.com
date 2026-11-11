@@ -480,6 +480,9 @@ test('CV matches the LaTeX profile and single-column academic content', async ({
 	await expect(page.locator('.cv-role')).toHaveText(
 		'PhD researcher, University College Cork · Data scientist'
 	);
+	await expect(page.locator('.cv-contact')).toHaveText(
+		'saheedfaremi@gmail.com · Available to work anywhere in Ireland'
+	);
 	await expect(page.locator('.cv-summary')).toHaveText(
 		'PhD researcher and data scientist with five years of experience building production software. I study what brief brain states represent and how they change over time. In industry, I apply machine learning to healthcare, finance and compliance.'
 	);
@@ -513,14 +516,14 @@ test('CV matches the LaTeX profile and single-column academic content', async ({
 	await expect(skillRows).toHaveCount(4);
 	await expect(skillRows.locator('dt')).toHaveText([
 		'Brain-signal analysis:',
-		'Applied AI and document automation:',
+		'Applied AI and agents:',
 		'Software & cloud engineering:',
 		'Research evaluation:'
 	]);
 	await expect(skillRows.locator('dd')).toHaveText([
-		'PyTorch; scikit-learn; MNE; large-scale model evaluation',
-		'Azure OpenAI; document question answering; fraud and anomaly detection; model fine-tuning; document generation and automation',
-		'Python; Go; TypeScript; SQL; FastAPI; Azure; CI/CD; SLURM; automated testing',
+		'PyTorch; scikit-learn; MNE',
+		'Azure OpenAI; AI agents and tool use; prompt engineering; retrieval-augmented generation (RAG); document question answering; model fine-tuning',
+		'Python; Go; TypeScript; SQL; FastAPI; Azure; CI/CD; SLURM; multi-GPU scheduling; memory-aware job allocation; automated testing',
 		'Testing across participants; statistical significance tests; correction for multiple comparisons; time-series and duration analysis'
 	]);
 	for (let index = 0; index < 4; index += 1) {
@@ -539,7 +542,7 @@ test('CV matches the LaTeX profile and single-column academic content', async ({
 	]);
 	await expect(educationItems.locator('.cv-date')).toHaveText([
 		'In progress',
-		'Completed 2025',
+		'Completed',
 		'Completed'
 	]);
 	await expect(educationItems.nth(0)).toContainText(
@@ -548,7 +551,10 @@ test('CV matches the LaTeX profile and single-column academic content', async ({
 	await expect(educationItems.nth(1)).toContainText(
 		'Machine learning, deep learning, data mining, visualisation and statistics. 4.0/4.0 GPA (80/100).'
 	);
-	await expect(educationItems.nth(2)).toContainText('Second Class Honours, Upper Division (2.1).');
+	await expect(educationItems.nth(2)).toContainText(
+		'Machine learning, deep learning, data mining, visualisation and statistics. Second Class Honours, Upper Division (2.1).'
+	);
+	await expect(education).not.toContainText(/Completed (19|20)\d\d/);
 	await expect(education.locator('.cv-entry-list')).toHaveCSS('display', 'block');
 	await expect(education.locator('.cv-entry-list')).toHaveCSS('border-left-width', '0px');
 	for (const index of [0, 1]) {
@@ -563,19 +569,24 @@ test('CV matches the LaTeX profile and single-column academic content', async ({
 		expect(Math.abs((geometry.titleTop ?? 0) - (geometry.dateTop ?? 0))).toBeLessThanOrEqual(2);
 	}
 
-	const experienceItems = page.locator('section[aria-labelledby="cv-experience"] > ol > li');
+	const experienceSection = page.locator('section[aria-labelledby="cv-experience"]');
+	const experienceItems = experienceSection.locator('> ol > li');
 	await expect(experienceItems).toHaveCount(2);
 	await expect(experienceItems.nth(0).locator('.cv-highlights li')).toHaveText([
-		'Developed and compared image-based scalp maps with maps built from connections between recording electrodes. When both used the same processing step on 203 resting-state recordings, the electrode-based approach accounted for 61.8% of the signal versus 54.2% for the image-based approach. The image-based approach produced tighter groups of activity.',
-		'Tested whether including the duration of a brain state improves the model’s match to the recording. With nine states, including duration improved the match from 55.7% to 63.7%, compared with using only the current state. A separate comparison found that its state-switching patterns differed more from chance than those from standard clustering (35.6% versus 23.6%).',
-		'Showed that processing choices can change the reported duration of brain states. The gap between the two models narrowed from 70.2 versus 143.2 milliseconds to 70.2 versus 71.0 milliseconds when both used the same processing step. In a separate test, changing a duration setting moved the average from 402 to 24 milliseconds.'
+		'Compared image-based and electrode-based representations of brain activity on 203 recordings. The electrode-based approach explained 61.8% of the variation, versus 54.2% for the image-based approach, which grouped similar activity better.',
+		'Analysed brain-activity recordings from 203 people to understand how activity changes from one state to another. Paired statistical tests showed that accounting for state duration represented these changes more accurately than the current state alone, improving the result from 55.7% to 63.7%.',
+		'Showed that analysis settings can change average reported brain-state durations from 402 to 24 milliseconds. Using the same processing method for both approaches changed the image-based result from 143.2 to 71.0 milliseconds, close to the electrode result of 70.2 milliseconds.',
+		'Evaluated 4,832 model configurations on SLURM-managed GPU and IBM Power9 systems, scoring 110 measures per model and testing consistency across participants.'
 	]);
 	await expect(experienceItems.nth(1).locator('.cv-highlights li')).toHaveText([
-		'Delivered seven production services for payments, account security, identity checks and background processing, plus a 120-screen mobile app, an admin dashboard and a public website.',
-		'Fixed a live withdrawal-fraud issue by debiting the customer’s account before making an external payout and rejecting duplicate transfer requests.',
-		'Built a fraud and anti-money-laundering system with 38 rule-based checks, AI-drafted suspicious-activity reports, and privacy controls that hide personal details.',
-		'Built an Azure AI document service that cut manual document work by 85% across three compliance regions.'
+		'Led a four-person team to develop a compliance dashboard for tracking legal obligations, document submissions, compliance scores and risk levels, reducing manual handling by 60%.',
+		'Built a facial-recognition system for Know Your Customer (KYC) checks, using identity documents and liveness verification to flag potentially fraudulent user profiles for review. Developed automated checks to identify suspicious financial transactions, improving fraud detection by up to 35%.',
+		'Built an LLM proposal generator from scratch for business bids, using RAG to turn past proposals, contracts and client requirements into seven-section drafts and cut manual preparation time by 80%.'
 	]);
+	await expect(experienceSection).not.toContainText(
+		/maps|tighter groups|explained signal|nine-state model/i
+	);
+	await expect(experienceSection).not.toContainText(/\b38\b/);
 	await expect(page.locator('.cv-page')).not.toContainText(/Conv-VaDE|Graph-VaDE|VAE\/GMM/);
 	await expect(page.getByText('Etihuku (Curnance), continued', { exact: true })).toHaveCount(0);
 });
@@ -737,8 +748,8 @@ test('CV stays single-column without overflow at mobile and desktop widths in bo
 				await expect(page.locator('.cv-page')).toHaveCSS('font-family', /Fraunces/);
 				await expect(page.locator('.cv-entry-list').first()).toHaveCSS('display', 'block');
 				await expect(page.locator('.cv-skill-row').first()).toHaveCSS('display', 'block');
-				await expect(page.locator('.cv-highlights').first().locator('li')).toHaveCount(3);
-				await expect(page.locator('.cv-highlights').nth(1).locator('li')).toHaveCount(4);
+				await expect(page.locator('.cv-highlights').first().locator('li')).toHaveCount(4);
+				await expect(page.locator('.cv-highlights').nth(1).locator('li')).toHaveCount(3);
 				expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
 					width
 				);
